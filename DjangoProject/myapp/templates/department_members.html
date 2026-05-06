@@ -1,0 +1,1071 @@
+{% extends "Base.html" %}
+{% load avatar_tags %}
+{% block title %}{{ department_display_name|default:department.name }} - HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <a href="{{ dashboard_url|default:'/' }}">Dashboard</a>
+  <span class="bc-sep">/</span>
+  <strong>{{ department_display_name|default:department.name }} Department</strong>
+{% endblock %}
+
+{% block content %}
+<style>
+  
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+  .dept-wrap * { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+  
+  .dept-wrap {
+    --radius-lg: 18px;
+    --radius-md: 13px;
+    --radius-sm: 9px;
+    --transition: .18s cubic-bezier(.4,0,.2,1);
+  }
+
+  
+  .dept-multi-section-label {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--slate-500);
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .dept-multi-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--slate-200);
+  }
+
+  .dept-multi-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  
+  .multi-dept-card {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.1);
+    background-color: #1e2955;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 1px 3px rgba(15,23,42,.1), 0 8px 32px rgba(15,23,42,.18);
+    color: #fff;
+    padding: 18px 20px;
+    min-height: 140px;
+    transition: transform var(--transition), box-shadow var(--transition);
+    cursor: default;
+  }
+  .multi-dept-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(15,23,42,.14), 0 18px 40px rgba(15,23,42,.22);
+  }
+  
+  .multi-dept-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 96% -20%, rgba(59,130,246,.18) 0%, transparent 55%),
+                radial-gradient(ellipse at 5% 110%, rgba(16,185,129,.1) 0%, transparent 45%),
+                linear-gradient(135deg, rgba(15,23,42,.52) 0%, rgba(30,41,100,.38) 100%);
+    pointer-events: none;
+  }
+
+  .md-body {
+    position: relative;
+    z-index: 1;
+  }
+
+  
+  .md-identity {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .md-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,.5);
+    box-shadow: 0 4px 14px rgba(0,0,0,.3);
+    flex-shrink: 0;
+    background: rgba(255,255,255,.1);
+  }
+  .md-avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .md-name {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -.25px;
+    color: #fff;
+    text-shadow: 0 1px 4px rgba(0,0,0,.3);
+    line-height: 1.15;
+  }
+  .md-sub {
+    margin: 3px 0 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,.7);
+  }
+
+  
+  .md-pills {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 12px;
+  }
+  .md-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 11px;
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 999px;
+    background: rgba(255,255,255,.15);
+    color: rgba(255,255,255,.9);
+    font-size: 11.5px;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
+  }
+  .md-pill i { font-size: 10px; }
+
+  
+  .md-active-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(16,185,129,.25);
+    border: 1px solid rgba(16,185,129,.5);
+    color: #6ee7b7;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 999px;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  
+  .dept-hero {
+    position: relative;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--slate-200);
+    background-color: #1e2955;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 1px 3px rgba(15,23,42,.1), 0 8px 32px rgba(15,23,42,.18);
+    padding: 28px 28px 22px;
+    margin-bottom: 22px;
+    overflow: hidden;
+  }
+  .dept-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 96% -20%, rgba(59,130,246,.18) 0%, transparent 55%),
+                radial-gradient(ellipse at 5% 110%, rgba(16,185,129,.1) 0%, transparent 45%);
+    pointer-events: none;
+  }
+  .dept-hero-body {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .dept-identity {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    min-width: 260px;
+  }
+  .dept-name {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -.3px;
+    line-height: 1.15;
+    text-shadow: 0 1px 4px rgba(0,0,0,.3);
+  }
+  .dept-sub {
+    margin: 4px 0 0;
+    color: rgba(255,255,255,.75);
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .dept-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 10px;
+  }
+  .dept-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 11px;
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 999px;
+    background: rgba(255,255,255,.15);
+    color: rgba(255,255,255,.9);
+    font-size: 12px;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
+  }
+  .dept-pill i { font-size: 11px; }
+  .dept-desc {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,.2);
+    color: rgba(255,255,255,.8);
+    font-size: 13.5px;
+    line-height: 1.65;
+    max-width: 700px;
+  }
+
+  
+  .dept-avatar-thumb {
+    width: 52px; height: 52px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,.5);
+    box-shadow: 0 4px 14px rgba(0,0,0,.3);
+    flex-shrink: 0;
+    background: rgba(255,255,255,.1);
+  }
+  .dept-avatar-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  
+  .dept-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    align-items: stretch;
+  }
+  .dept-grid > .hd-card,
+  .dept-grid > .sidebar-stack {
+    height: 100%;
+  }
+
+  
+  .hd-card {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--slate-200);
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(15,23,42,.04), 0 6px 18px rgba(15,23,42,.05);
+    overflow: hidden;
+  }
+  .hd-card-header {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--slate-100);
+    background: linear-gradient(180deg, #fff 0%, var(--slate-50) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .hd-card-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--slate-700);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .hd-card-title i { color: var(--slate-400); font-size: 13px; }
+  .hd-card-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--slate-100);
+    color: var(--slate-500);
+  }
+  .hd-card-body { padding: 16px 18px; }
+
+  
+  .members-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .member-card {
+    border: 1px solid var(--slate-200);
+    border-radius: var(--radius-md);
+    background: #fff;
+    padding: 15px;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+  .member-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--brand, #3b82f6), #10b981);
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+  .member-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(59,130,246,.35);
+    box-shadow: 0 8px 24px rgba(15,23,42,.1);
+  }
+  .member-card:hover::before { opacity: 1; }
+
+  .member-top {
+    display: flex;
+    gap: 11px;
+    align-items: center;
+    margin-bottom: 13px;
+  }
+  .member-avatar {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #ede9fe;
+    color: #6366f1;
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    font-size: 16px;
+    font-weight: 800;
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,.9);
+    box-shadow: 0 2px 8px rgba(15,23,42,.12);
+  }
+  .member-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .member-avatar .member-avatar-initial { display: inline-flex; }
+  .member-avatar img + .member-avatar-initial { display: none; }
+  .member-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--slate-900);
+    margin: 0;
+    line-height: 1.25;
+  }
+  .member-role {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--slate-500);
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    margin-top: 2px;
+  }
+  .member-you-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: #ede9fe;
+    color: #6366f1;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  .member-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+    margin-bottom: 12px;
+  }
+  .metric-mini {
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--slate-100);
+    background: var(--slate-50);
+    text-align: center;
+    padding: 8px 4px;
+  }
+  .metric-mini .k {
+    display: block;
+    color: var(--slate-400);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+  }
+  .metric-mini .v {
+    display: block;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--slate-900);
+    line-height: 1.2;
+    margin-top: 2px;
+  }
+  .metric-mini.m-active  { border-color: #bfdbfe; background: #eff6ff; }
+  .metric-mini.m-active .v  { color: #2563eb; }
+  .metric-mini.m-resolved { border-color: #a7f3d0; background: #ecfdf5; }
+  .metric-mini.m-resolved .v { color: #059669; }
+  .metric-mini.m-overdue { border-color: #fecaca; background: #fef2f2; }
+  .metric-mini.m-overdue .v { color: #dc2626; }
+
+  .stack-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--slate-500);
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .stack-bar {
+    height: 7px;
+    background: var(--slate-100);
+    border-radius: 999px;
+    overflow: hidden;
+    display: flex;
+    gap: 1px;
+    margin-bottom: 5px;
+  }
+  .stack-seg {
+    height: 100%;
+    border-radius: 999px;
+    transition: width .5s cubic-bezier(.4,0,.2,1);
+  }
+  .seg-active   { background: #3b82f6; }
+  .seg-resolved { background: #10b981; }
+  .seg-overdue  { background: #ef4444; }
+  .stack-legend { display: flex; gap: 10px; }
+  .legend-dot {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--slate-500);
+  }
+  .legend-dot::before {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+  }
+  .legend-dot.ld-active::before   { background: #3b82f6; }
+  .legend-dot.ld-resolved::before { background: #10b981; }
+  .legend-dot.ld-overdue::before  { background: #ef4444; }
+
+  .completion-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--slate-100);
+  }
+  .completion-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--slate-500);
+  }
+  .completion-badge { font-size: 13px; font-weight: 800; color: var(--slate-900); }
+  .completion-badge.good   { color: #059669; }
+  .completion-badge.warn   { color: #d97706; }
+  .completion-badge.danger { color: #dc2626; }
+
+  
+  .sidebar-stack { display: grid; gap: 16px; height: 100%; }
+  .sidebar-stack .hd-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar-stack .hd-card-body {
+    flex: 1;
+  }
+
+  .role-list { display: grid; gap: 8px; }
+  .role-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--slate-100);
+    background: var(--slate-50);
+    transition: border-color var(--transition);
+  }
+  .role-row:hover { border-color: rgba(59,130,246,.3); }
+  .role-name {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--slate-700);
+  }
+  .role-count {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--slate-900);
+    background: #fff;
+    border: 1px solid var(--slate-200);
+    border-radius: 999px;
+    padding: 2px 9px;
+  }
+
+  .ticket-list { display: grid; gap: 9px; }
+  .ticket-item {
+    border: 1px solid var(--slate-200);
+    border-radius: var(--radius-sm);
+    padding: 11px 12px;
+    background: #fff;
+    transition: border-color var(--transition), transform var(--transition);
+    cursor: default;
+  }
+  .ticket-item:hover {
+    transform: translateX(2px);
+    border-color: rgba(59,130,246,.35);
+  }
+  .ticket-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 6px;
+  }
+  .ticket-id {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--slate-400);
+    margin-bottom: 2px;
+  }
+  .ticket-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--slate-800);
+    margin: 0;
+    line-height: 1.35;
+  }
+  .ticket-footer {
+    margin-top: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+  }
+  .ticket-due {
+    font-size: 10.5px;
+    color: var(--slate-400);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .ticket-assignee {
+    font-size: 10.5px;
+    color: var(--slate-500);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 30px 16px;
+    color: var(--slate-400);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .empty-state i { font-size: 28px; display: block; margin-bottom: 8px; }
+
+  
+  @media (max-width: 1200px) {
+    .dept-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .members-grid { grid-template-columns: 1fr; }
+    .dept-hero { padding: 18px; }
+    .dept-name { font-size: 20px; }
+    .dept-multi-grid { grid-template-columns: 1fr; }
+  }
+  
+</style>
+
+<div class="dept-wrap">
+
+  {% if multi_departments|length > 1 %}
+  <div class="dept-multi-section-label">
+    <i class="fas fa-layer-group"></i> Your Departments
+  </div>
+  <div class="dept-multi-grid">
+    {% for d in multi_departments %}
+    <div class="multi-dept-card"
+         data-dept-name="{{ d.department.name|lower|escapejs }}"
+         data-dept-code="{{ d.department.code|lower|escapejs }}">
+      <div class="md-body">
+
+        <div class="md-identity">
+          <div class="md-avatar">
+            <img class="md-avatar-img" src="" alt="{{ d.department.name }}">
+          </div>
+          <div>
+            <h3 class="md-name">{{ d.department.name }}</h3>
+            <div class="md-sub">Department Overview</div>
+          </div>
+          {% if d.department == department %}
+          <span class="md-active-badge"><i class="fas fa-circle" style="font-size:6px;"></i> Active</span>
+          {% endif %}
+        </div>
+
+        <div class="md-pills">
+          <span class="md-pill"><i class="fas fa-hashtag"></i>{{ d.department.code }}</span>
+          {% if d.department.email %}
+          <span class="md-pill"><i class="fas fa-envelope"></i>{{ d.department.email }}</span>
+          {% endif %}
+          <span class="md-pill"><i class="fas fa-users"></i>{{ d.members }} members</span>
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if not is_multi_department_view %}
+  <section class="dept-hero">
+    <div class="dept-hero-body">
+      <div class="dept-identity">
+        <div class="dept-avatar-thumb">
+          <img id="dept-avatar-img" src="" alt="{{ department.name }} Department">
+        </div>
+        <div>
+          <h1 class="dept-name">{{ department_display_name|default:department.name }}</h1>
+          <p class="dept-sub">Department Overview &amp; Team Performance</p>
+          <div class="dept-pills">
+            <span class="dept-pill"><i class="fas fa-hashtag"></i>{{ department.code|default:"N/A" }}</span>
+            {% if department.email %}
+            <span class="dept-pill"><i class="fas fa-envelope"></i>{{ department.email }}</span>
+            {% endif %}
+            <span class="dept-pill"><i class="fas fa-users"></i>{{ total_members }} members</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if department.description %}
+    <div class="dept-desc">{{ department.description }}</div>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  {% if is_multi_department_view %}
+    {% for section in department_sections %}
+    <div class="hd-card" style="margin-bottom: 14px;">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="{{ section.department.icon|default:'fas fa-building' }}"></i>
+          {{ section.department.name }}
+        </div>
+      </div>
+    </div>
+    <div class="dept-grid" style="margin-bottom: 22px;">
+      <div class="hd-card">
+        <div class="hd-card-header">
+          <div class="hd-card-title">
+            <i class="fas fa-user-friends"></i> Team Performance
+          </div>
+          <span class="hd-card-badge">{{ section.total_members }} agents</span>
+        </div>
+        <div class="hd-card-body">
+          <div class="members-grid">
+            {% for row in section.member_stats %}
+            <article class="member-card">
+
+              <div class="member-top">
+                <div class="member-avatar">
+                  {% if row.profile_image %}
+                  <img src="{{ row.profile_image }}"
+                       alt="{{ row.membership.user.username }}"
+                       onerror="this.style.display='none'; if(this.nextElementSibling){ this.nextElementSibling.style.display='inline-flex'; }">
+                  <span class="member-avatar-initial">{{ row.membership.user|avatar_initial }}</span>
+                  {% else %}
+                  {{ row.membership.user|avatar_initial }}
+                  {% endif %}
+                </div>
+                <div>
+                  <p class="member-name">
+                    {{ row.membership.user.get_full_name|default:row.membership.user.username }}
+                    {% if row.is_current_user %}<span class="member-you-tag">You</span>{% endif %}
+                  </p>
+                  <div class="member-role">{{ row.membership.get_role_display }}</div>
+                </div>
+              </div>
+
+              <div class="member-metrics">
+                <div class="metric-mini m-active">
+                  <span class="k">Active</span>
+                  <span class="v">{{ row.active }}</span>
+                </div>
+                <div class="metric-mini m-resolved">
+                  <span class="k">Resolved</span>
+                  <span class="v">{{ row.resolved }}</span>
+                </div>
+                <div class="metric-mini m-overdue">
+                  <span class="k">Overdue</span>
+                  <span class="v">{{ row.overdue }}</span>
+                </div>
+              </div>
+
+              {% with total=row.active|add:row.resolved|add:row.overdue %}
+              {% if total > 0 %}
+              <div class="stack-label">
+                <span>Ticket breakdown</span>
+                <span>{{ total }} total</span>
+              </div>
+              <div class="stack-bar">
+                <div class="stack-seg seg-active"   style="width: {% widthratio row.active   total 100 %}%;"></div>
+                <div class="stack-seg seg-resolved" style="width: {% widthratio row.resolved total 100 %}%;"></div>
+                <div class="stack-seg seg-overdue"  style="width: {% widthratio row.overdue  total 100 %}%;"></div>
+              </div>
+              <div class="stack-legend">
+                <span class="legend-dot ld-active">Active</span>
+                <span class="legend-dot ld-resolved">Resolved</span>
+                <span class="legend-dot ld-overdue">Overdue</span>
+              </div>
+              {% else %}
+              <div class="stack-bar">
+                <div class="stack-seg seg-resolved" style="width:0%;"></div>
+              </div>
+              {% endif %}
+              {% endwith %}
+
+              <div class="completion-row">
+                <span class="completion-label"><i class="fas fa-chart-line me-1"></i>Completion rate</span>
+                <span class="completion-badge {% if row.completion_rate >= 75 %}good{% elif row.completion_rate >= 40 %}warn{% else %}danger{% endif %}">
+                  {{ row.completion_rate }}%
+                </span>
+              </div>
+
+            </article>
+            {% empty %}
+            <div class="empty-state" style="grid-column: 1/-1;">
+              <i class="fas fa-users-slash"></i>
+              No members found for this department.
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-stack">
+        <div class="hd-card">
+          <div class="hd-card-header">
+            <div class="hd-card-title">
+              <i class="fas fa-clock-rotate-left"></i> Recent Tickets
+            </div>
+            <span class="hd-card-badge">last {{ section.recent_tickets|length }}</span>
+          </div>
+          <div class="hd-card-body">
+            <div class="ticket-list">
+              {% for ticket in section.recent_tickets %}
+              <div class="ticket-item">
+                <div class="ticket-head">
+                  <div>
+                    <div class="ticket-id">#{{ ticket.id }}</div>
+                    <p class="ticket-title">{{ ticket.TICKET_TITLE }}</p>
+                  </div>
+                  {% if ticket.TICKET_STATUS == 'Open' %}
+                    <span class="status-badge sb-open">{{ ticket.TICKET_STATUS }}</span>
+                  {% elif ticket.TICKET_STATUS == 'In Progress' %}
+                    <span class="status-badge sb-progress">{{ ticket.TICKET_STATUS }}</span>
+                  {% elif ticket.TICKET_STATUS == 'Resolved' %}
+                    <span class="status-badge sb-resolved">{{ ticket.TICKET_STATUS }}</span>
+                  {% elif ticket.TICKET_STATUS == 'Closed' %}
+                    <span class="status-badge sb-closed">{{ ticket.TICKET_STATUS }}</span>
+                  {% elif ticket.TICKET_STATUS == 'Reopen' %}
+                    <span class="status-badge sb-reopen">{{ ticket.TICKET_STATUS }}</span>
+                  {% else %}
+                    <span class="status-badge sb-reopen">{{ ticket.TICKET_STATUS }}</span>
+                  {% endif %}
+                </div>
+                <div class="ticket-footer">
+                  <span class="ticket-due">
+                    <i class="fas fa-calendar-alt"></i>
+                    {{ ticket.TICKET_DUE_DATE|date:"M d, Y" }}
+                  </span>
+                  <span class="ticket-assignee">
+                    <i class="fas fa-user"></i>
+                    {% if ticket.assigned_to %}
+                      {{ ticket.assigned_to.get_full_name|default:ticket.assigned_to.username }}
+                    {% else %}
+                      Unassigned
+                    {% endif %}
+                  </span>
+                </div>
+              </div>
+              {% empty %}
+              <div class="empty-state"><i class="fas fa-inbox"></i>No recent tickets.</div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+  {% else %}
+  <div class="dept-grid">
+
+    
+    <div class="hd-card">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-user-friends"></i> Team Performance
+        </div>
+        <span class="hd-card-badge">{{ total_members }} agents</span>
+      </div>
+      <div class="hd-card-body">
+        <div class="members-grid">
+          {% for row in member_stats %}
+          <article class="member-card">
+
+            <div class="member-top">
+              <div class="member-avatar">
+                {% if row.profile_image %}
+                <img src="{{ row.profile_image }}"
+                     alt="{{ row.membership.user.username }}"
+                     onerror="this.style.display='none'; if(this.nextElementSibling){ this.nextElementSibling.style.display='inline-flex'; }">
+                <span class="member-avatar-initial">{{ row.membership.user|avatar_initial }}</span>
+                {% else %}
+                {{ row.membership.user|avatar_initial }}
+                {% endif %}
+              </div>
+              <div>
+                <p class="member-name">
+                  {{ row.membership.user.get_full_name|default:row.membership.user.username }}
+                  {% if row.is_current_user %}<span class="member-you-tag">You</span>{% endif %}
+                </p>
+                <div class="member-role">{{ row.membership.get_role_display }}</div>
+              </div>
+            </div>
+
+            <div class="member-metrics">
+              <div class="metric-mini m-active">
+                <span class="k">Active</span>
+                <span class="v">{{ row.active }}</span>
+              </div>
+              <div class="metric-mini m-resolved">
+                <span class="k">Resolved</span>
+                <span class="v">{{ row.resolved }}</span>
+              </div>
+              <div class="metric-mini m-overdue">
+                <span class="k">Overdue</span>
+                <span class="v">{{ row.overdue }}</span>
+              </div>
+            </div>
+
+            {% with total=row.active|add:row.resolved|add:row.overdue %}
+            {% if total > 0 %}
+            <div class="stack-label">
+              <span>Ticket breakdown</span>
+              <span>{{ total }} total</span>
+            </div>
+            <div class="stack-bar">
+              <div class="stack-seg seg-active"   style="width: {% widthratio row.active   total 100 %}%;"></div>
+              <div class="stack-seg seg-resolved" style="width: {% widthratio row.resolved total 100 %}%;"></div>
+              <div class="stack-seg seg-overdue"  style="width: {% widthratio row.overdue  total 100 %}%;"></div>
+            </div>
+            <div class="stack-legend">
+              <span class="legend-dot ld-active">Active</span>
+              <span class="legend-dot ld-resolved">Resolved</span>
+              <span class="legend-dot ld-overdue">Overdue</span>
+            </div>
+            {% else %}
+            <div class="stack-bar">
+              <div class="stack-seg seg-resolved" style="width:0%;"></div>
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <div class="completion-row">
+              <span class="completion-label"><i class="fas fa-chart-line me-1"></i>Completion rate</span>
+              <span class="completion-badge {% if row.completion_rate >= 75 %}good{% elif row.completion_rate >= 40 %}warn{% else %}danger{% endif %}">
+                {{ row.completion_rate }}%
+              </span>
+            </div>
+
+          </article>
+          {% empty %}
+          <div class="empty-state" style="grid-column: 1/-1;">
+            <i class="fas fa-users-slash"></i>
+            No members found for this department.
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-stack">
+      <div class="hd-card">
+        <div class="hd-card-header">
+          <div class="hd-card-title">
+            <i class="fas fa-clock-rotate-left"></i> Recent Tickets
+          </div>
+          <span class="hd-card-badge">last {{ recent_tickets|length }}</span>
+        </div>
+        <div class="hd-card-body">
+          <div class="ticket-list">
+            {% for ticket in recent_tickets %}
+            <div class="ticket-item">
+              <div class="ticket-head">
+                <div>
+                  <div class="ticket-id">#{{ ticket.id }}</div>
+                  <p class="ticket-title">{{ ticket.TICKET_TITLE }}</p>
+                </div>
+                {% if ticket.TICKET_STATUS == 'Open' %}
+                  <span class="status-badge sb-open">{{ ticket.TICKET_STATUS }}</span>
+                {% elif ticket.TICKET_STATUS == 'In Progress' %}
+                  <span class="status-badge sb-progress">{{ ticket.TICKET_STATUS }}</span>
+                {% elif ticket.TICKET_STATUS == 'Resolved' %}
+                  <span class="status-badge sb-resolved">{{ ticket.TICKET_STATUS }}</span>
+                {% elif ticket.TICKET_STATUS == 'Closed' %}
+                  <span class="status-badge sb-closed">{{ ticket.TICKET_STATUS }}</span>
+                {% elif ticket.TICKET_STATUS == 'Reopen' %}
+                  <span class="status-badge sb-reopen">{{ ticket.TICKET_STATUS }}</span>
+                {% else %}
+                  <span class="status-badge sb-reopen">{{ ticket.TICKET_STATUS }}</span>
+                {% endif %}
+              </div>
+              <div class="ticket-footer">
+                <span class="ticket-due">
+                  <i class="fas fa-calendar-alt"></i>
+                  {{ ticket.TICKET_DUE_DATE|date:"M d, Y" }}
+                </span>
+                <span class="ticket-assignee">
+                  <i class="fas fa-user"></i>
+                  {% if ticket.assigned_to %}
+                    {{ ticket.assigned_to.get_full_name|default:ticket.assigned_to.username }}
+                  {% else %}
+                    Unassigned
+                  {% endif %}
+                </span>
+              </div>
+            </div>
+            {% empty %}
+            <div class="empty-state"><i class="fas fa-inbox"></i>No recent tickets.</div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+
+<script>
+(function () {
+
+  
+  const depts = {
+    'hr':                   { bg: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=120&q=80' },
+    'human resources':      { bg: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=120&q=80' },
+    'it':                   { bg: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=120&q=80' },
+    'information technology':{ bg: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=120&q=80' },
+    'finance':              { bg: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=120&q=80' },
+    'accounts':             { bg: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=120&q=80' },
+    'accounting':           { bg: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=120&q=80' },
+    'marketing':            { bg: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&q=80' },
+    'sales':                { bg: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&q=80' },
+    'operations':           { bg: 'https://images.unsplash.com/photo-1553413077-190dd305871c?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&q=80' },
+    'legal':                { bg: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=120&q=80' },
+    'support':              { bg: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=120&q=80' },
+    'customer support':     { bg: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=120&q=80' },
+    'customer service':     { bg: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1601935111741-ae98b2b230b0?w=120&q=80' },
+    'engineering':          { bg: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=120&q=80' },
+    'development':          { bg: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=120&q=80' },
+    'admin':                { bg: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=120&q=80' },
+    'administration':       { bg: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=120&q=80' },
+    'procurement':          { bg: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&q=80' },
+    'supply chain':         { bg: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&q=80' },
+    'management':           { bg: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=120&q=80' },
+    'executive':            { bg: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1400&q=80', avatar: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=120&q=80' },
+  };
+
+  const fallback = {
+    bg:     'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1400&q=80',
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&q=80',
+  };
+
+  
+  function resolve(name, code) {
+    name = (name || '').toLowerCase().trim();
+    code = (code || '').toLowerCase().trim();
+    if (depts[name]) return depts[name];
+    if (depts[code]) return depts[code];
+    for (const key of Object.keys(depts)) {
+      if (name.includes(key) || key.includes(name)) return depts[key];
+    }
+    return fallback;
+  }
+
+  function avatarFallbackDataUri(label) {
+    const txt = (label || '?').toString().trim().slice(0, 1).toUpperCase() || '?';
+    const svg =
+      `<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'>` +
+      `<rect width='100%' height='100%' fill='#1e3a8a'/>` +
+      `<text x='50%' y='56%' text-anchor='middle' fill='white' font-family='Arial' font-size='56' font-weight='700'>${txt}</text>` +
+      `</svg>`;
+    return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+  }
+
+  
+  const heroDeptName = "{{ department.name|lower|escapejs }}";
+  const heroDeptCode = "{{ department.code|lower|escapejs }}";
+  const heroMatch = resolve(heroDeptName, heroDeptCode);
+
+  const hero = document.querySelector('.dept-hero');
+  if (hero) {
+    hero.style.backgroundImage =
+      `linear-gradient(135deg, rgba(15,23,42,.52) 0%, rgba(30,41,100,.38) 100%), url('${heroMatch.bg}')`;
+  }
+  const heroAvatar = document.getElementById('dept-avatar-img');
+  if (heroAvatar) {
+    const heroInitial = (heroDeptName || heroDeptCode || "?").trim().charAt(0);
+    heroAvatar.onerror = () => { heroAvatar.onerror = null; heroAvatar.src = avatarFallbackDataUri(heroInitial); };
+    heroAvatar.src = heroMatch.avatar;
+  }
+
+  
+  document.querySelectorAll('.multi-dept-card').forEach(card => {
+    const name = (card.dataset.deptName || '').trim();
+    const code = (card.dataset.deptCode || '').trim();
+    const m = resolve(name, code);
+
+    
+    card.style.backgroundImage =
+      `radial-gradient(ellipse at 96% -20%, rgba(59,130,246,.18) 0%, transparent 55%), radial-gradient(ellipse at 5% 110%, rgba(16,185,129,.1) 0%, transparent 45%), linear-gradient(135deg, rgba(15,23,42,.52) 0%, rgba(30,41,100,.38) 100%), url('${m.bg}')`;
+
+    
+    const img = card.querySelector('.md-avatar-img');
+    if (img) {
+      const initial = (name || code || "?").trim().charAt(0);
+      img.onerror = () => { img.onerror = null; img.src = avatarFallbackDataUri(initial); };
+      img.src = m.avatar;
+    }
+  });
+
+})();
+</script>
+{% endblock %}

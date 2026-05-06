@@ -1,0 +1,177 @@
+{% extends "Base.html" %}
+{% block title %}Notifications - HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <a href="{{ dashboard_url|default:'/' }}">Dashboard</a>
+  <span class="bc-sep">/</span>
+  <strong>Notifications</strong>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .notif-row-actions {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+  }
+  .notif-row-actions form {
+    margin: 0;
+  }
+  .notif-row-btn {
+    min-width: 92px;
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+  <div>
+    <div class="page-title">Notifications</div>
+    <div class="page-sub">Track ticket updates and system alerts</div>
+  </div>
+  <div class="d-flex gap-2 flex-wrap">
+    {% if stats.unread > 0 %}
+    <form method="post" action="{% url 'mark_all_read' %}">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{% url 'notifications_list' %}?filter={{ filter_type|urlencode }}">
+      <button type="submit" class="btn btn-sm btn-primary">
+        <i class="fas fa-check-double me-1"></i>Mark All as Read
+      </button>
+    </form>
+    {% endif %}
+    {% if stats.total > 0 %}
+    <form method="post" action="{% url 'delete_all_notifications' %}" onsubmit="return confirm('Delete all notifications');">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{% url 'notifications_list' %}?filter={{ filter_type|urlencode }}">
+      <button type="submit" class="btn btn-sm btn-outline-danger">
+        <i class="fas fa-trash-alt me-1"></i>Delete All
+      </button>
+    </form>
+    {% endif %}
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-6 col-md-4">
+    <div class="stat-card">
+      <div class="stat-icon si-blue"><i class="fas fa-bell"></i></div>
+      <div>
+        <div class="stat-label">Total</div>
+        <div class="stat-value">{{ stats.total|default:0 }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-4">
+    <div class="stat-card">
+      <div class="stat-icon si-yellow"><i class="fas fa-bell-slash"></i></div>
+      <div>
+        <div class="stat-label">Unread</div>
+        <div class="stat-value">{{ stats.unread|default:0 }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-4">
+    <div class="stat-card">
+      <div class="stat-icon si-green"><i class="fas fa-check-circle"></i></div>
+      <div>
+        <div class="stat-label">Read</div>
+        <div class="stat-value">{{ stats.read|default:0 }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mb-3 d-flex gap-2 flex-wrap">
+  <a href="{% url 'notifications_list' %}?filter=all"
+     class="btn btn-sm {% if filter_type == 'all' %}btn-primary{% else %}btn-outline-secondary{% endif %}">
+    All
+  </a>
+  <a href="{% url 'notifications_list' %}?filter=unread"
+     class="btn btn-sm {% if filter_type == 'unread' %}btn-primary{% else %}btn-outline-secondary{% endif %}">
+    Unread
+  </a>
+  <a href="{% url 'notifications_list' %}?filter=read"
+     class="btn btn-sm {% if filter_type == 'read' %}btn-primary{% else %}btn-outline-secondary{% endif %}">
+    Read
+  </a>
+</div>
+
+<div class="hd-card">
+  {% if notifications %}
+  <div class="table-responsive">
+    <table class="hd-table">
+      <thead>
+        <tr>
+          <th>Message</th>
+          <th>Type</th>
+          <th>Time</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for notif in notifications %}
+        <tr>
+          <td>
+            <div style="font-weight:600;color:var(--slate-800);">{{ notif.message }}</div>
+          </td>
+          <td>{{ notif.get_notification_type_display }}</td>
+          <td>{{ notif.created_at|timesince }} ago</td>
+          <td>
+            {% if notif.is_read %}
+            <span class="status-badge sb-closed">Read</span>
+            {% else %}
+            <span class="status-badge sb-open">Unread</span>
+            {% endif %}
+          </td>
+          <td>
+            <div class="notif-row-actions">
+              {% if not notif.is_read %}
+              <form method="post" action="{% url 'mark_notification_read' notif.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{% url 'notifications_list' %}?filter={{ filter_type|urlencode }}">
+                <button type="submit" class="btn btn-sm btn-outline-primary notif-row-btn">Mark as Read</button>
+              </form>
+              {% endif %}
+              <form method="post" action="{% url 'delete_notification' notif.id %}" onsubmit="return confirm('Delete this notification');">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{% url 'notifications_list' %}?filter={{ filter_type|urlencode }}">
+                <button type="submit" class="btn btn-sm btn-outline-danger notif-row-btn">Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% if notifications.has_other_pages %}
+  <div class="hd-card-footer d-flex justify-content-between align-items-center">
+    <span style="font-size:12px;color:var(--slate-500);">
+      Page {{ notifications.number }} of {{ notifications.paginator.num_pages }}
+    </span>
+    <div class="d-flex gap-2">
+      {% if notifications.has_previous %}
+      <a href="?filter={{ filter_type|urlencode }}&page={{ notifications.previous_page_number }}" class="btn btn-sm btn-outline-secondary">Prev</a>
+      {% endif %}
+      {% if notifications.has_next %}
+      <a href="?filter={{ filter_type|urlencode }}&page={{ notifications.next_page_number }}" class="btn btn-sm btn-outline-secondary">Next</a>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+  {% else %}
+  <div class="empty-state">
+    <div class="empty-icon"><i class="fas fa-bell-slash"></i></div>
+    <div class="empty-title">No notifications</div>
+    <div class="empty-text">You are all caught up.</div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

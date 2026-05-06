@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if role == 'admin' %}Admin Login{% else %}Sign In{% endif %} - HelpDesk</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root{
+      --brand:#0F766E;--brand-dark:#115E59;--brand-light:#ECFEFF;--brand-muted:#99F6E4;
+      --adm:#7C3AED;--adm-light:#F5F3FF;--adm-muted:#DDD6FE;
+      --slate-50:#F8FAFC;--slate-100:#F1F5F9;--slate-200:#E2E8F0;
+      --slate-400:#94A3B8;--slate-500:#64748B;--slate-600:#475569;
+      --slate-700:#334155;--slate-800:#1E293B;--slate-900:#0F172A;
+      --danger:#DC2626;--danger-bg:#FEF2F2;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'DM Sans',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px;}
+    body.r-user{background:radial-gradient(900px 600px at 80% -10%,#d1fae5 0%,transparent 50%),radial-gradient(700px 500px at -5% 20%,#cffafe 0%,transparent 45%),#F8FAFC;}
+    body.r-admin{background:radial-gradient(900px 600px at 80% -10%,#EDE9FE 0%,transparent 50%),radial-gradient(700px 500px at -5% 20%,#F5F3FF 0%,transparent 45%),#F8FAFC;}
+    .outer{width:100%;max-width:420px;}
+    .back-link{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--slate-500);font-weight:600;margin-bottom:22px;text-decoration:none;transition:color .15s;}
+    .back-link:hover{color:var(--slate-800);}
+    .card{background:#fff;border-radius:18px;box-shadow:0 8px 36px rgba(15,23,42,.09);overflow:hidden;}
+    .card-head{padding:34px 32px 24px;text-align:center;border-bottom:1px solid var(--slate-100);}
+    .icon-ring{width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 16px;animation:popIn .5s cubic-bezier(.34,1.56,.64,1) both;}
+    .r-user .icon-ring{background:var(--brand-light);color:var(--brand);border:2px solid var(--brand-muted);}
+    .r-admin .icon-ring{background:var(--adm-light);color:var(--adm);border:2px solid var(--adm-muted);}
+    .card-title{font-size:22px;font-weight:800;color:var(--slate-900);letter-spacing:-.4px;margin-bottom:5px;}
+    .card-sub{font-size:13.5px;color:var(--slate-500);}
+    .role-toggle{display:flex;background:var(--slate-100);border-radius:10px;padding:4px;margin-top:16px;}
+    .rt-btn{flex:1;padding:8px 12px;border-radius:7px;border:none;font-size:13px;font-weight:700;transition:all .15s;background:#fff;text-align:center;display:block;}
+    .rt-active-user{color:var(--brand);box-shadow:0 2px 8px rgba(0,0,0,.07);}
+    .rt-active-admin{color:var(--adm);box-shadow:0 2px 8px rgba(0,0,0,.07);}
+    .card-body{padding:26px 32px;}
+    label.fl{font-size:13px;font-weight:700;color:var(--slate-700);margin-bottom:6px;display:block;}
+    .iw{position:relative;}
+    .iw .pi{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--slate-400);font-size:13px;pointer-events:none;}
+    .iw input{padding-left:36px;padding-right:44px;width:100%;border:1.5px solid var(--slate-200);border-radius:8px;padding-top:10px;padding-bottom:10px;font-size:14px;color:var(--slate-800);background:#fff;transition:border-color .15s,box-shadow .15s;font-family:inherit;}
+    .iw input:focus{outline:none;}
+    .r-user  .iw input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(15,118,110,.1);}
+    .r-admin .iw input:focus{border-color:var(--adm);box-shadow:0 0 0 3px rgba(124,58,237,.1);}
+    .pw-tog{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--slate-400);font-size:13px;cursor:pointer;padding:0;transition:color .15s;}
+    .r-user  .pw-tog:hover{color:var(--brand);}
+    .r-admin .pw-tog:hover{color:var(--adm);}
+    .err-banner{display:flex;align-items:flex-start;gap:10px;background:var(--danger-bg);border:1px solid #FECACA;border-radius:8px;padding:12px 14px;margin-bottom:18px;font-size:13px;color:var(--danger);}
+    .admin-notice{display:flex;align-items:flex-start;gap:10px;background:#F5F3FF;border:1px solid #DDD6FE;border-radius:8px;padding:12px 14px;margin-bottom:18px;font-size:12.5px;color:#5B21B6;}
+    .btn-login{width:100%;padding:12px;border:none;border-radius:8px;font-size:14.5px;font-weight:700;cursor:pointer;transition:all .15s;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;}
+    .r-user  .btn-login{background:var(--brand);}
+    .r-user  .btn-login:hover{background:var(--brand-dark);box-shadow:0 4px 14px rgba(15,118,110,.3);}
+    .r-admin .btn-login{background:var(--adm);}
+    .r-admin .btn-login:hover{background:#6D28D9;box-shadow:0 4px 14px rgba(124,58,237,.3);}
+    .card-foot{padding:15px 32px;border-top:1px solid var(--slate-100);text-align:center;font-size:13px;color:var(--slate-400);}
+    .card-foot a{color:var(--brand);font-weight:700;text-decoration:none;}
+    .r-admin .card-foot a{color:var(--adm);}
+    .fe{font-size:12px;color:var(--danger);margin-top:5px;}
+    @keyframes popIn{0%{transform:scale(0);opacity:0;}60%{transform:scale(1.1);}100%{transform:scale(1);opacity:1;}}
+  </style>
+</head>
+<body class="{% if role == 'admin' %}r-admin{% else %}r-user{% endif %}">
+
+<div class="outer">
+  <a href="{% url 'landing' %}" class="back-link">
+    <i class="fas fa-arrow-left" style="font-size:11px;"></i> Back to Home
+  </a>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="icon-ring">
+        {% if role == 'admin' %}<i class="fas fa-shield-alt"></i>
+        {% else %}<i class="fas fa-user"></i>{% endif %}
+      </div>
+      <div class="card-title">
+        {% if role == 'admin' %}Admin Portal{% else %}Welcome Back{% endif %}
+      </div>
+      <div class="card-sub">
+        {% if role == 'admin' %}Full system access - administrator only
+        {% else %}Sign in to your department workspace{% endif %}
+      </div>
+      <div class="role-toggle">
+        {% if role == 'admin' %}
+        <span class="rt-btn rt-active-admin"><i class="fas fa-shield-alt me-1"></i> Admin</span>
+        {% else %}
+        <span class="rt-btn rt-active-user"><i class="fas fa-user me-1"></i> User</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="card-body">
+      {% if messages %}
+        {% for msg in messages %}
+        <div class="err-banner">
+          <i class="fas fa-exclamation-circle" style="flex-shrink:0;margin-top:1px;"></i>
+          <span>{{ msg }}</span>
+        </div>
+        {% endfor %}
+      {% endif %}
+
+      {% if form.non_field_errors %}
+      <div class="err-banner">
+        <i class="fas fa-exclamation-circle" style="flex-shrink:0;margin-top:1px;"></i>
+        <span>{{ form.non_field_errors.0 }}</span>
+      </div>
+      {% endif %}
+
+      <form method="POST" id="loginForm" novalidate>
+        {% csrf_token %}
+        <input type="hidden" name="login_as" value="{{ role|default:'user' }}">
+
+        <div class="mb-3">
+          <label class="fl">Username <span style="color:#DC2626">*</span></label>
+          <div class="iw">
+            <i class="fas fa-user pi"></i>
+            {{ form.username }}
+          </div>
+          {% if form.username.errors %}<div class="fe">{{ form.username.errors.0 }}</div>{% endif %}
+          <div id="forgotHint" class="fe" style="display:none;"></div>
+        </div>
+
+        <div class="mb-4">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <label class="fl" style="margin:0;">Password <span style="color:#DC2626">*</span></label>
+            <a id="forgotLink" data-base-url="{% url 'password_reset' %}" href="#"
+               style="font-size:12px;color:var(--brand);font-weight:600;text-decoration:none;opacity:.55;pointer-events:none;"
+               title="Enter username first">Forgot</a>
+          </div>
+          <div class="iw">
+            <i class="fas fa-lock pi"></i>
+            {{ form.password }}
+            <button type="button" class="pw-tog" onclick="togglePw(this)"><i class="fas fa-eye"></i></button>
+          </div>
+          {% if form.password.errors %}<div class="fe">{{ form.password.errors.0 }}</div>{% endif %}
+        </div>
+
+        <button type="submit" class="btn-login" id="loginBtn">
+          <i class="fas {% if role == 'admin' %}fa-shield-alt{% else %}fa-sign-in-alt{% endif %}"></i>
+          {% if role == 'admin' %}Access Admin Portal{% else %}Sign In{% endif %}
+        </button>
+      </form>
+    </div>
+
+    <div class="card-foot">
+      {% if allow_register %}
+        No account <a href="{% url 'register' %}">Register</a>
+      {% else %}
+        Regular user <a href="{% url 'login' %}?role=user">User Login</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function togglePw(btn){
+    const inp=btn.closest('.iw').querySelector('input');
+    const ic=btn.querySelector('i');
+    inp.type = inp.type === 'password' ? 'text' : 'password';
+    ic.className = inp.type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+  }
+
+  function setFieldError(input, message) {
+    input.style.borderColor = '#DC2626';
+    input.style.boxShadow = '0 0 0 3px rgba(220,38,38,.12)';
+    let err = input.closest('.mb-3, .mb-4').querySelector('.fe.js-fe');
+    if (!err) {
+      err = document.createElement('div');
+      err.className = 'fe js-fe';
+      input.closest('.mb-3, .mb-4').appendChild(err);
+    }
+    err.textContent = message;
+  }
+
+  function clearFieldError(input) {
+    input.style.borderColor = '#E2E8F0';
+    input.style.boxShadow = 'none';
+    const err = input.closest('.mb-3, .mb-4').querySelector('.fe.js-fe');
+    if (err) err.remove();
+  }
+
+  function validateLoginForm() {
+    const username = document.getElementById('id_username');
+    const password = document.getElementById('id_password');
+    let ok = true;
+
+    if (!username) {
+      ok = false;
+    } else if (!username.value.trim()) {
+      setFieldError(username, 'Username is required.');
+      ok = false;
+    } else {
+      clearFieldError(username);
+    }
+
+    if (!password) {
+      ok = false;
+    } else if (!password.value.trim()) {
+      setFieldError(password, 'Password is required.');
+      ok = false;
+    } else if (password.value.length < 6) {
+      setFieldError(password, 'Password must be at least 6 characters.');
+      ok = false;
+    } else {
+      clearFieldError(password);
+    }
+
+    return ok;
+  }
+
+  let forgotLookupToken = 0;
+  let forgotLookupTimer = null;
+
+  function setForgotHint(message, color) {
+    const hint = document.getElementById('forgotHint');
+    if (!hint) return;
+    if (!message) {
+      hint.style.display = 'none';
+      hint.textContent = '';
+      return;
+    }
+    hint.textContent = message;
+    hint.style.display = 'block';
+    hint.style.color = color || '#DC2626';
+  }
+
+  async function usernameExists(username) {
+    const res = await fetch('/api/username-exists/?username=' + encodeURIComponent(username), {
+      method: 'GET',
+      headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    });
+    if (!res.ok) return false;
+    const data = await res.json();
+    return !!data.exists;
+  }
+
+  function setForgotDisabled(forgot, message) {
+    forgot.href = '#';
+    forgot.style.opacity = '.55';
+    forgot.style.pointerEvents = 'none';
+    forgot.title = message || 'Enter username first';
+    setForgotHint(message || '', '#DC2626');
+  }
+
+  function setForgotEnabled(forgot, username) {
+    forgot.href = forgot.dataset.baseUrl + '?username=' + encodeURIComponent(username);
+    forgot.style.opacity = '1';
+    forgot.style.pointerEvents = 'auto';
+    forgot.title = 'Reset password for this username';
+    setForgotHint('Username found. You can continue with Forgot Password.', '#059669');
+  }
+
+  function updateForgotLink() {
+    const username = document.getElementById('id_username');
+    const forgot = document.getElementById('forgotLink');
+    if (!forgot) return;
+    const isUserLogin = document.body.classList.contains('r-user');
+    if (!isUserLogin) {
+      forgot.href = forgot.dataset.baseUrl;
+      forgot.style.opacity = '1';
+      forgot.style.pointerEvents = 'auto';
+      forgot.title = 'Forgot password';
+      setForgotHint('', '');
+      return;
+    }
+    const value = username ? username.value.trim() : '';
+    if (value) {
+      setForgotDisabled(forgot, 'Checking username...');
+      clearTimeout(forgotLookupTimer);
+      const token = ++forgotLookupToken;
+      forgotLookupTimer = setTimeout(async function () {
+        const exists = await usernameExists(value);
+        if (token !== forgotLookupToken) return;
+        if (exists) setForgotEnabled(forgot, value);
+        else setForgotDisabled(forgot, 'Username not found. Enter a valid registered username.');
+      }, 250);
+    } else {
+      clearTimeout(forgotLookupTimer);
+      setForgotDisabled(forgot, '');
+    }
+  }
+
+  document.getElementById('loginForm').addEventListener('submit',function(e){
+    if (!validateLoginForm()) {
+      e.preventDefault();
+      return;
+    }
+    const b=document.getElementById('loginBtn');
+    b.innerHTML='<i class="fas fa-spinner fa-spin"></i> Signing in...';
+    b.style.opacity='.8';b.disabled=true;
+  });
+
+  document.querySelectorAll('.iw input').forEach(function(el){
+    el.style.cssText='padding-left:36px;padding-right:44px;width:100%;border:1.5px solid #E2E8F0;border-radius:8px;padding-top:10px;padding-bottom:10px;font-size:14px;color:#1E293B;background:#fff;transition:border-color .15s,box-shadow .15s;font-family:inherit;box-sizing:border-box;';
+    el.addEventListener('focus',function(){this.style.borderColor=document.body.classList.contains('r-admin') ? '#7C3AED' : '#0F766E';this.style.boxShadow=document.body.classList.contains('r-admin') ? '0 0 0 3px rgba(124,58,237,.1)' : '0 0 0 3px rgba(15,118,110,.1)';});
+    el.addEventListener('blur',function(){
+      if (this.value.trim()) clearFieldError(this);
+      else this.style.borderColor='#E2E8F0';
+    });
+  });
+
+  const usernameInput = document.getElementById('id_username');
+  if (usernameInput) {
+    usernameInput.addEventListener('input', updateForgotLink);
+    usernameInput.addEventListener('blur', updateForgotLink);
+  }
+  updateForgotLink();
+</script>
+</body>
+</html>

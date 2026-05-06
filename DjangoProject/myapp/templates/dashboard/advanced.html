@@ -1,0 +1,47 @@
+{% extends "Base.html" %}
+{% block title %}Advanced Dashboard - HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <strong>Advanced Dashboard</strong>
+{% endblock %}
+
+{% block content %}
+<div class="row g-3 mb-3">
+  <div class="col-6 col-md-3"><div class="stat-card"><div class="stat-icon si-indigo"><i class="fas fa-ticket-alt"></i></div><div><div class="stat-label">Total</div><div class="stat-value">{{ total_tickets }}</div></div></div></div>
+  <div class="col-6 col-md-3"><div class="stat-card"><div class="stat-icon si-yellow"><i class="fas fa-circle"></i></div><div><div class="stat-label">Open</div><div class="stat-value">{{ open_tickets }}</div></div></div></div>
+  <div class="col-6 col-md-3"><div class="stat-card"><div class="stat-icon si-blue"><i class="fas fa-spinner"></i></div><div><div class="stat-label">In Progress</div><div class="stat-value">{{ in_progress }}</div></div></div></div>
+  <div class="col-6 col-md-3"><div class="stat-card"><div class="stat-icon si-green"><i class="fas fa-check-circle"></i></div><div><div class="stat-label">Closed</div><div class="stat-value">{{ closed_tickets }}</div></div></div></div>
+</div>
+
+<div class="hd-card">
+  <div class="hd-card-header">
+    <div class="hd-card-title"><i class="fas fa-clock" style="color:var(--brand);"></i> Recent Tickets</div>
+  </div>
+  <div class="table-responsive">
+    <table class="hd-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Priority</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in recent_tickets %}
+        <tr>
+          <td>#{{ t.id }}</td>
+          <td><a href="{% url 'ticketinfo' t.id %}">{{ t.TICKET_TITLE|truncatechars:60 }}</a></td>
+          <td>{{ t.TICKET_STATUS }}</td>
+          <td>{{ t.effective_priority_display }}</td>
+          <td>{{ t.TICKET_CREATED_ON|date:"M d, Y" }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" class="text-center text-muted py-4">No tickets found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

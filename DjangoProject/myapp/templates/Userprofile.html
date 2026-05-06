@@ -1,0 +1,471 @@
+{% extends "Base.html" %}
+{% load avatar_tags %}
+{% block title %}My Profile — HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <strong>My Profile</strong>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+
+  
+  .p-identity {
+    background: #fff;
+    border: 1px solid var(--slate-200);
+    border-radius: var(--r-lg);
+    padding: 28px 28px 20px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow);
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .p-identity::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--brand) 0%, #7C3AED 100%);
+    border-radius: 4px 0 0 4px;
+  }
+
+  .p-avatar {
+    width: 76px; height: 76px;
+    border-radius: 50%;
+    background: var(--brand-light);
+    border: 3px solid var(--slate-200);
+    overflow: hidden; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; font-weight: 900; color: var(--brand);
+    box-shadow: 0 2px 10px rgba(15,23,42,.1);
+  }
+  .p-avatar img { width:100%; height:100%; object-fit:cover; }
+  .p-avatar .p-avatar-initial { display: inline-flex; }
+  .p-avatar img + .p-avatar-initial { display: none; }
+
+  .p-id-body { flex: 1; min-width: 0; }
+  .p-name {
+    font-size: 21px; font-weight: 900;
+    color: var(--slate-900); letter-spacing: -.4px;
+    margin-bottom: 6px; line-height: 1.1;
+  }
+  .p-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .p-chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 10px; border-radius: 20px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .4px; text-transform: uppercase;
+  }
+  .pc-brand { background: var(--brand-light); border: 1px solid var(--brand-muted); color: var(--brand); }
+  .pc-green { background: #F0FDF4; border: 1px solid #BBF7D0; color: #16A34A; }
+  .pc-slate { background: var(--slate-100); border: 1px solid var(--slate-200); color: var(--slate-500); }
+
+  .p-id-actions { display: flex; gap: 8px; flex-wrap: wrap; flex-shrink: 0; }
+
+  
+  .p-grid {
+    display: grid;
+    grid-template-columns: 1fr 272px;
+    gap: 20px;
+    align-items: start;
+  }
+  .p-grid > div {
+    display: flex;
+    flex-direction: column;
+  }
+  @media (max-width: 900px)  { .p-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 540px)  { .p-identity { gap: 16px; } }
+
+  
+  .p-row {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    padding: 11px 18px;
+    border-bottom: 1px solid var(--slate-100);
+    gap: 8px; font-size: 13px;
+    transition: background .1s;
+  }
+  .p-row:last-child { border-bottom: none; }
+  .p-row:hover { background: var(--slate-50); }
+
+  .p-row-label {
+    font-size: 12px; color: var(--slate-500);
+    font-weight: 600; white-space: nowrap;
+    display: flex; align-items: center; gap: 7px;
+    min-width: 130px;
+  }
+  .p-row-label i { width: 14px; text-align: center; font-size: 11px; color: var(--slate-400); }
+
+  .p-row-val {
+    color: var(--slate-800); font-weight: 600;
+    text-align: right; word-break: break-word;
+  }
+  .p-row-val.mono { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; }
+  .p-empty { color: var(--slate-300); font-weight: 400; font-style: italic; }
+
+  
+  .p-pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 9px; border-radius: 20px;
+    font-size: 11px; font-weight: 700;
+  }
+  .pp-green { background: #F0FDF4; border: 1px solid #BBF7D0; color: #16A34A; }
+  .pp-brand { background: var(--brand-light); border: 1px solid var(--brand-muted); color: var(--brand); }
+  .pp-muted { background: var(--slate-100); border: 1px solid var(--slate-200); color: var(--slate-500); }
+
+  .pw-mask { letter-spacing: 3px; color: var(--slate-300); font-size: 16px; }
+
+  
+  .p-menu-item {
+    display: flex; align-items: center; gap: 11px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--slate-100);
+    text-decoration: none;
+    color: var(--slate-700);
+    font-size: 13px; font-weight: 600;
+    transition: all .13s;
+  }
+  .p-menu-item:last-child { border-bottom: none; }
+  .p-menu-item:hover { background: var(--brand-light); color: var(--brand); padding-left: 20px; }
+  .p-menu-item:hover .p-menu-icon { background: var(--brand); color: #fff; }
+  .p-menu-icon {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: var(--slate-100); color: var(--slate-500);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11.5px; flex-shrink: 0; transition: all .13s;
+  }
+  .p-menu-arr { margin-left: auto; color: var(--slate-300); font-size: 10px; }
+
+  
+  .p-info-row {
+    display: flex; align-items: center; gap: 11px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--slate-100);
+    font-size: 12.5px;
+  }
+  .p-info-row:last-child { border-bottom: none; }
+  .p-info-icon {
+    width: 30px; height: 30px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; flex-shrink: 0;
+  }
+  .p-info-sub  { font-size: 10.5px; color: var(--slate-400); font-weight: 600; }
+  .p-info-val  { font-weight: 700; color: var(--slate-800); font-size: 12.5px; margin-top: 1px; }
+
+  .p-equal-card {
+    min-height: 262px;
+    display: flex;
+    flex-direction: column;
+  }
+  .p-top-card {
+    min-height: 338px;
+  }
+
+  
+  .p-stars { display: inline-flex; align-items: center; gap: 2px; }
+  .p-star-on  { color: #F59E0B; font-size: 12px; }
+  .p-star-off { color: var(--slate-200); font-size: 12px; }
+  .p-star-num {
+    margin-left: 6px; font-size: 13px;
+    font-weight: 800; color: var(--slate-700);
+  }
+
+  
+  .p-res-wrap { padding: 12px 18px 14px; }
+  .p-res-head {
+    display: flex; justify-content: space-between;
+    font-size: 12px; font-weight: 600;
+    color: var(--slate-500); margin-bottom: 7px;
+  }
+  .p-res-pct { font-weight: 800; color: var(--slate-800); }
+  .p-res-track { height: 5px; border-radius: 3px; background: var(--slate-100); overflow: hidden; }
+  .p-res-fill  {
+    height: 100%; border-radius: 3px;
+    background: linear-gradient(90deg, var(--brand) 0%, var(--success) 100%);
+    transition: width .5s ease;
+  }
+
+</style>
+{% endblock %}
+
+{% block content %}
+{% if ProfileDatas %}
+{% for ProfileData in ProfileDatas %}
+
+
+<div class="p-identity">
+  <div class="p-avatar">
+    {% with avatar=ProfileData.user|avatar_url %}
+    {% if avatar %}
+      <img src="{{ avatar }}" alt="Profile"
+           onerror="this.style.display='none'; if(this.nextElementSibling){ this.nextElementSibling.style.display='inline-flex'; }">
+      <span class="p-avatar-initial">{{ ProfileData.user|avatar_initial }}</span>
+    {% else %}
+      {{ ProfileData.user|avatar_initial }}
+    {% endif %}
+    {% endwith %}
+  </div>
+
+  <div class="p-id-body">
+    <div class="p-name">{{ request.user.get_full_name|default:request.user.username }}</div>
+    <div class="p-chips">
+      <span class="p-chip pc-brand">
+        <i class="fas fa-user-shield" style="font-size:9px;"></i>
+        {{ user_role|default:'User' }}
+      </span>
+      <span class="p-chip pc-green">
+        <i class="fas fa-circle" style="font-size:7px;"></i> Active
+      </span>
+      {% if request.user.email %}
+      <span class="p-chip pc-slate">
+        <i class="fas fa-envelope" style="font-size:9px;"></i>
+        {{ request.user.email }}
+      </span>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="p-id-actions">
+    <a href="{% url 'update_profile' ProfileData.id %}" class="btn btn-primary btn-sm">
+      <i class="fas fa-pen me-2"></i>Edit Profile
+    </a>
+    <a href="{% url 'ChangePassword' %}" class="btn btn-outline-secondary btn-sm">
+      <i class="fas fa-key me-2"></i>Password
+    </a>
+  </div>
+</div>
+
+
+<div class="row g-3 mb-4">
+  <div class="col-4">
+    <div class="stat-card">
+      <div class="stat-icon si-indigo"><i class="fas fa-ticket-alt"></i></div>
+      <div>
+        <div class="stat-label">Tickets Created</div>
+        <div class="stat-value" style="color:var(--brand);">{{ my_tickets_count|default:0 }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="stat-card">
+      <div class="stat-icon si-green"><i class="fas fa-circle-check"></i></div>
+      <div>
+        <div class="stat-label">Resolved</div>
+        <div class="stat-value" style="color:var(--success);">{{ resolved_count|default:0 }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="stat-card">
+      <div class="stat-icon si-yellow"><i class="fas fa-inbox"></i></div>
+      <div>
+        <div class="stat-label">Active Queue</div>
+        <div class="stat-value" style="color:var(--warning);">{{ ticket_count|default:0 }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="p-grid">
+
+  
+  <div>
+
+    
+    <div class="hd-card mb-4 p-equal-card p-top-card">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-id-card" style="color:var(--brand);"></i>
+          Personal Information
+        </div>
+        <a href="{% url 'update_profile' ProfileData.id %}" class="btn btn-xs btn-outline-secondary">
+          <i class="fas fa-pen me-1"></i>Edit
+        </a>
+      </div>
+
+      <div class="p-row">
+        <span class="p-row-label"><i class="fas fa-id-badge"></i>Full Name</span>
+        <span class="p-row-val">
+          {% if request.user.get_full_name %}{{ request.user.get_full_name }}
+          {% else %}<span class="p-empty">Not provided</span>{% endif %}
+        </span>
+      </div>
+      <div class="p-row">
+        <span class="p-row-label"><i class="fas fa-at"></i>Username</span>
+        <span class="p-row-val mono">{{ request.user.username }}</span>
+      </div>
+      <div class="p-row">
+        <span class="p-row-label"><i class="fas fa-envelope"></i>Email</span>
+        <span class="p-row-val">
+          {% if request.user.email %}{{ request.user.email }}
+          {% else %}<span class="p-empty">Not provided</span>{% endif %}
+        </span>
+      </div>
+      <div class="p-row">
+        <span class="p-row-label"><i class="fas fa-phone"></i>Phone</span>
+        <span class="p-row-val">
+          {% if ProfileData.phone %}{{ ProfileData.phone }}
+          {% else %}<span class="p-empty">Not provided</span>{% endif %}
+        </span>
+      </div>
+      <div class="p-row">
+        <span class="p-row-label"><i class="fas fa-city"></i>City &amp; State</span>
+        <span class="p-row-val">
+          {% if ProfileData.City or ProfileData.State %}
+            {{ ProfileData.City }}{% if ProfileData.City and ProfileData.State %}, {% endif %}{{ ProfileData.State }}
+          {% else %}<span class="p-empty">Not provided</span>{% endif %}
+        </span>
+      </div>
+    </div>
+
+    
+    <div class="hd-card mb-4 p-equal-card">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-lock" style="color:var(--brand);"></i>
+          Account &amp; Security
+        </div>
+      </div>
+
+      <div class="p-row">
+        <span class="p-row-label"><i class="fas fa-circle-dot"></i>Account Status</span>
+        <span class="p-row-val">
+          <span class="p-pill pp-green">
+            <i class="fas fa-circle" style="font-size:6px;"></i> Active
+          </span>
+        </span>
+      </div>
+      <div class="p-row">
+        <span class="p-row-label"><i class="fas fa-user-tag"></i>Role</span>
+        <span class="p-row-val">
+          <span class="p-pill pp-brand">{{ user_role|default:'User' }}</span>
+        </span>
+      </div>
+      <div class="p-row">
+        <span class="p-row-label"><i class="fas fa-key"></i>Password</span>
+        <span class="p-row-val" style="display:flex;align-items:center;gap:10px;">
+          <span class="pw-mask">••••••••</span>
+          <a href="{% url 'ChangePassword' %}" class="btn btn-xs btn-outline-secondary">
+            <i class="fas fa-rotate me-1"></i>Change
+          </a>
+        </span>
+      </div>
+      <div class="p-row">
+        <span class="p-row-label"><i class="fas fa-bell"></i>Email Alerts</span>
+        <span class="p-row-val">
+          {% if ProfileData.email_notifications %}
+            <span class="p-pill pp-green"><i class="fas fa-check" style="font-size:9px;"></i> Enabled</span>
+          {% else %}
+            <span class="p-pill pp-muted"><i class="fas fa-xmark" style="font-size:9px;"></i> Disabled</span>
+          {% endif %}
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+  
+  <div>
+
+    
+    <div class="hd-card mb-4 p-equal-card p-top-card">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-bolt" style="color:var(--brand);"></i>
+          Quick Actions
+        </div>
+      </div>
+      <a href="{% url 'update_profile' ProfileData.id %}" class="p-menu-item">
+        <div class="p-menu-icon"><i class="fas fa-pen"></i></div>
+        Edit Profile
+        <i class="fas fa-chevron-right p-menu-arr"></i>
+      </a>
+      <a href="{% url 'ChangePassword' %}" class="p-menu-item">
+        <div class="p-menu-icon"><i class="fas fa-key"></i></div>
+        Change Password
+        <i class="fas fa-chevron-right p-menu-arr"></i>
+      </a>
+      <a href="{% url 'resolved_history' %}" class="p-menu-item">
+        <div class="p-menu-icon"><i class="fas fa-clock-rotate-left"></i></div>
+        Resolved History
+        <i class="fas fa-chevron-right p-menu-arr"></i>
+      </a>
+      <a href="{% url 'ticketdetail' %}" class="p-menu-item">
+        <div class="p-menu-icon"><i class="fas fa-plus"></i></div>
+        New Ticket
+        <i class="fas fa-chevron-right p-menu-arr"></i>
+      </a>
+      <a href="{% url 'mycart' %}" class="p-menu-item">
+        <div class="p-menu-icon"><i class="fas fa-inbox"></i></div>
+        My Queue
+        <i class="fas fa-chevron-right p-menu-arr"></i>
+      </a>
+    </div>
+
+    
+    <div class="hd-card mb-4 p-equal-card">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-address-book" style="color:var(--brand);"></i>
+          Contact
+        </div>
+      </div>
+      <div class="p-info-row">
+        <div class="p-info-icon" style="background:#DBEAFE;color:#2563EB;">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <div>
+          <div class="p-info-sub">Email</div>
+          <div class="p-info-val">{{ request.user.email|default:"—" }}</div>
+        </div>
+      </div>
+      <div class="p-info-row">
+        <div class="p-info-icon" style="background:#DCFCE7;color:#16A34A;">
+          <i class="fas fa-phone"></i>
+        </div>
+        <div>
+          <div class="p-info-sub">Phone</div>
+          <div class="p-info-val">{{ ProfileData.phone|default:"—" }}</div>
+        </div>
+      </div>
+      <div class="p-info-row">
+        <div class="p-info-icon" style="background:#FEF3C7;color:#D97706;">
+          <i class="fas fa-location-dot"></i>
+        </div>
+        <div>
+          <div class="p-info-sub">Location</div>
+          <div class="p-info-val">
+            {% if ProfileData.City or ProfileData.State %}
+              {{ ProfileData.City }}{% if ProfileData.City and ProfileData.State %}, {% endif %}{{ ProfileData.State }}
+            {% else %}—{% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+<div class="col-12">
+  <div class="hd-card empty-state" style="padding:64px;text-align:center;">
+    <div class="empty-icon"><i class="fas fa-user-slash"></i></div>
+    <div class="empty-title">Profile not found</div>
+    <div class="empty-text">
+      Your user profile has not been created yet.<br>
+      Please contact an administrator.
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

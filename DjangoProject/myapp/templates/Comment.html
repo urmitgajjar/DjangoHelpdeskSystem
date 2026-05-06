@@ -1,0 +1,361 @@
+{% extends "Base.html" %}
+{% block title %}
+  {% if action == 'closing_comment' %}Close Ticket #{{ ticket.id }}
+  {% else %}Reopen Ticket #{{ ticket.id }}{% endif %}
+  — HelpDesk
+{% endblock %}
+
+{% block breadcrumb %}
+  <a href="{% url 'base' %}">Dashboard</a>
+  <span class="bc-sep">/</span>
+  <a href="{% url 'ticketinfo' ticket.id %}">Ticket #{{ ticket.id }}</a>
+  <span class="bc-sep">/</span>
+  <strong>
+    {% if action == 'closing_comment' %}Close
+    {% else %}Reopen{% endif %}
+  </strong>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .comment-wrap { max-width: 760px; margin: 0 auto; }
+
+  .action-icon-head {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 6px;
+  }
+  .action-icon {
+    width: 48px; height: 48px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .icon-close   { background: var(--success-bg); color: var(--success); }
+  .icon-reopen  { background: var(--warning-bg); color: var(--warning); }
+  .icon-comment { background: var(--brand-light); color: var(--brand); }
+
+  .canned-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px;
+    margin-top: 10px;
+  }
+  .canned-card {
+    padding: 10px 13px; border-radius: var(--r);
+    border: 1.5px solid var(--slate-200); cursor: pointer;
+    transition: all .15s; background: #fff;
+  }
+  .canned-card:hover { border-color: var(--brand); background: var(--brand-light); }
+  .canned-card.selected { border-color: var(--success); background: var(--success-bg); }
+  .canned-title { font-size: 12.5px; font-weight: 700; color: var(--slate-800); }
+  .canned-dept  { font-size: 11px; color: var(--slate-400); margin-top: 2px; }
+
+  .next-action {
+    border-radius: var(--r); padding: 13px 16px;
+    font-size: 13px; line-height: 1.6; color: var(--slate-600);
+  }
+  .na-close   { background: var(--success-bg); border-left: 3px solid var(--success); }
+  .na-reopen  { background: var(--warning-bg); border-left: 3px solid var(--warning); }
+  .na-comment { background: var(--brand-light); border-left: 3px solid var(--brand); }
+  .na-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+    margin-bottom: 5px;
+  }
+  .na-close   .na-label { color: var(--success); }
+  .na-reopen  .na-label { color: var(--warning); }
+  .na-comment .na-label { color: var(--brand); }
+
+  .char-counter { font-size: 11.5px; color: var(--slate-400); text-align: right; margin-top: 4px; }
+  .char-counter.warn { color: var(--warning); font-weight: 600; }
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="comment-wrap">
+
+  <div class="page-header">
+    <div class="action-icon-head">
+      <div class="action-icon
+        {% if action == 'closing_comment' %}icon-close
+        {% elif action == 'reopen_comment' %}icon-reopen
+        {% else %}icon-comment{% endif %}">
+        {% if action == 'closing_comment' %}<i class="fas fa-check-circle"></i>
+        {% elif action == 'reopen_comment' %}<i class="fas fa-redo"></i>
+        {% else %}<i class="fas fa-comment-dots"></i>{% endif %}
+      </div>
+      <div>
+        <div class="page-title">
+          {% if action == 'closing_comment' %}Close Ticket #{{ ticket.id }}
+          {% else %}Reopen Ticket #{{ ticket.id }}{% endif %}
+        </div>
+        <div class="page-sub">{{ ticket.TICKET_TITLE|truncatechars:75 }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hd-card">
+    <div class="hd-card-header">
+      <div class="hd-card-title">
+        {% if action == 'closing_comment' %}Closing Note
+        {% else %}Reopen Reason{% endif %}
+      </div>
+      <span class="status-badge
+        {% if ticket.TICKET_STATUS == 'Open'        %}sb-open
+        {% elif ticket.TICKET_STATUS == 'In Progress'%}sb-progress
+        {% elif ticket.TICKET_STATUS == 'Closed'    %}sb-closed
+        {% elif ticket.TICKET_STATUS == 'Resolved'  %}sb-resolved
+        {% elif ticket.TICKET_STATUS == 'Reopen'    %}sb-reopen
+        {% else %}sb-reopen{% endif %}">
+        {{ ticket.TICKET_STATUS }}
+      </span>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data" id="commentForm" novalidate>
+      {% csrf_token %}
+      <input type="hidden" name="canned_response_id" id="cannedResponseId">
+
+      <div class="hd-card-body">
+
+        {% if is_agent and canned_responses and action == 'reopen_comment' %}
+        <div class="mb-4 agent-only">
+          <label class="form-label">
+            <i class="fas fa-bolt me-1" style="color:var(--warning);"></i>
+            Quick Reply Templates
+          </label>
+          <select id="cannedSelect" class="form-select mb-2">
+            <option value="">— Select a template to auto-fill —</option>
+            {% for cr in canned_responses %}
+            <option value="{{ cr.id }}" data-content="{{ cr.content|escapejs }}">
+              {{ cr.title }}{% if cr.department %} · {{ cr.department.name }}{% endif %}
+            </option>
+            {% endfor %}
+          </select>
+
+          <div class="canned-grid" id="cannedGrid">
+            {% for cr in canned_responses|slice:":6" %}
+            <div class="canned-card" data-id="{{ cr.id }}" data-content="{{ cr.content|escapejs }}"
+                 onclick="applyCanned(this)">
+              <div class="canned-title">{{ cr.title }}</div>
+              {% if cr.department %}
+              <div class="canned-dept">{{ cr.department.name }}</div>
+              {% elif cr.is_public %}
+              <div class="canned-dept">Public template</div>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+          <div class="form-text mt-1">Click a card to auto-fill, or use the dropdown above</div>
+          <hr style="border-color:var(--slate-200);margin:18px 0 0;">
+        </div>
+        {% endif %}
+
+        {% if action == 'closing_comment' and form.Closing_comment %}
+        <div class="mb-4">
+          <label class="form-label">
+            <i class="fas fa-check-circle me-1" style="color:var(--success);"></i>
+            Closing Comment
+            {% if action == 'closing_comment' %}<span class="text-danger">*</span>{% endif %}
+          </label>
+          {{ form.Closing_comment }}
+          <div style="display:flex;justify-content:space-between;margin-top:4px;">
+            <div class="form-text" style="margin:0;">Describe what was done to resolve this ticket</div>
+            <div class="char-counter" id="closingCounter"></div>
+          </div>
+          {% if form.Closing_comment.errors %}
+            <div class="field-error">{{ form.Closing_comment.errors.0 }}</div>
+          {% endif %}
+          <div class="field-error" id="err_closing" style="display:none;">
+            A closing note is required to close this ticket.
+          </div>
+        </div>
+        {% endif %}
+
+        {% if action == 'reopen_comment' and form.Reopen_comment %}
+        <div class="mb-4">
+          <label class="form-label">
+            <i class="fas fa-redo me-1" style="color:var(--warning);"></i>
+            Reopen Reason
+            {% if action == 'reopen_comment' %}<span class="text-danger">*</span>{% endif %}
+          </label>
+          {{ form.Reopen_comment }}
+          <div style="display:flex;justify-content:space-between;margin-top:4px;">
+            <div class="form-text" style="margin:0;">Clearly explain why this ticket needs to be reopened</div>
+            <div class="char-counter" id="reopenCounter"></div>
+          </div>
+          {% if form.Reopen_comment.errors %}
+            <div class="field-error">{{ form.Reopen_comment.errors.0 }}</div>
+          {% endif %}
+          <div class="field-error" id="err_reopen" style="display:none;">
+            A reopen reason is required.
+          </div>
+        </div>
+        {% endif %}
+
+        {% if form.TextFile %}
+        <div class="mb-4">
+          <label class="form-label">
+            <i class="fas fa-paperclip me-1" style="color:var(--slate-400);"></i>
+            Attachment <span style="font-weight:400;color:var(--slate-400);">(optional)</span>
+          </label>
+          {{ form.TextFile }}
+          <div class="form-text">Max 10MB — screenshots, logs, documents</div>
+          <div class="field-error" id="err_file" style="display:none;"></div>
+          {% if form.TextFile.errors %}
+            <div class="field-error">{{ form.TextFile.errors.0 }}</div>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="next-action
+          {% if action == 'closing_comment' %}na-close
+          {% elif action == 'reopen_comment' %}na-reopen
+          {% else %}na-comment{% endif %}">
+          <div class="na-label">
+            <i class="fas fa-info-circle me-1"></i>What happens next
+          </div>
+          {% if action == 'closing_comment' %}
+            After submitting, the ticket will be marked <strong>Closed</strong>.
+            The ticket creator can then rate your work.
+          {% elif action == 'reopen_comment' %}
+            After submitting, this ticket will be <strong>Reopened</strong> and re-assigned
+            to the previous admin who will be notified immediately.
+          {% else %}
+            Your comment will be saved and the ticket creator will be notified.
+          {% endif %}
+        </div>
+
+      </div>
+
+      <div class="hd-card-footer d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <a href="{% url 'ticketinfo' ticket.id %}" class="btn btn-outline-secondary btn-sm">
+          <i class="fas fa-arrow-left me-1"></i>Back to Ticket
+        </a>
+        <button type="submit" id="submitBtn" class="btn btn-sm
+          {% if action == 'closing_comment' %}btn-success
+          {% elif action == 'reopen_comment' %}btn-warning
+          {% else %}btn-primary{% endif %}">
+          {% if action == 'closing_comment' %}
+            <i class="fas fa-check-circle me-1"></i>Save & Close Ticket
+          {% elif action == 'reopen_comment' %}
+            <i class="fas fa-redo me-1"></i>Save & Reopen Ticket
+          {% else %}
+            <i class="fas fa-paper-plane me-1"></i>Post Comment
+          {% endif %}
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+
+  const cannedSelect = document.getElementById('cannedSelect');
+  const cannedIdInput = document.getElementById('cannedResponseId');
+
+  if (cannedSelect) {
+    cannedSelect.addEventListener('change', function() {
+      const opt = this.options[this.selectedIndex];
+      if (!opt.value) return;
+      insertCannedContent(opt.dataset.content, opt.value);
+      document.querySelectorAll('.canned-card').forEach(c => {
+        c.classList.toggle('selected', c.dataset.id === opt.value);
+      });
+      setTimeout(() => {
+        cannedSelect.style.borderColor = 'var(--success)';
+        setTimeout(() => { cannedSelect.style.borderColor = ''; cannedSelect.selectedIndex = 0; }, 1000);
+      }, 10);
+    });
+  }
+
+  function applyCanned(card) {
+    document.querySelectorAll('.canned-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    insertCannedContent(card.dataset.content, card.dataset.id);
+  }
+
+  function insertCannedContent(rawContent, id) {
+    let content = rawContent || '';
+    content = content.replace(/\{\{ticket_id\}\}/g,    '{{ ticket.id }}');
+    content = content.replace(/\{\{ticket_title\}\}/g,  '{{ ticket.TICKET_TITLE|escapejs }}');
+    content = content.replace(/\{\{user_name\}\}/g,   '{{ ticket.TICKET_CREATED.username|escapejs }}');
+    content = content.replace(/\{\{assigned_to\}\}/g, '{{ ticket.assigned_to.username|default:"Unassigned"|escapejs }}');
+
+    const closingTA = document.querySelector('textarea[name="Closing_comment"]');
+    const reopenTA  = document.querySelector('textarea[name="Reopen_comment"]');
+    const target = (closingTA && closingTA.closest('.mb-4') && closingTA.closest('.mb-4').style.display !== 'none')
+                    ? closingTA
+                    : reopenTA;
+    if (target) { target.value = content; target.focus(); updateCounter(target); }
+    if (cannedIdInput) cannedIdInput.value = id;
+  }
+
+  function updateCounter(ta) {
+    const map = {
+      'Closing_comment': 'closingCounter',
+      'Reopen_comment':  'reopenCounter',
+    };
+    const counterId = map[ta.name];
+    if (!counterId) return;
+    const el = document.getElementById(counterId);
+    if (!el) return;
+    const len = ta.value.length;
+    el.textContent = `${len} chars`;
+    el.classList.toggle('warn', len > 1800);
+  }
+
+  ['Closing_comment','Reopen_comment'].forEach(name => {
+    const ta = document.querySelector(`textarea[name="${name}"]`);
+    if (ta) {
+      ta.addEventListener('input', () => updateCounter(ta));
+      updateCounter(ta);
+    }
+  });
+
+  const fileInput = document.querySelector('input[type="file"]');
+  if (fileInput) {
+    fileInput.addEventListener('change', function() {
+      const errFile = document.getElementById('err_file');
+      const MAX_MB  = 10;
+      if (this.files[0] && this.files[0].size > MAX_MB * 1024 * 1024) {
+        errFile.textContent = `File exceeds ${MAX_MB}MB limit. Please choose a smaller file.`;
+        errFile.style.display = 'block';
+        this.value = '';
+      } else {
+        errFile.style.display = 'none';
+      }
+    });
+  }
+
+  document.getElementById('commentForm').addEventListener('submit', function(e) {
+    let valid = true;
+    const action = '{{ action }}';
+
+    if (action === 'closing_comment') {
+      const ta  = document.querySelector('textarea[name="Closing_comment"]');
+      const err = document.getElementById('err_closing');
+      if (ta && !ta.value.trim()) {
+        ta.classList.add('is-invalid'); err.style.display = 'block'; valid = false;
+      } else if (ta) {
+        ta.classList.remove('is-invalid'); err.style.display = 'none';
+      }
+    }
+
+    if (action === 'reopen_comment') {
+      const ta  = document.querySelector('textarea[name="Reopen_comment"]');
+      const err = document.getElementById('err_reopen');
+      if (ta && !ta.value.trim()) {
+        ta.classList.add('is-invalid'); err.style.display = 'block'; valid = false;
+      } else if (ta) {
+        ta.classList.remove('is-invalid'); err.style.display = 'none';
+      }
+    }
+
+    if (!valid) { e.preventDefault(); return; }
+
+    const btn = document.getElementById('submitBtn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Submitting…';
+    btn.disabled  = true;
+  });
+</script>
+{% endblock %}

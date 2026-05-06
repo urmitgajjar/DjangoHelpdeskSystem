@@ -1,0 +1,777 @@
+{% extends "Base.html" %}
+{% block title %}Ticket #{{ ticketinfos.id }} — HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <a href="{% url 'base' %}">Dashboard</a>
+  <span class="bc-sep">/</span>
+  <strong>Ticket #{{ ticketinfos.id }}</strong>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .ti-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .dr {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    padding: 11px 18px;
+    border-bottom: 1px solid var(--slate-100);
+    gap: 8px;
+    font-size: 13.5px;
+  }
+  .dr:last-child { border-bottom: none; }
+  .dr-label {
+    font-size: 12px; color: var(--slate-500);
+    font-weight: 600; white-space: nowrap;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .dr-val {
+    color: var(--slate-800); font-weight: 500;
+    text-align: right; max-width: 180px;
+    word-break: break-word;
+  }
+
+  .action-grid {
+    display: grid; gap: 8px;
+  }
+  .action-btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 9px 14px; border-radius: var(--r);
+    font-size: 13px; font-weight: 600;
+    transition: all .15s; text-decoration: none;
+    border: 1.5px solid transparent; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .action-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+  .ab-primary   { background: var(--brand);        color: #fff; border-color: var(--brand); }
+  .ab-primary:hover { background: var(--brand-dark); }
+  .ab-success   { background: var(--success);      color: #fff; border-color: var(--success); }
+  .ab-success:hover { background: #047857; }
+  .ab-outline   { background: #fff; color: var(--slate-700); border-color: var(--slate-200); }
+  .ab-outline:hover { border-color: var(--slate-400); color: var(--slate-900); background: var(--slate-50); }
+  .ab-warning   { background: var(--warning-bg); color: var(--warning); border-color: var(--warning-border); }
+  .ab-warning:hover { background: var(--warning); color: #fff; }
+  .ab-danger    { background: var(--danger-bg);  color: var(--danger);  border-color: var(--danger-border); }
+  .ab-danger:hover  { background: var(--danger);  color: #fff; }
+
+  .ai-assign-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(90deg, #EEF2FF, #F5F3FF);
+    border: 1px solid #C7D2FE;
+    border-radius: var(--r);
+    font-size: 12.5px; color: var(--slate-700);
+    margin-bottom: 12px;
+  }
+  .ticket-action-panel {
+    display: grid;
+    gap: 14px;
+    padding: 16px 18px;
+    background: linear-gradient(180deg, #F8FBFF 0%, #EEF6FF 100%);
+    border: 1px solid #CFE0F5;
+    border-radius: 16px;
+  }
+  .ticket-action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+  .ticket-action-buttons .action-btn {
+    min-height: 42px;
+  }
+  .ta-edit {
+    background: #0F766E;
+    color: #fff;
+    border-color: #0F766E;
+  }
+  .ta-edit:hover {
+    background: #115E59;
+    color: #fff;
+  }
+  .ta-close {
+    background: #0B8F63;
+    color: #fff;
+    border-color: #0B8F63;
+  }
+  .ta-close:hover {
+    background: #087553;
+    color: #fff;
+  }
+  .ta-reopen {
+    background: #FFF4DB;
+    color: #B45309;
+    border-color: #F5C56B;
+  }
+  .ta-reopen:hover {
+    background: #F59E0B;
+    color: #fff;
+  }
+  .ta-reject {
+    background: #FFF1F2;
+    color: #BE123C;
+    border-color: #FDA4AF;
+  }
+  .ta-reject:hover {
+    background: #E11D48;
+    color: #fff;
+  }
+  .ta-rate {
+    background: #FEF3C7;
+    color: #92400E;
+    border-color: #F6C453;
+  }
+  .ta-rate:hover {
+    background: #D97706;
+    color: #fff;
+  }
+  .ta-delete {
+    background: #FFF1F2;
+    color: #C81E1E;
+    border-color: #F5A3A3;
+  }
+  .ta-delete:hover {
+    background: #DC2626;
+    color: #fff;
+  }
+  .reassign-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px solid #D6E4F5;
+    border-radius: 14px;
+  }
+  .reassign-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #31507A;
+    min-width: 220px;
+  }
+  .reassign-select {
+    min-width: 270px;
+    max-width: 360px;
+    border-color: #BFD2EA;
+  }
+  .ta-reassign {
+    background: #1D4ED8;
+    color: #fff;
+    border-color: #1D4ED8;
+  }
+  .ta-reassign:hover {
+    background: #1E40AF;
+    color: #fff;
+  }
+  @media (max-width: 768px) {
+    .ticket-action-buttons {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .ticket-action-buttons .action-btn,
+    .reassign-box .action-btn,
+    .reassign-box .reassign-select {
+      width: 100%;
+      max-width: none;
+    }
+    .reassign-label {
+      min-width: 0;
+      width: 100%;
+    }
+  }
+
+  .reject-modal-backdrop {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,.45); z-index: 2000;
+    align-items: center; justify-content: center;
+  }
+  .reject-modal-backdrop.show { display: flex; }
+  .reject-modal {
+    background: #fff; border-radius: var(--r-lg);
+    padding: 28px; max-width: 440px; width: 90%;
+    box-shadow: var(--shadow-lg);
+    animation: popIn .2s ease;
+  }
+  @keyframes popIn { from { transform: scale(.94); opacity:0; } to { transform: scale(1); opacity:1; } }
+  .rm-title { font-size: 16px; font-weight: 700; color: var(--slate-900); margin-bottom: 6px; }
+  .rm-sub   { font-size: 13px; color: var(--slate-500); margin-bottom: 18px; }
+
+  .comment-item {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--slate-100);
+  }
+  .comment-item:last-child { border-bottom: none; }
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="ti-grid">
+
+  <div>
+
+    <div class="hd-card mb-4">
+      <div class="hd-card-body">
+
+        <div class="d-flex align-items-center gap-2 flex-wrap mb-3">
+          <span class="mono" style="font-size:12px;color:var(--slate-400);">
+            TICKET #{{ ticketinfos.id }}
+          </span>
+          {% if ticketinfos.assignment_type == 'AUTO_AI' or ticketinfos.assignment_type == 'AUTO_ML' %}
+          <span class="ai-badge"><i class="fas fa-robot"></i> AI Routed</span>
+          {% endif %}
+        </div>
+
+        <h1 style="font-size:20px;font-weight:700;color:var(--slate-900);
+                   letter-spacing:-.3px;line-height:1.35;margin-bottom:16px;">
+          {{ ticketinfos.TICKET_TITLE }}
+        </h1>
+
+        <div class="d-flex flex-wrap gap-2 align-items-center mb-4">
+          <span class="status-badge
+            {% if ticketinfos.TICKET_STATUS == 'Open'         %}sb-open
+            {% elif ticketinfos.TICKET_STATUS == 'In Progress'%}sb-progress
+            {% elif ticketinfos.TICKET_STATUS == 'Closed'     %}sb-closed
+            {% elif ticketinfos.TICKET_STATUS == 'Resolved'   %}sb-resolved
+            {% elif ticketinfos.TICKET_STATUS == 'Reopen'     %}sb-reopen
+            {% else %}sb-reopen{% endif %}">
+            {{ ticketinfos.TICKET_STATUS }}
+          </span>
+
+          {% if ticketinfos.effective_priority %}
+          <span class="priority-badge
+            {% if ticketinfos.effective_priority == 'LOW'     %}pb-low
+            {% elif ticketinfos.effective_priority == 'MEDIUM'%}pb-medium
+            {% elif ticketinfos.effective_priority == 'HIGH'  %}pb-high
+            {% else %}pb-urgent{% endif %}">
+            <i class="fas fa-flag" style="font-size:9px;"></i>
+            {{ ticketinfos.effective_priority_display }}
+          </span>
+          {% endif %}
+
+          {% if ticketinfos.is_overdue %}
+          <span style="background:var(--danger-bg);color:var(--danger);border:1px solid var(--danger-border);
+                       font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;">
+            <i class="fas fa-exclamation-triangle"></i> Overdue
+          </span>
+          {% endif %}
+
+          {% if ticketinfos.category %}
+          <span style="font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;
+                       background:{{ ticketinfos.category.color }}18;color:{{ ticketinfos.category.color }};
+                       border:1px solid {{ ticketinfos.category.color }}40;">
+            <i class="{{ ticketinfos.category.icon }}"></i> {{ ticketinfos.category.name }}
+          </span>
+          {% endif %}
+        </div>
+
+        <div class="ticket-action-panel">
+          <div class="ticket-action-buttons">
+          {% if creator_edit_only_mode and can_edit_ticket %}
+          <a href="{% url 'updateticket' ticketinfos.id %}?mine_only=1" class="action-btn ta-edit">
+            <i class="fas fa-edit"></i>Edit Ticket Department and Due Date
+          </a>
+          {% elif can_edit_ticket and not request.GET.from_assigned %}
+          <a href="{% url 'updateticket' ticketinfos.id %}" class="action-btn ta-edit">
+            <i class="fas fa-edit"></i>Edit Ticket Department and Due Date
+          </a>
+
+          {% if ticketinfos.TICKET_STATUS not in 'Closed,Resolved' and can_close_ticket %}
+          <a href="{% url 'comment' pk=ticketinfos.id action='closing_comment' %}"
+             class="action-btn ta-close">
+            <i class="fas fa-check-double"></i>Close with Note
+          </a>
+          {% endif %}
+
+          {% if ticketinfos.TICKET_STATUS == 'Closed' %}
+            {% if can_reopen_ticket and is_admin or can_reopen_ticket and ticketinfos.TICKET_CREATED == request.user and can_work_on_ticket %}
+            <a href="{% url 'comment' pk=ticketinfos.id action='reopen_comment' %}"
+               class="action-btn ta-reopen">
+              <i class="fas fa-redo"></i>Reopen
+            </a>
+            {% endif %}
+          {% endif %}
+
+          {% if ticketinfos.TICKET_STATUS not in 'Closed,Resolved' and can_reject and not request.GET.from_assigned %}
+          <a href="{% url 'removeticket' ticketinfos.id %}" class="action-btn ta-reject">
+            <i class="fas fa-times"></i>Reject Assignment
+          </a>
+          {% endif %}
+
+          {% if not request.GET.from_assigned %}
+            {% if ticketinfos.TICKET_STATUS == 'Closed' or ticketinfos.TICKET_STATUS == 'Resolved' %}
+              {% if ticketinfos.TICKET_CREATED == request.user %}
+              <a href="{% url 'rate_ticket' ticketinfos.id %}" class="action-btn ta-rate">
+                <i class="fas fa-star"></i>Rate Ticket
+              </a>
+              {% endif %}
+            {% endif %}
+          </div>
+            {% if can_admin_reassign_ticket %}
+            <form method="post" action="" class="reassign-box">
+              {% csrf_token %}
+              <input type="hidden" name="action" value="admin_reassign">
+              <span class="reassign-label">
+                Reassign in {{ ticketinfos.assigned_department.name }} ({{ admin_reassignment_member_count }} active members)
+              </span>
+              <select name="assigned_to" class="form-select form-select-sm reassign-select" required>
+                <option value="" selected disabled>Select department member</option>
+                {% for option in admin_reassignment_options %}
+                  {% if not option.is_current_assignee %}
+                  <option value="{{ option.user.id }}">
+                    {{ option.user.get_full_name|default:option.user.username }}
+                  </option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+              <button class="action-btn ta-reassign" type="submit">
+                <i class="fas fa-random"></i>Reassign Ticket
+              </button>
+            </form>
+            {% endif %}
+            {% if ticketinfos.TICKET_CREATED == request.user or is_admin %}
+            <form method="post" action="{% url 'deleteticket' ticketinfos.id %}"
+                  onsubmit="return confirm('Permanently delete this ticket')">
+              {% csrf_token %}
+              <button class="action-btn ta-delete" type="submit">
+                <i class="fas fa-trash"></i>Delete
+              </button>
+            </form>
+            {% endif %}
+          {% endif %}
+          {% endif %}
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="hd-card mb-4">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-align-left" style="color:var(--brand);"></i> Description
+        </div>
+      </div>
+      <div class="hd-card-body">
+        <p style="font-size:14px;color:var(--slate-700);line-height:1.85;white-space:pre-line;margin:0;">
+          {{ normalized_description }}
+        </p>
+        {% if is_admin %}
+        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--slate-100);display:grid;gap:8px;">
+          <div style="font-size:12.5px;color:var(--slate-700);">
+            <i class="fas fa-user-check" style="color:var(--brand);margin-right:5px;"></i>
+            <strong>Currently solving:</strong>
+            {% if ticketinfos.assigned_to %}
+              {{ ticketinfos.assigned_to.get_full_name|default:ticketinfos.assigned_to.username }}
+            {% else %}
+              Unassigned
+            {% endif %}
+          </div>
+          {% if latest_rejection_reason %}
+          <div style="font-size:12.5px;color:#92400E;">
+            <i class="fas fa-ban" style="margin-right:5px;"></i>
+            <strong>Earlier member rejection:</strong>
+            {% if latest_rejection_by %}{{ latest_rejection_by }} - {% endif %}
+            {{ latest_rejection_reason }}
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="hd-card">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-comments" style="color:var(--brand);"></i>
+          Activity
+          {% if comments %}
+          <span style="background:var(--slate-100);color:var(--slate-600);font-size:11px;
+                       font-weight:700;padding:1px 7px;border-radius:20px;margin-left:4px;">
+            {{ comments|length }}
+          </span>
+          {% endif %}
+        </div>
+      </div>
+
+      {% if can_creator_decide_closed %}
+      <div class="hd-card-body" style="border-bottom:1px solid var(--slate-100);">
+        <div class="d-flex gap-2 flex-wrap">
+          {% if can_reopen_ticket %}
+          <a href="{% url 'comment' pk=ticketinfos.id action='reopen_comment' %}"
+             class="btn btn-sm btn-outline-warning">
+            <i class="fas fa-redo me-1"></i>Add Reopening Comment
+          </a>
+          {% endif %}
+          <a href="{% url 'resolvedticket' ticketinfos.id %}" class="btn btn-sm btn-outline-success">
+            <i class="fas fa-check-circle me-1"></i>Mark as Resolved
+          </a>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if can_rate_resolved_ticket %}
+      <div class="hd-card-body" style="border-bottom:1px solid var(--slate-100);">
+        <div class="d-flex gap-2 flex-wrap">
+          <a href="{% url 'rate_ticket' ticketinfos.id %}" class="btn btn-sm btn-outline-warning">
+            <i class="fas fa-star me-1"></i>Rate Ticket
+          </a>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if comments %}
+        {% for comment in comments %}
+        <div class="comment-item">
+          <div class="d-flex gap-3">
+            <div class="hd-avatar" style="width:32px;height:32px;font-size:12px;flex-shrink:0;">
+              {{ comment.user.username|first|upper }}
+            </div>
+            <div style="flex:1;min-width:0;">
+              <div class="d-flex align-items-center gap-2 flex-wrap mb-2">
+                <span style="font-size:13px;font-weight:700;color:var(--slate-800);">
+                  {{ comment.user.username }}
+                </span>
+                <span style="font-size:11.5px;color:var(--slate-400);">
+                  {{ comment.created_at|date:"M d, Y · H:i" }}
+                </span>
+              </div>
+
+              {% if comment.Closing_comment %}
+              <div style="background:var(--success-bg);border-left:3px solid var(--success);
+                          padding:10px 14px;border-radius:4px;font-size:13.5px;
+                          color:var(--slate-700);line-height:1.6;">
+                <div style="font-size:10.5px;font-weight:700;color:var(--success);margin-bottom:4px;">
+                  <i class="fas fa-check-circle"></i> CLOSING NOTE
+                </div>
+                {{ comment.Closing_comment }}
+              </div>
+              {% elif comment.Reopen_comment %}
+              <div style="background:var(--warning-bg);border-left:3px solid var(--warning);
+                          padding:10px 14px;border-radius:4px;font-size:13.5px;
+                          color:var(--slate-700);line-height:1.6;">
+                <div style="font-size:10.5px;font-weight:700;color:var(--warning);margin-bottom:4px;">
+                  <i class="fas fa-redo"></i> REOPEN NOTE
+                </div>
+                {{ comment.Reopen_comment }}
+              </div>
+              {% else %}
+              <div style="font-size:13.5px;color:var(--slate-700);line-height:1.65;">
+                {{ comment.Comment|default:'' }}
+              </div>
+              {% endif %}
+
+              {% if comment.TextFile %}
+              <div style="margin-top:10px;">
+                <a href="{% url 'download_file' comment.id %}"
+                   style="display:inline-flex;align-items:center;gap:7px;font-size:12.5px;
+                          color:var(--brand);background:var(--brand-light);
+                          padding:5px 12px;border-radius:6px;border:1px solid var(--brand-muted);">
+                  <i class="fas fa-paperclip"></i> Download Attachment
+                </a>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+      <div class="empty-state" style="padding:40px;">
+        <div class="empty-icon"><i class="fas fa-comment-slash"></i></div>
+        <div class="empty-title">No activity yet</div>
+        <div class="empty-text">Comments, status changes and notes will appear here.</div>
+      </div>
+      {% endif %}
+
+      {% if not creator_edit_only_mode %}
+      <div class="hd-card-footer">
+        <div class="d-flex gap-2 flex-wrap">
+          {% if ticketinfos.TICKET_STATUS not in 'Closed,Resolved' and can_close_ticket %}
+          <a href="{% url 'comment' pk=ticketinfos.id action='closing_comment' %}"
+             class="btn btn-xs btn-outline-success">
+            <i class="fas fa-check me-1"></i>Close with Note
+          </a>
+          {% endif %}
+          {% if ticketinfos.TICKET_STATUS == 'Closed' and can_reopen_ticket and is_admin or ticketinfos.TICKET_STATUS == 'Closed' and can_reopen_ticket and ticketinfos.TICKET_CREATED == request.user %}
+          <a href="{% url 'comment' pk=ticketinfos.id action='reopen_comment' %}"
+             class="btn btn-xs btn-outline-warning">
+            <i class="fas fa-redo me-1"></i>Reopen
+          </a>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+  </div>
+
+  <div>
+
+    {% if ticketinfos.assignment_type == 'AUTO_AI' or ticketinfos.assignment_type == 'AUTO_ML' %}
+    <div class="ai-assign-row mb-3">
+      <i class="fas fa-robot" style="color:var(--brand);font-size:15px;flex-shrink:0;"></i>
+      <div>
+        <div style="font-weight:700;color:var(--slate-800);font-size:12.5px;">AI-Assigned Ticket</div>
+        <div style="color:var(--slate-500);font-size:12px;">
+          Routed by AI
+          {% if ticketinfos.ml_confidence_score %}
+            · {{ ticketinfos.ml_confidence_score|floatformat:0 }}% confidence
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="hd-card mb-3">
+      <div class="hd-card-header">
+        <div class="hd-card-title">Ticket Details</div>
+      </div>
+
+      <div class="dr">
+        <span class="dr-label"><i class="fas fa-user"></i> Reported By</span>
+        <span class="dr-val">{{ ticketinfos.TICKET_CREATED.username }}</span>
+      </div>
+      <div class="dr">
+        <span class="dr-label"><i class="fas fa-calendar-alt"></i> Created</span>
+        <span class="dr-val">{{ ticketinfos.TICKET_CREATED_ON|date:"M d, Y" }}</span>
+      </div>
+      <div class="dr">
+        <span class="dr-label"><i class="fas fa-calendar-check"></i> Due Date</span>
+        <span class="dr-val" style="{% if ticketinfos.is_overdue %}color:var(--danger);font-weight:700;{% endif %}">
+          {{ ticketinfos.TICKET_DUE_DATE|date:"M d, Y" }}
+          {% if ticketinfos.is_overdue %}<i class="fas fa-exclamation-circle ms-1" style="font-size:10px;"></i>{% endif %}
+        </span>
+      </div>
+
+      {% if ticketinfos.assigned_department %}
+      <div class="dr">
+        <span class="dr-label"><i class="fas fa-building"></i> Department</span>
+        <span class="dr-val" style="font-weight:700;color:{{ ticketinfos.assigned_department.color|default:'var(--brand)' }};">
+          {{ ticketinfos.assigned_department.name }}
+        </span>
+      </div>
+      {% endif %}
+
+      {% if ticketinfos.assigned_to %}
+      <div class="dr">
+        <span class="dr-label"><i class="fas fa-user-check"></i> Assigned To</span>
+        <span class="dr-val">
+          <div class="d-flex align-items-center gap-2 justify-content-end">
+            <div class="hd-avatar" style="width:22px;height:22px;font-size:10px;">
+              {{ ticketinfos.assigned_to.username|first|upper }}
+            </div>
+            {{ ticketinfos.assigned_to.get_full_name|default:ticketinfos.assigned_to.username }}
+          </div>
+        </span>
+      </div>
+      {% else %}
+      <div class="dr">
+        <span class="dr-label"><i class="fas fa-user-check"></i> Assigned To</span>
+        <span class="dr-val" style="color:var(--slate-400);">Pending AI</span>
+      </div>
+      {% endif %}
+      {% if ticketinfos.TICKET_CLOSED_ON %}
+      <div class="dr">
+        <span class="dr-label"><i class="fas fa-times-circle"></i> Closed On</span>
+        <span class="dr-val">{{ ticketinfos.TICKET_CLOSED_ON|date:"M d, Y" }}</span>
+      </div>
+      {% endif %}
+    </div>
+
+    {% if can_view_admin_note_thread %}
+    <div class="hd-card mb-3" id="overdue-note-thread">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-sticky-note" style="color:var(--warning);"></i>
+          Overdue Note Thread
+        </div>
+      </div>
+      <div class="hd-card-body" style="padding-top:12px;">
+        {% if overdue_note_thread and overdue_note_thread.object_list %}
+          {% for item in overdue_note_thread %}
+          <div style="margin-bottom:10px;padding:10px 12px;border-radius:8px;
+                      border:1px solid {% if item.field_name == 'admin_overdue_note' %}#FCD34D{% else %}var(--slate-200){% endif %};
+                      background:{% if item.field_name == 'admin_overdue_note' %}#FFFBEB{% else %}var(--slate-50){% endif %};">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px;">
+              <span style="font-size:11px;font-weight:700;color:var(--slate-700);">
+                {% if item.field_name == 'admin_overdue_note' %}Admin Note{% else %}Member Reply{% endif %}
+                · {{ item.changed_by.username|default:'System' }}
+              </span>
+              <span style="font-size:11px;color:var(--slate-400);">{{ item.changed_at|date:"M d, Y · H:i" }}</span>
+            </div>
+            <div style="font-size:13px;color:var(--slate-700);line-height:1.6;white-space:pre-line;">
+              {{ item.new_value }}
+            </div>
+          </div>
+          {% endfor %}
+          {% if overdue_note_thread.has_other_pages %}
+          <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap" style="margin-top:14px;">
+            <div style="font-size:12px;color:var(--slate-500);">
+              Page {{ overdue_note_thread.number }} of {{ overdue_note_thread.paginator.num_pages }}
+            </div>
+            <div class="d-flex gap-2">
+              {% if overdue_note_thread.has_previous %}
+              <a href="?overdue_page={{ overdue_note_thread.previous_page_number }}#overdue-note-thread" class="btn btn-sm btn-outline-secondary">Prev</a>
+              {% endif %}
+              {% if overdue_note_thread.has_next %}
+              <a href="?overdue_page={{ overdue_note_thread.next_page_number }}#overdue-note-thread" class="btn btn-sm btn-outline-secondary">Next</a>
+              {% endif %}
+            </div>
+          </div>
+          {% endif %}
+        {% else %}
+          <div style="font-size:13px;color:var(--slate-400);font-style:italic;">No overdue notes yet.</div>
+        {% endif %}
+
+        {% if can_reply_admin_overdue_note %}
+        <form method="POST" action="{% url 'reply_overdue_note' ticketinfos.id %}" style="margin-top:12px;">
+          {% csrf_token %}
+          <label for="overdueReply" class="form-label" style="font-size:12px;font-weight:700;">Reply to Admin</label>
+          <textarea id="overdueReply" name="overdue_note_reply" class="form-control mb-2" rows="3"
+                    placeholder="Update admin on progress for this overdue ticket." required minlength="3"></textarea>
+          <button type="submit" class="btn btn-sm btn-outline-primary">
+            <i class="fas fa-reply me-1"></i>Send Reply
+          </button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if not creator_edit_only_mode %}
+    <div class="hd-card-body action-grid">
+      {% if is_admin and ticketinfos.is_overdue and ticketinfos.TICKET_STATUS != 'Closed' and ticketinfos.TICKET_STATUS != 'Resolved' %}
+      <form method="POST" action="{% url 'send_overdue_note' ticketinfos.id %}" class="mb-2">
+        {% csrf_token %}
+        <label for="overdueNote" class="form-label" style="font-size:12px;font-weight:700;">Admin Note For Overdue Ticket</label>
+        <textarea id="overdueNote" name="overdue_note" class="form-control mb-2" rows="3"
+                  placeholder="Ticket is overdue. Please complete it as soon as possible."
+                  required minlength="8" data-label="Overdue note"></textarea>
+        <button type="submit" class="action-btn ab-warning" style="width:100%;">
+          <i class="fas fa-bell"></i> Send Overdue Reminder
+        </button>
+      </form>
+      {% endif %}
+
+      {% if request.GET.from_assigned and ticketinfos.TICKET_STATUS == 'Reopen' %}
+        {% if can_close_ticket %}
+        <a href="{% url 'comment' pk=ticketinfos.id action='closing_comment' %}" class="action-btn ab-outline">
+          <i class="fas fa-times-circle"></i> Close with Note
+        </a>
+        {% endif %}
+      {% elif ticketinfos.TICKET_STATUS == 'In Progress' or ticketinfos.TICKET_STATUS == 'Reopen' %}
+        {% if can_work_on_ticket or is_admin %}
+        <a href="{% url 'resolvedticket' ticketinfos.id %}" class="action-btn ab-success">
+          <i class="fas fa-check-circle"></i> Mark Resolved
+        </a>
+        {% if can_close_ticket %}
+        <a href="{% url 'closeticket' ticketinfos.id %}" class="action-btn ab-outline">
+          <i class="fas fa-times-circle"></i> Close Ticket
+        </a>
+        {% endif %}
+        {% if can_reject %}
+        <a href="{% url 'removeticket' ticketinfos.id %}"
+            class="action-btn ab-outline">
+          <i class="fas fa-undo"></i> Release Ticket
+        </a>
+        {% endif %}
+        {% endif %}
+      {% endif %}
+
+      {% if can_creator_decide_closed %}
+      <a href="{% url 'resolvedticket' ticketinfos.id %}" class="action-btn ab-success">
+        <i class="fas fa-check-circle"></i> Mark Resolved
+      </a>
+      {% endif %}
+
+      {% if ticketinfos.TICKET_STATUS == 'Closed' and can_reopen_ticket and is_admin or ticketinfos.TICKET_STATUS == 'Closed' and can_reopen_ticket and ticketinfos.TICKET_CREATED == request.user %}
+      <a href="{% url 'comment' pk=ticketinfos.id action='reopen_comment' %}" class="action-btn ab-warning">
+        <i class="fas fa-redo"></i> Reopen Ticket
+      </a>
+      {% endif %}
+
+      {% if ticketinfos.TICKET_STATUS == 'Closed' or ticketinfos.TICKET_STATUS == 'Resolved' %}
+        {% if ticketinfos.TICKET_CREATED == request.user %}
+        <a href="{% url 'rate_ticket' ticketinfos.id %}" class="action-btn ab-outline">
+          <i class="fas fa-star"></i> Rate This Ticket
+        </a>
+        {% endif %}
+      {% endif %}
+
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% if can_reject and not creator_edit_only_mode %}
+<div class="reject-modal-backdrop" id="rejectModalBackdrop">
+  <div class="reject-modal">
+    <div class="rm-title"><i class="fas fa-times-circle me-2" style="color:var(--danger);"></i>Reject This Assignment</div>
+    <div class="rm-sub">
+      Tell the system why you can't handle this ticket. It will be reassigned to another available admin.
+    </div>
+    <form method="POST" action="{% url 'removeticket' ticketinfos.id %}" id="rejectForm">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label class="form-label">Reason <span class="text-danger">*</span></label>
+        <textarea name="reject_reason" id="rejectReason" class="form-control" rows="3"
+                  placeholder="e.g. Out of my area of expertise, currently at capacity…"
+                  style="resize:vertical;"></textarea>
+        <div class="field-error" id="rejectErr" style="display:none;">Please provide a reason.</div>
+      </div>
+      <div class="d-flex gap-2 justify-content-end">
+        <button type="button" class="btn btn-outline-secondary btn-sm"
+                onclick="closeRejectModal()">Cancel</button>
+        <button type="submit" class="btn btn-danger btn-sm" onclick="return validateReject(event)">
+          <i class="fas fa-times me-1"></i>Confirm Rejection
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  function openRejectModal()  {
+    document.getElementById('rejectModalBackdrop').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeRejectModal() {
+    document.getElementById('rejectModalBackdrop').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  const rejectBackdrop = document.getElementById('rejectModalBackdrop');
+  if (rejectBackdrop) {
+    rejectBackdrop.addEventListener('click', function(e) {
+      if (e.target === this) closeRejectModal();
+    });
+  }
+
+  function validateReject(e) {
+    const reasonEl = document.getElementById('rejectReason');
+    const reason = reasonEl ? reasonEl.value.trim() : '';
+    const err    = document.getElementById('rejectErr');
+    if (!reason) {
+      err.style.display = 'block';
+      e.preventDefault();
+      return false;
+    }
+    err.style.display = 'none';
+    return true;
+  }
+</script>
+{% endblock %}
+
+
+
+

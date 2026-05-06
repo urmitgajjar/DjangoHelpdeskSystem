@@ -1,0 +1,2381 @@
+INFO 2026-05-04 20:26:21,341 autoreload Watching for file changes with StatReloader
+INFO 2026-05-04 20:26:25,238 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-04 20:26:27,030 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-04 20:26:46,390 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-04 20:26:46,933 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-04 21:51:36,820 autoreload Watching for file changes with StatReloader
+INFO 2026-05-04 21:51:38,006 basehttp "GET /login/?role=admin HTTP/1.1" 200 13504
+INFO 2026-05-04 21:51:38,122 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-04 21:51:47,857 basehttp "POST /login/?role=admin HTTP/1.1" 200 13734
+INFO 2026-05-04 21:51:47,891 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-04 21:51:56,936 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-04 21:51:56,999 basehttp "GET /dashboard/ HTTP/1.1" 200 43491
+INFO 2026-05-04 21:51:57,248 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-04 21:52:06,482 basehttp "GET /ticket/new/ HTTP/1.1" 200 36049
+INFO 2026-05-04 21:52:06,529 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-04 21:52:08,371 basehttp "GET /dashboard/ HTTP/1.1" 200 43215
+INFO 2026-05-04 21:52:08,417 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-04 21:52:18,743 basehttp "GET /ticket/new/ HTTP/1.1" 200 36049
+INFO 2026-05-04 21:52:18,789 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-04 21:52:19,556 basehttp "GET /analytics/ HTTP/1.1" 200 53573
+INFO 2026-05-04 21:52:19,852 basehttp "GET /api/tickets-over-time/?range=30_days HTTP/1.1" 200 425
+INFO 2026-05-04 21:52:19,860 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-04 21:52:20,651 basehttp "GET /pie-chart/ HTTP/1.1" 200 37175
+INFO 2026-05-04 21:52:20,706 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-04 21:52:21,853 basehttp "GET /admin-departments/ HTTP/1.1" 200 102902
+INFO 2026-05-04 21:52:22,105 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-04 21:52:32,533 basehttp "GET /notifications/ HTTP/1.1" 200 33330
+INFO 2026-05-04 21:52:32,577 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-04 21:52:33,507 basehttp "GET /profile/ HTTP/1.1" 200 44596
+INFO 2026-05-04 21:52:33,583 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-04 21:52:34,606 basehttp "GET /categories/ HTTP/1.1" 200 56049
+INFO 2026-05-04 21:52:34,700 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:40:28,155 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 20:40:42,748 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 20:40:42,839 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:40:44,852 basehttp "GET /login/?role=user HTTP/1.1" 200 13441
+INFO 2026-05-05 20:40:44,927 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:40:46,997 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:40:52,927 basehttp "GET /login/?role=user HTTP/1.1" 200 13441
+INFO 2026-05-05 20:40:52,976 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:40:54,857 basehttp "GET /register/ HTTP/1.1" 200 45381
+INFO 2026-05-05 20:40:57,046 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:44:07,358 basehttp "POST /register/ HTTP/1.1" 302 0
+INFO 2026-05-05 20:44:07,365 basehttp "GET /login/ HTTP/1.1" 200 13668
+INFO 2026-05-05 20:44:07,416 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:44:19,427 basehttp "GET /register/ HTTP/1.1" 200 45381
+INFO 2026-05-05 20:44:19,484 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:45:26,257 basehttp "POST /register/ HTTP/1.1" 200 45882
+INFO 2026-05-05 20:45:26,304 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:46:03,907 basehttp "POST /register/ HTTP/1.1" 302 0
+INFO 2026-05-05 20:46:03,918 basehttp "GET /login/ HTTP/1.1" 200 13668
+INFO 2026-05-05 20:46:03,990 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:46:24,674 basehttp "GET /register/ HTTP/1.1" 200 45381
+INFO 2026-05-05 20:46:24,711 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:47:17,590 basehttp "POST /register/ HTTP/1.1" 302 0
+INFO 2026-05-05 20:47:17,598 basehttp "GET /login/ HTTP/1.1" 200 13668
+INFO 2026-05-05 20:47:17,648 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:47:20,781 basehttp "GET /register/ HTTP/1.1" 200 45381
+INFO 2026-05-05 20:47:20,817 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:48:19,347 basehttp "POST /register/ HTTP/1.1" 302 0
+INFO 2026-05-05 20:48:19,356 basehttp "GET /login/ HTTP/1.1" 200 13668
+INFO 2026-05-05 20:48:19,405 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:48:23,188 basehttp "GET /register/ HTTP/1.1" 200 45381
+INFO 2026-05-05 20:48:23,226 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:49:20,076 basehttp "POST /register/ HTTP/1.1" 302 0
+INFO 2026-05-05 20:49:20,083 basehttp "GET /login/ HTTP/1.1" 200 13668
+INFO 2026-05-05 20:49:20,131 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:49:23,181 basehttp "GET /register/ HTTP/1.1" 200 45381
+INFO 2026-05-05 20:49:23,216 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:50:13,087 basehttp "POST /register/ HTTP/1.1" 302 0
+INFO 2026-05-05 20:50:13,095 basehttp "GET /login/ HTTP/1.1" 200 13668
+INFO 2026-05-05 20:50:13,141 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:50:16,401 basehttp "GET /register/ HTTP/1.1" 200 45381
+INFO 2026-05-05 20:50:16,438 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:51:32,157 basehttp "POST /register/ HTTP/1.1" 302 0
+INFO 2026-05-05 20:51:32,167 basehttp "GET /login/ HTTP/1.1" 200 13668
+INFO 2026-05-05 20:51:32,219 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:51:34,884 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 20:51:34,920 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:51:36,197 basehttp "GET /login/?role=admin HTTP/1.1" 200 13504
+INFO 2026-05-05 20:51:36,234 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:51:43,413 basehttp "POST /login/?role=admin HTTP/1.1" 200 13734
+INFO 2026-05-05 20:51:43,443 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:51:51,052 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-05 20:51:51,109 basehttp "GET /dashboard/ HTTP/1.1" 200 43491
+INFO 2026-05-05 20:51:51,163 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:51:56,093 basehttp "GET /ticket/new/ HTTP/1.1" 200 36049
+INFO 2026-05-05 20:51:56,144 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:51:57,048 basehttp "GET /analytics/ HTTP/1.1" 200 53573
+INFO 2026-05-05 20:51:57,198 basehttp "GET /api/tickets-over-time/?range=30_days HTTP/1.1" 200 425
+INFO 2026-05-05 20:51:57,205 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:52:00,494 basehttp "GET /pie-chart/ HTTP/1.1" 200 37175
+INFO 2026-05-05 20:52:00,545 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:52:02,978 basehttp "GET /admin-departments/ HTTP/1.1" 200 104450
+INFO 2026-05-05 20:52:03,206 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:52:55,451 basehttp "POST /admin-departments/5/add-member/ HTTP/1.1" 302 0
+INFO 2026-05-05 20:52:55,542 basehttp "GET /admin-departments/ HTTP/1.1" 200 105792
+INFO 2026-05-05 20:52:55,593 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:53:11,759 basehttp "POST /admin-departments/1/add-member/ HTTP/1.1" 302 0
+INFO 2026-05-05 20:53:11,852 basehttp "GET /admin-departments/ HTTP/1.1" 200 106868
+INFO 2026-05-05 20:53:11,902 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:53:18,974 basehttp "POST /admin-departments/3/add-member/ HTTP/1.1" 302 0
+INFO 2026-05-05 20:53:19,055 basehttp "GET /admin-departments/ HTTP/1.1" 200 107934
+INFO 2026-05-05 20:53:19,106 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:53:31,725 basehttp "POST /admin-departments/2/add-member/ HTTP/1.1" 302 0
+INFO 2026-05-05 20:53:31,807 basehttp "GET /admin-departments/ HTTP/1.1" 200 109024
+INFO 2026-05-05 20:53:31,861 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:53:47,604 basehttp "POST /admin-departments/4/add-member/ HTTP/1.1" 302 0
+INFO 2026-05-05 20:53:47,693 basehttp "GET /admin-departments/ HTTP/1.1" 200 110101
+INFO 2026-05-05 20:53:47,745 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:53:53,085 basehttp "POST /admin-departments/6/add-member/ HTTP/1.1" 302 0
+INFO 2026-05-05 20:53:53,172 basehttp "GET /admin-departments/ HTTP/1.1" 200 111188
+INFO 2026-05-05 20:53:53,224 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:54:19,841 basehttp "POST /admin-departments/5/add-member/ HTTP/1.1" 302 0
+INFO 2026-05-05 20:54:19,942 basehttp "GET /admin-departments/ HTTP/1.1" 200 112436
+INFO 2026-05-05 20:54:20,001 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:54:24,633 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 20:54:24,638 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 20:54:24,675 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:54:25,432 basehttp "GET /login/?role=user HTTP/1.1" 200 13653
+INFO 2026-05-05 20:54:25,467 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:54:35,941 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 20:54:35,991 basehttp "GET /dashboard/ HTTP/1.1" 200 44159
+INFO 2026-05-05 20:54:36,044 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:54:48,063 basehttp "GET /ticket/new/ HTTP/1.1" 200 37014
+INFO 2026-05-05 20:54:48,109 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:57:06,350 views AI priority prediction started for new ticket submit.
+WARNING 2026-05-05 20:57:07,014 ai_priority Groq priority prediction failed: HTTP 404: Not Found | {"error":{"message":"The model `meta-llama/llama-4-maverick-17b-128e-instruct` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
+
+INFO 2026-05-05 20:57:07,015 views AI priority prediction applied: MEDIUM
+INFO 2026-05-05 20:57:07,018 views ML department prediction applied: Finance
+INFO 2026-05-05 20:57:07,050 basehttp "POST /ticket/new/ HTTP/1.1" 200 37453
+INFO 2026-05-05 20:57:07,092 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:59:35,347 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 20:59:44,461 basehttp "GET / HTTP/1.1" 302 0
+INFO 2026-05-05 20:59:44,538 basehttp "GET /dashboard/ HTTP/1.1" 200 43897
+INFO 2026-05-05 20:59:44,637 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:59:47,350 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 20:59:47,355 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 20:59:47,390 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:59:48,275 basehttp "GET /login/?role=user HTTP/1.1" 200 13653
+INFO 2026-05-05 20:59:48,314 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:59:55,977 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 20:59:56,007 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 20:59:57,305 basehttp "GET /login/?role=admin HTTP/1.1" 200 13504
+INFO 2026-05-05 20:59:57,339 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:00:03,493 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-05 21:00:03,535 basehttp "GET /dashboard/ HTTP/1.1" 200 43491
+INFO 2026-05-05 21:00:03,589 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:00:07,477 basehttp "GET /profile/ HTTP/1.1" 200 44596
+INFO 2026-05-05 21:00:07,598 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:00:08,298 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:00:08,303 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 21:00:08,339 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:00:09,233 basehttp "GET /login/?role=user HTTP/1.1" 200 13653
+INFO 2026-05-05 21:00:09,267 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:00:16,325 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 21:00:16,373 basehttp "GET /dashboard/ HTTP/1.1" 200 44159
+INFO 2026-05-05 21:00:16,438 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:00:19,905 basehttp "GET /ticket/new/ HTTP/1.1" 200 37014
+INFO 2026-05-05 21:00:19,955 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:00:50,809 views AI priority prediction started for new ticket submit.
+INFO 2026-05-05 21:00:51,680 views AI priority prediction applied: HIGH
+INFO 2026-05-05 21:00:51,683 views ML department prediction applied: Finance
+INFO 2026-05-05 21:00:51,717 basehttp "POST /ticket/new/ HTTP/1.1" 200 37456
+INFO 2026-05-05 21:00:51,759 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:02:47,562 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 21:02:57,817 basehttp "GET / HTTP/1.1" 302 0
+INFO 2026-05-05 21:02:57,896 basehttp "GET /dashboard/ HTTP/1.1" 200 43897
+INFO 2026-05-05 21:02:57,986 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:02:59,734 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:02:59,739 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 21:02:59,777 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:03:00,607 basehttp "GET /login/?role=admin HTTP/1.1" 200 13716
+INFO 2026-05-05 21:03:00,644 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:03:07,656 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-05 21:03:07,700 basehttp "GET /dashboard/ HTTP/1.1" 200 43491
+INFO 2026-05-05 21:03:07,745 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:03:14,085 basehttp "GET /dashboard/?status=Open HTTP/1.1" 200 43409
+INFO 2026-05-05 21:03:14,133 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:03:14,519 basehttp "GET /dashboard/?status=In%20Progress HTTP/1.1" 200 43418
+INFO 2026-05-05 21:03:14,562 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:03:15,255 basehttp "GET /dashboard/?status=Resolved HTTP/1.1" 200 43413
+INFO 2026-05-05 21:03:15,295 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:03:16,182 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 43461
+INFO 2026-05-05 21:03:16,229 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:03:17,079 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:03:17,084 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 21:03:17,120 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:03:17,807 basehttp "GET /login/?role=user HTTP/1.1" 200 13653
+INFO 2026-05-05 21:03:17,847 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:03:28,086 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 21:03:28,135 basehttp "GET /dashboard/ HTTP/1.1" 200 44134
+INFO 2026-05-05 21:03:28,195 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:03:33,930 basehttp "GET /ticket/new/ HTTP/1.1" 200 37003
+INFO 2026-05-05 21:03:33,979 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:04:12,724 views AI priority prediction started for new ticket submit.
+INFO 2026-05-05 21:04:13,197 views AI priority prediction applied: MEDIUM
+INFO 2026-05-05 21:04:13,200 views ML department prediction applied: Finance
+ERROR 2026-05-05 21:04:13,245 notifications Failed to send notification email for notification 1.
+Traceback (most recent call last):
+  File "H:\DjangoHelpdeskProject\DjangoProject\myapp\notifications.py", line 69, in send_notification_email
+    html_message  = render_to_string('notification.html', context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: notification.html
+INFO 2026-05-05 21:04:13,256 basehttp "POST /ticket/new/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:04:13,305 basehttp "GET /dashboard/ HTTP/1.1" 200 44137
+INFO 2026-05-05 21:04:13,352 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:04:15,636 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 45096
+INFO 2026-05-05 21:04:15,689 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+WARNING 2026-05-05 21:13:00,362 notifications Notification email backend reported zero emails sent for notification 1.
+INFO 2026-05-05 21:13:37,624 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 21:13:50,030 basehttp "GET / HTTP/1.1" 302 0
+INFO 2026-05-05 21:13:50,106 basehttp "GET /dashboard/ HTTP/1.1" 200 43876
+INFO 2026-05-05 21:13:50,205 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:13:52,466 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:13:52,471 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 21:13:52,507 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:13:53,196 basehttp "GET /login/?role=user HTTP/1.1" 200 13653
+INFO 2026-05-05 21:13:53,235 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:14:05,595 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 21:14:05,645 basehttp "GET /dashboard/ HTTP/1.1" 200 44134
+INFO 2026-05-05 21:14:05,701 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:14:09,165 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 45096
+INFO 2026-05-05 21:14:09,213 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:14:12,929 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:14:12,935 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 21:14:12,967 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:14:13,548 basehttp "GET /login/?role=user HTTP/1.1" 200 13653
+INFO 2026-05-05 21:14:13,581 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:14:20,155 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 21:14:20,208 basehttp "GET /dashboard/ HTTP/1.1" 200 46279
+INFO 2026-05-05 21:14:20,265 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:14:23,459 basehttp "GET /notifications/ HTTP/1.1" 200 37795
+INFO 2026-05-05 21:14:23,504 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:14:26,268 basehttp "POST /notifications/1/read/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:14:26,305 basehttp "GET /notifications/?filter=all HTTP/1.1" 200 36159
+INFO 2026-05-05 21:14:26,346 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:14:31,845 basehttp "GET /my-tickets/ HTTP/1.1" 200 38544
+INFO 2026-05-05 21:14:31,935 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:14:37,197 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:14:37,203 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 21:14:37,239 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:14:38,244 basehttp "GET /login/?role=user HTTP/1.1" 200 13653
+INFO 2026-05-05 21:14:38,277 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:16:26,743 basehttp "POST /login/?role=user HTTP/1.1" 200 13670
+INFO 2026-05-05 21:16:26,779 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+ERROR 2026-05-05 21:18:12,333 log Internal Server Error: /password-reset/
+Traceback (most recent call last):
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\test\utils.py", line 111, in instrumented_test_render
+    template_rendered.send(sender=self, template=self, context=context)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\dispatch\dispatcher.py", line 177, in send
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\test\client.py", line 267, in store_rendered_templates
+    store["context"].append(copy(context))
+                            ~~~~^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\copy.py", line 82, in copy
+    return copier(x)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 158, in __copy__
+    duplicate = super().__copy__()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 39, in __copy__
+    duplicate.dicts = self.dicts[:]
+    ^^^^^^^^^^^^^^^
+AttributeError: 'super' object has no attribute 'dicts' and no __dict__ for setting new attributes
+ERROR 2026-05-05 21:18:12,694 log Internal Server Error: /password-reset/
+Traceback (most recent call last):
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\DjangoProject\myapp\views.py", line 653, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\utils\decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\utils\decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\contrib\auth\views.py", line 242, in dispatch
+    return super().dispatch(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\views\generic\edit.py", line 153, in post
+    return self.form_valid(form)
+           ~~~~~~~~~~~~~~~^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\contrib\auth\views.py", line 255, in form_valid
+    form.save(**opts)
+    ~~~~~~~~~^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\contrib\auth\forms.py", line 383, in save
+    self.send_mail(
+    ~~~~~~~~~~~~~~^
+        subject_template_name,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        html_email_template_name=html_email_template_name,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\contrib\auth\forms.py", line 309, in send_mail
+    subject = loader.render_to_string(subject_template_name, context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\test\utils.py", line 111, in instrumented_test_render
+    template_rendered.send(sender=self, template=self, context=context)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\dispatch\dispatcher.py", line 177, in send
+    (receiver, receiver(signal=self, sender=sender, **named))
+               ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\test\client.py", line 267, in store_rendered_templates
+    store["context"].append(copy(context))
+                            ~~~~^^^^^^^^^
+  File "C:\Program Files\Python314\Lib\copy.py", line 82, in copy
+    return copier(x)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 158, in __copy__
+    duplicate = super().__copy__()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 39, in __copy__
+    duplicate.dicts = self.dicts[:]
+    ^^^^^^^^^^^^^^^
+AttributeError: 'super' object has no attribute 'dicts' and no __dict__ for setting new attributes
+ERROR 2026-05-05 21:18:39,456 log Invalid HTTP_HOST header: 'testserver'. You may need to add 'testserver' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\utils\deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\http\request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'testserver'. You may need to add 'testserver' to ALLOWED_HOSTS.
+INFO 2026-05-05 21:21:51,049 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 21:22:00,608 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 21:22:00,680 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:22:01,789 basehttp "GET /login/?role=user HTTP/1.1" 200 13452
+INFO 2026-05-05 21:22:01,826 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:22:05,565 basehttp "GET /api/username-exists/?username=Ash HTTP/1.1" 200 17
+INFO 2026-05-05 21:22:06,385 basehttp "GET /api/username-exists/?username=Ashneer HTTP/1.1" 200 16
+INFO 2026-05-05 21:22:06,684 basehttp "GET /api/username-exists/?username=Ashneer HTTP/1.1" 200 16
+INFO 2026-05-05 21:22:15,530 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 21:22:17,908 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 21:22:19,618 basehttp "GET /password-reset/?username=Aman HTTP/1.1" 200 36043
+INFO 2026-05-05 21:22:19,667 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:22:31,125 basehttp "POST /password-reset/?username=Aman HTTP/1.1" 302 0
+INFO 2026-05-05 21:22:31,135 basehttp "GET /password-reset/done/ HTTP/1.1" 200 35577
+INFO 2026-05-05 21:22:31,172 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:23:04,773 basehttp "GET /password-reset-confirm/Mg/d84jde-93785089414a59483ef6aa6b7e2190ba/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:23:04,794 basehttp "GET /password-reset-confirm/Mg/set-password/ HTTP/1.1" 200 39387
+INFO 2026-05-05 21:23:04,879 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:23:20,360 basehttp "POST /password-reset-confirm/Mg/set-password/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:23:20,367 basehttp "GET /password-reset-complete/ HTTP/1.1" 200 35772
+INFO 2026-05-05 21:23:20,414 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:23:59,308 basehttp "GET /login/ HTTP/1.1" 200 13452
+INFO 2026-05-05 21:23:59,346 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:24:07,049 basehttp "GET /password-reset-confirm/Mg/d84jde-93785089414a59483ef6aa6b7e2190ba/ HTTP/1.1" 200 34726
+INFO 2026-05-05 21:24:07,148 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:24:13,552 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 21:24:13,596 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:30:00,110 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 21:30:10,992 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 21:30:11,064 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:30:11,989 basehttp "GET /login/?role=user HTTP/1.1" 200 13452
+INFO 2026-05-05 21:30:12,031 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:30:15,356 basehttp "GET /api/username-exists/?username=A HTTP/1.1" 200 17
+INFO 2026-05-05 21:30:15,775 basehttp "GET /api/username-exists/?username=Ama HTTP/1.1" 200 17
+INFO 2026-05-05 21:30:16,072 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 21:30:16,514 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 21:30:20,487 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 21:30:20,554 basehttp "GET /dashboard/ HTTP/1.1" 200 44134
+INFO 2026-05-05 21:30:20,612 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:30:24,503 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 45096
+INFO 2026-05-05 21:30:24,553 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:30:27,925 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:30:27,930 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 21:30:27,962 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:30:32,985 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 21:30:33,018 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:30:37,646 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 21:30:39,043 basehttp "GET /password-reset/?username=Aman HTTP/1.1" 200 36043
+INFO 2026-05-05 21:30:39,083 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:30:50,733 basehttp "POST /password-reset/?username=Aman HTTP/1.1" 302 0
+INFO 2026-05-05 21:30:50,742 basehttp "GET /password-reset/done/ HTTP/1.1" 200 35577
+INFO 2026-05-05 21:30:50,779 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:31:04,744 basehttp "GET /password-reset-confirm/Mg/d84jr7-90be8dd19594a8d797942dfb1bcf77c5/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:31:04,765 basehttp "GET /password-reset-confirm/Mg/set-password/ HTTP/1.1" 200 39387
+INFO 2026-05-05 21:31:04,851 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:31:16,908 basehttp "POST /password-reset-confirm/Mg/set-password/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:31:16,920 basehttp "GET /password-reset-complete/ HTTP/1.1" 200 35582
+INFO 2026-05-05 21:31:16,966 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:31:19,892 basehttp "GET /login/ HTTP/1.1" 200 13452
+INFO 2026-05-05 21:31:19,929 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:31:22,097 basehttp "GET /api/username-exists/?username=A HTTP/1.1" 200 17
+INFO 2026-05-05 21:31:22,681 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 21:31:23,300 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 21:31:26,705 basehttp "POST /login/ HTTP/1.1" 200 13681
+INFO 2026-05-05 21:31:26,746 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:31:26,981 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 21:31:28,713 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 21:31:33,475 basehttp "POST /login/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:31:33,527 basehttp "GET /dashboard/ HTTP/1.1" 200 44134
+INFO 2026-05-05 21:31:33,574 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:31:36,341 basehttp "GET /ticket/new/ HTTP/1.1" 200 37003
+INFO 2026-05-05 21:31:36,391 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:31:37,214 basehttp "GET /my-tickets/ HTTP/1.1" 200 36903
+INFO 2026-05-05 21:31:37,257 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:31:37,655 basehttp "GET /resolved-history/ HTTP/1.1" 200 36656
+INFO 2026-05-05 21:31:37,695 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:31:38,215 basehttp "GET /notifications/ HTTP/1.1" 200 34284
+INFO 2026-05-05 21:31:38,265 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:31:38,659 basehttp "GET /profile/ HTTP/1.1" 200 45545
+INFO 2026-05-05 21:31:38,711 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:32:05,507 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:32:05,512 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 21:32:05,547 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:32:06,425 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 21:32:06,456 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:32:08,893 basehttp "GET /api/username-exists/?username=Ashneer HTTP/1.1" 200 16
+INFO 2026-05-05 21:32:09,219 basehttp "GET /api/username-exists/?username=Ashneer HTTP/1.1" 200 16
+INFO 2026-05-05 21:32:12,736 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 21:32:12,790 basehttp "GET /dashboard/ HTTP/1.1" 200 45508
+INFO 2026-05-05 21:32:12,839 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:32:15,106 basehttp "GET /ticket/1/ HTTP/1.1" 200 44702
+INFO 2026-05-05 21:32:15,160 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:32:27,430 basehttp "GET /my-tickets/ HTTP/1.1" 200 38544
+INFO 2026-05-05 21:32:27,478 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:32:35,297 basehttp "GET /ticket/1/?from_assigned=1 HTTP/1.1" 200 44702
+INFO 2026-05-05 21:32:35,343 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:33:14,692 basehttp "GET /ticket/1/comment/closing_comment/ HTTP/1.1" 200 42191
+INFO 2026-05-05 21:33:14,740 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:34:23,527 basehttp "POST /ticket/1/comment/closing_comment/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:34:23,577 basehttp "GET /dashboard/ HTTP/1.1" 200 45478
+INFO 2026-05-05 21:34:23,624 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:34:29,659 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:34:29,665 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 21:34:29,696 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:34:30,618 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 21:34:30,650 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:34:32,451 basehttp "GET /api/username-exists/?username=A HTTP/1.1" 200 17
+INFO 2026-05-05 21:34:33,044 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 21:34:33,311 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 21:34:36,595 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 21:34:36,640 basehttp "GET /dashboard/ HTTP/1.1" 200 44134
+INFO 2026-05-05 21:34:36,686 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:34:43,699 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 45100
+INFO 2026-05-05 21:34:43,747 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:34:52,441 basehttp "GET /notifications/ HTTP/1.1" 200 34284
+INFO 2026-05-05 21:34:52,483 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:34:55,402 basehttp "GET /dashboard/ HTTP/1.1" 200 43876
+INFO 2026-05-05 21:34:55,447 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:37:09,647 autoreload H:\DjangoHelpdeskProject\DjangoProject\myapp\views.py changed, reloading.
+INFO 2026-05-05 21:37:10,664 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 21:40:04,653 autoreload H:\DjangoHelpdeskProject\DjangoProject\myapp\views.py changed, reloading.
+INFO 2026-05-05 21:40:05,651 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 21:40:07,918 autoreload H:\DjangoHelpdeskProject\DjangoProject\myapp\views.py changed, reloading.
+INFO 2026-05-05 21:40:08,445 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 21:40:14,081 autoreload H:\DjangoHelpdeskProject\DjangoProject\myapp\views.py changed, reloading.
+INFO 2026-05-05 21:40:15,043 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 21:40:37,144 autoreload H:\DjangoHelpdeskProject\DjangoProject\myapp\views.py changed, reloading.
+INFO 2026-05-05 21:40:38,017 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 21:43:16,042 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 21:43:31,700 basehttp "GET / HTTP/1.1" 302 0
+INFO 2026-05-05 21:43:31,803 basehttp "GET /dashboard/ HTTP/1.1" 200 45554
+INFO 2026-05-05 21:43:31,900 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:43:33,972 basehttp "GET /notifications/ HTTP/1.1" 200 39834
+INFO 2026-05-05 21:43:34,017 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:43:39,354 basehttp "POST /notifications/mark-all-read/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:43:39,397 basehttp "GET /notifications/?filter=all HTTP/1.1" 200 37978
+INFO 2026-05-05 21:43:39,438 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:43:42,342 basehttp "GET /dashboard/ HTTP/1.1" 200 44739
+INFO 2026-05-05 21:43:42,382 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:43:44,495 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 45963
+INFO 2026-05-05 21:43:44,543 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:43:46,549 basehttp "GET /ticket/1/?mine_only=1 HTTP/1.1" 200 46017
+INFO 2026-05-05 21:43:46,591 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:43:54,629 basehttp "GET /ticket/1/resolve/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:43:54,680 basehttp "GET /ticket/1/ HTTP/1.1" 200 46451
+INFO 2026-05-05 21:43:54,730 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:43:58,905 basehttp "GET /ticket/1/rate/ HTTP/1.1" 200 49300
+INFO 2026-05-05 21:43:58,957 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:44:17,541 basehttp "POST /ticket/1/rate/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:44:17,577 basehttp "GET /ticket/1/ HTTP/1.1" 200 46151
+INFO 2026-05-05 21:44:17,650 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:44:26,897 basehttp "GET /download/1/ HTTP/1.1" 200 35015
+INFO 2026-05-05 21:44:36,459 basehttp "GET /ticket/1/rate/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:44:36,504 basehttp "GET /ticket/1/ HTTP/1.1" 200 46146
+INFO 2026-05-05 21:44:36,545 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:44:47,995 basehttp "GET /dashboard/ HTTP/1.1" 200 44741
+INFO 2026-05-05 21:44:48,044 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:44:49,424 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 45969
+INFO 2026-05-05 21:44:49,467 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:44:51,790 basehttp "GET /ticket/1/?mine_only=1 HTTP/1.1" 200 45487
+INFO 2026-05-05 21:44:51,836 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:44:58,999 basehttp "GET /resolved-history/ HTTP/1.1" 200 38999
+INFO 2026-05-05 21:44:59,048 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:45:04,082 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:45:04,089 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 21:45:04,127 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:45:04,912 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 21:45:04,950 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:45:07,816 basehttp "GET /api/username-exists/?username=Ashneer HTTP/1.1" 200 16
+INFO 2026-05-05 21:45:08,183 basehttp "GET /api/username-exists/?username=Ashneer HTTP/1.1" 200 16
+INFO 2026-05-05 21:45:11,643 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 21:45:11,691 basehttp "GET /dashboard/ HTTP/1.1" 200 46768
+INFO 2026-05-05 21:45:11,742 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:45:13,184 basehttp "GET /notifications/ HTTP/1.1" 200 39257
+INFO 2026-05-05 21:45:13,229 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:45:15,531 basehttp "POST /notifications/4/read/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:45:15,574 basehttp "GET /notifications/?filter=all HTTP/1.1" 200 37621
+INFO 2026-05-05 21:45:15,622 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:45:16,775 basehttp "GET /dashboard/ HTTP/1.1" 200 45734
+INFO 2026-05-05 21:45:16,823 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:45:19,788 basehttp "GET /ticket/1/ HTTP/1.1" 200 46170
+INFO 2026-05-05 21:45:19,835 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:45:25,137 basehttp "GET /resolved-history/ HTTP/1.1" 200 38946
+INFO 2026-05-05 21:45:25,180 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:45:29,745 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:45:29,751 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 21:45:29,786 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:45:30,459 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 21:45:30,495 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:45:32,223 basehttp "GET /api/username-exists/?username=Nami HTTP/1.1" 200 17
+INFO 2026-05-05 21:45:32,897 basehttp "GET /api/username-exists/?username=Namita HTTP/1.1" 200 16
+INFO 2026-05-05 21:45:36,619 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 21:45:36,663 basehttp "GET /dashboard/ HTTP/1.1" 200 44155
+INFO 2026-05-05 21:45:36,723 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:45:40,464 basehttp "GET /resolved-history/ HTTP/1.1" 200 38142
+INFO 2026-05-05 21:45:40,512 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:45:44,449 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:45:44,455 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 21:45:44,490 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:49:17,652 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 21:49:17,687 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:49:20,925 basehttp "GET /api/username-exists/?username=Ashneer HTTP/1.1" 200 16
+INFO 2026-05-05 21:49:21,273 basehttp "GET /api/username-exists/?username=Ashneer HTTP/1.1" 200 16
+INFO 2026-05-05 21:49:24,391 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 21:49:24,439 basehttp "GET /dashboard/ HTTP/1.1" 200 45997
+INFO 2026-05-05 21:49:24,487 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:49:26,857 basehttp "GET /ticket/new/ HTTP/1.1" 200 37816
+INFO 2026-05-05 21:49:26,908 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:49:56,289 views AI priority prediction started for new ticket submit.
+INFO 2026-05-05 21:49:56,982 views AI priority prediction applied: LOW
+WARNING 2026-05-05 21:49:57,503 department_predictor Department model was trained with a different scikit-learn version. Model loaded, but retraining is recommended.
+INFO 2026-05-05 21:49:57,508 views ML department prediction applied: Operations
+INFO 2026-05-05 21:50:01,913 basehttp "POST /ticket/new/ HTTP/1.1" 302 0
+INFO 2026-05-05 21:50:01,964 basehttp "GET /dashboard/ HTTP/1.1" 200 45996
+INFO 2026-05-05 21:50:02,016 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:50:45,602 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 45917
+INFO 2026-05-05 21:50:45,653 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:50:51,568 basehttp "GET /dashboard/?status= HTTP/1.1" 200 45855
+INFO 2026-05-05 21:50:51,617 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 21:50:55,184 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 45917
+INFO 2026-05-05 21:50:55,236 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:01:45,058 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 22:01:57,098 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 302 0
+INFO 2026-05-05 22:01:57,115 basehttp "GET /login/?next=/dashboard/%3Fmine_only%3D1 HTTP/1.1" 200 13689
+INFO 2026-05-05 22:01:57,149 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:02:02,490 basehttp "GET /api/username-exists/?username=A HTTP/1.1" 200 17
+INFO 2026-05-05 22:02:03,239 basehttp "GET /api/username-exists/?username=As HTTP/1.1" 200 17
+INFO 2026-05-05 22:02:03,614 basehttp "GET /api/username-exists/?username=Ashneer HTTP/1.1" 200 16
+INFO 2026-05-05 22:02:08,370 basehttp "POST /login/?next=/dashboard/%3Fmine_only%3D1 HTTP/1.1" 302 0
+INFO 2026-05-05 22:02:08,439 basehttp "GET /dashboard/ HTTP/1.1" 200 45998
+INFO 2026-05-05 22:02:08,486 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:02:14,583 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 45918
+INFO 2026-05-05 22:02:14,632 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:02:20,261 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:02:20,268 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:02:20,303 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:02:21,777 basehttp "GET /login/?role=admin HTTP/1.1" 200 13727
+INFO 2026-05-05 22:02:21,807 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:02:35,514 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-05 22:02:35,565 basehttp "GET /dashboard/ HTTP/1.1" 200 46839
+INFO 2026-05-05 22:02:35,613 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:02:40,262 basehttp "POST /tickets/bulk-delete/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:02:40,301 basehttp "GET /dashboard/ HTTP/1.1" 200 43481
+INFO 2026-05-05 22:02:40,338 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:02:42,011 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:02:42,016 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:02:42,048 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:02:42,542 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:02:42,584 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:02:44,812 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 22:02:48,125 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:02:48,177 basehttp "GET /dashboard/ HTTP/1.1" 200 44134
+INFO 2026-05-05 22:02:48,222 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:02:50,115 basehttp "GET /ticket/new/ HTTP/1.1" 200 37003
+INFO 2026-05-05 22:02:50,161 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:03:11,742 views AI priority prediction started for new ticket submit.
+INFO 2026-05-05 22:03:12,623 views AI priority prediction applied: LOW
+INFO 2026-05-05 22:03:12,799 views ML department prediction applied: Operations
+INFO 2026-05-05 22:03:16,625 basehttp "POST /ticket/new/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:03:16,677 basehttp "GET /dashboard/ HTTP/1.1" 200 44137
+INFO 2026-05-05 22:03:16,734 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:03:20,648 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 45091
+INFO 2026-05-05 22:03:20,697 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:03:27,156 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:03:27,162 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:03:27,200 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:03:27,905 basehttp "GET /login/?role=admin HTTP/1.1" 200 13727
+INFO 2026-05-05 22:03:27,943 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:03:34,229 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:03:34,268 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:03:34,883 basehttp "GET /login/?role=user HTTP/1.1" 200 13452
+INFO 2026-05-05 22:03:34,920 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:03:36,349 basehttp "GET /api/username-exists/?username=V HTTP/1.1" 200 17
+INFO 2026-05-05 22:03:37,522 basehttp "GET /api/username-exists/?username=Vineeta HTTP/1.1" 200 16
+INFO 2026-05-05 22:03:37,822 basehttp "GET /api/username-exists/?username=Vineeta HTTP/1.1" 200 16
+INFO 2026-05-05 22:03:41,138 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:03:41,190 basehttp "GET /dashboard/ HTTP/1.1" 200 46282
+INFO 2026-05-05 22:03:41,245 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:03:44,963 basehttp "GET /ticket/3/ HTTP/1.1" 200 45457
+INFO 2026-05-05 22:03:45,014 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:03:47,669 basehttp "GET /ticket/3/comment/closing_comment/ HTTP/1.1" 200 42977
+INFO 2026-05-05 22:03:47,717 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:04:02,715 basehttp "POST /ticket/3/comment/closing_comment/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:04:02,777 basehttp "GET /dashboard/ HTTP/1.1" 200 46253
+INFO 2026-05-05 22:04:02,826 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:04:12,342 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:04:12,348 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:04:12,385 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:04:12,940 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:04:12,977 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:04:14,135 basehttp "GET /api/username-exists/?username=A HTTP/1.1" 200 17
+INFO 2026-05-05 22:04:15,278 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 22:04:18,876 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:04:18,925 basehttp "GET /dashboard/ HTTP/1.1" 200 45732
+INFO 2026-05-05 22:04:18,975 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:04:20,543 basehttp "GET /notifications/ HTTP/1.1" 200 39674
+INFO 2026-05-05 22:04:20,586 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:04:21,594 basehttp "GET /my-tickets/ HTTP/1.1" 200 38501
+INFO 2026-05-05 22:04:21,639 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:04:22,736 basehttp "GET /dashboard/ HTTP/1.1" 200 45474
+INFO 2026-05-05 22:04:22,786 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:04:23,730 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 46693
+INFO 2026-05-05 22:04:23,778 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:04:29,399 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:04:29,405 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:04:29,442 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:04:30,216 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:04:30,255 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:04:32,305 basehttp "GET /api/username-exists/?username=V HTTP/1.1" 200 17
+INFO 2026-05-05 22:04:34,996 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 22:04:38,325 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:04:38,381 basehttp "GET /dashboard/ HTTP/1.1" 200 45732
+INFO 2026-05-05 22:04:38,433 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:04:40,009 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 46693
+INFO 2026-05-05 22:04:40,056 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:04:41,225 basehttp "GET /ticket/3/?mine_only=1 HTTP/1.1" 200 46168
+INFO 2026-05-05 22:04:41,274 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:04:42,812 basehttp "GET /ticket/3/resolve/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:04:42,865 basehttp "GET /ticket/3/ HTTP/1.1" 200 46602
+INFO 2026-05-05 22:04:42,912 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:04:45,625 basehttp "GET /ticket/3/rate/ HTTP/1.1" 200 50042
+INFO 2026-05-05 22:04:45,672 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:04:58,954 basehttp "POST /ticket/3/rate/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:04:59,005 basehttp "GET /ticket/3/ HTTP/1.1" 200 46298
+INFO 2026-05-05 22:04:59,057 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:01,526 basehttp "GET /notifications/ HTTP/1.1" 200 39670
+INFO 2026-05-05 22:05:01,572 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:02,970 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:05:02,975 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:05:03,006 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:03,727 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:05:03,761 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:05,614 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 22:05:10,204 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:05:10,255 basehttp "GET /dashboard/ HTTP/1.1" 200 45730
+INFO 2026-05-05 22:05:10,308 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:11,713 basehttp "GET /notifications/ HTTP/1.1" 200 39670
+INFO 2026-05-05 22:05:11,757 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:13,361 basehttp "GET /dashboard/ HTTP/1.1" 200 45472
+INFO 2026-05-05 22:05:13,409 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:14,418 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 46695
+INFO 2026-05-05 22:05:14,461 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:17,864 basehttp "GET /ticket/3/?mine_only=1 HTTP/1.1" 200 45634
+INFO 2026-05-05 22:05:17,911 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:22,857 basehttp "GET /notifications/ HTTP/1.1" 200 39670
+INFO 2026-05-05 22:05:22,900 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:24,224 basehttp "GET /my-tickets/ HTTP/1.1" 200 38499
+INFO 2026-05-05 22:05:24,281 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:24,761 basehttp "GET /resolved-history/ HTTP/1.1" 200 39726
+INFO 2026-05-05 22:05:24,804 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:28,698 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:05:28,703 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:05:28,740 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:30,121 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:05:30,157 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:31,765 basehttp "GET /api/username-exists/?username=V HTTP/1.1" 200 17
+INFO 2026-05-05 22:05:32,075 basehttp "GET /api/username-exists/?username=Vi HTTP/1.1" 200 17
+INFO 2026-05-05 22:05:32,481 basehttp "GET /api/username-exists/?username=Vin HTTP/1.1" 200 17
+INFO 2026-05-05 22:05:32,811 basehttp "GET /api/username-exists/?username=Vineeta HTTP/1.1" 200 16
+INFO 2026-05-05 22:05:35,901 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:05:35,959 basehttp "GET /dashboard/ HTTP/1.1" 200 46821
+INFO 2026-05-05 22:05:36,025 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:38,949 basehttp "GET /ticket/3/ HTTP/1.1" 200 46411
+INFO 2026-05-05 22:05:38,993 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:41,034 basehttp "GET /profile/ HTTP/1.1" 200 47206
+INFO 2026-05-05 22:05:41,086 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:41,518 basehttp "GET /notifications/ HTTP/1.1" 200 39763
+INFO 2026-05-05 22:05:41,563 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:43,018 basehttp "POST /notifications/mark-all-read/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:05:43,062 basehttp "GET /notifications/?filter=all HTTP/1.1" 200 37907
+INFO 2026-05-05 22:05:43,107 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:45,038 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:05:45,043 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:05:45,085 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:05:45,902 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:05:45,941 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:07:00,567 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 22:07:05,521 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:07:05,594 basehttp "GET /dashboard/ HTTP/1.1" 200 44155
+INFO 2026-05-05 22:07:05,702 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:07:09,404 basehttp "GET /ticket/new/ HTTP/1.1" 200 37011
+INFO 2026-05-05 22:07:09,459 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:07:43,647 views AI priority prediction started for new ticket submit.
+INFO 2026-05-05 22:07:44,377 views AI priority prediction applied: LOW
+INFO 2026-05-05 22:07:44,380 views ML department prediction applied: HR
+INFO 2026-05-05 22:07:48,063 basehttp "POST /ticket/new/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:07:48,113 basehttp "GET /dashboard/ HTTP/1.1" 200 44155
+INFO 2026-05-05 22:07:48,164 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:07:50,893 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 45095
+INFO 2026-05-05 22:07:50,944 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:07:53,537 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:07:53,543 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:07:53,579 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:07:57,617 basehttp "GET /login/?role=admin HTTP/1.1" 200 13727
+INFO 2026-05-05 22:07:57,654 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:08:03,755 basehttp "POST /login/?role=admin HTTP/1.1" 200 13745
+INFO 2026-05-05 22:08:03,789 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:08:08,601 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-05 22:08:08,649 basehttp "GET /dashboard/ HTTP/1.1" 200 46813
+INFO 2026-05-05 22:08:08,691 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:08:12,781 basehttp "GET /ticket/4/ HTTP/1.1" 200 43625
+INFO 2026-05-05 22:08:12,830 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:08:17,334 basehttp "GET /dashboard/ HTTP/1.1" 200 46537
+INFO 2026-05-05 22:08:17,385 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:08:19,899 basehttp "GET /admin-departments/ HTTP/1.1" 200 112170
+INFO 2026-05-05 22:08:19,965 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:08:26,922 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:08:26,928 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:08:26,965 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:08:27,852 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:08:27,892 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:08:29,912 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 22:08:30,277 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 22:08:33,593 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:08:33,656 basehttp "GET /dashboard/ HTTP/1.1" 200 47359
+INFO 2026-05-05 22:08:33,716 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:08:35,792 basehttp "GET /my-tickets/ HTTP/1.1" 200 40416
+INFO 2026-05-05 22:08:35,843 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:08:37,385 basehttp "GET /ticket/4/?from_assigned=1 HTTP/1.1" 200 46574
+INFO 2026-05-05 22:08:37,430 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:08:39,089 basehttp "GET /ticket/4/comment/closing_comment/ HTTP/1.1" 200 44074
+INFO 2026-05-05 22:08:39,136 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:08:58,137 basehttp "POST /ticket/4/comment/closing_comment/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:08:58,194 basehttp "GET /dashboard/ HTTP/1.1" 200 47332
+INFO 2026-05-05 22:08:58,247 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:09:04,444 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 47282
+INFO 2026-05-05 22:09:04,488 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:09:05,602 basehttp "GET /dashboard/?status= HTTP/1.1" 200 47192
+INFO 2026-05-05 22:09:05,648 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:09:08,171 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:09:08,176 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:09:08,214 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:09:10,029 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:09:10,068 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:09:12,236 basehttp "GET /api/username-exists/?username=Nami HTTP/1.1" 200 17
+INFO 2026-05-05 22:09:12,625 basehttp "GET /api/username-exists/?username=Namit HTTP/1.1" 200 17
+INFO 2026-05-05 22:09:12,922 basehttp "GET /api/username-exists/?username=Namita HTTP/1.1" 200 16
+INFO 2026-05-05 22:09:13,256 basehttp "GET /api/username-exists/?username=Namita HTTP/1.1" 200 16
+INFO 2026-05-05 22:09:16,267 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:09:16,318 basehttp "GET /dashboard/ HTTP/1.1" 200 45758
+INFO 2026-05-05 22:09:16,368 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:09:18,324 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 46702
+INFO 2026-05-05 22:09:18,374 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:09:19,640 basehttp "GET /ticket/4/?mine_only=1 HTTP/1.1" 200 46200
+INFO 2026-05-05 22:09:19,687 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:09:21,441 basehttp "GET /ticket/4/comment/reopen_comment/ HTTP/1.1" 200 43435
+INFO 2026-05-05 22:09:21,490 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:09:39,760 basehttp "POST /ticket/4/comment/reopen_comment/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:09:39,812 basehttp "GET /dashboard/ HTTP/1.1" 200 45759
+INFO 2026-05-05 22:09:39,867 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:09:43,867 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:09:43,872 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:09:43,910 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:09:44,521 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:09:44,566 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:09:46,469 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 22:09:49,368 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:09:49,424 basehttp "GET /dashboard/ HTTP/1.1" 200 48466
+INFO 2026-05-05 22:09:49,476 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:09:51,371 basehttp "GET /my-tickets/ HTTP/1.1" 200 41523
+INFO 2026-05-05 22:09:51,417 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:09:53,025 basehttp "GET /ticket/4/?from_assigned=1 HTTP/1.1" 200 50241
+INFO 2026-05-05 22:09:53,077 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:09:56,069 basehttp "GET /ticket/4/comment/closing_comment/ HTTP/1.1" 200 45181
+INFO 2026-05-05 22:09:56,122 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:10:16,980 basehttp "POST /ticket/4/comment/closing_comment/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:10:17,035 basehttp "GET /dashboard/ HTTP/1.1" 200 48436
+INFO 2026-05-05 22:10:17,087 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:10:21,993 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:10:21,998 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:10:22,034 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:10:22,906 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:10:22,948 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:10:24,965 basehttp "GET /api/username-exists/?username=Am HTTP/1.1" 200 17
+INFO 2026-05-05 22:10:25,842 basehttp "GET /api/username-exists/?username=A HTTP/1.1" 200 17
+INFO 2026-05-05 22:10:27,925 basehttp "GET /api/username-exists/?username=N HTTP/1.1" 200 17
+INFO 2026-05-05 22:10:28,302 basehttp "GET /api/username-exists/?username=Nam HTTP/1.1" 200 17
+INFO 2026-05-05 22:10:28,681 basehttp "GET /api/username-exists/?username=Namita HTTP/1.1" 200 16
+INFO 2026-05-05 22:10:31,759 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:10:31,811 basehttp "GET /dashboard/ HTTP/1.1" 200 46887
+INFO 2026-05-05 22:10:31,862 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:10:33,499 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 47831
+INFO 2026-05-05 22:10:33,545 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:10:34,506 basehttp "GET /ticket/4/?mine_only=1 HTTP/1.1" 200 49563
+INFO 2026-05-05 22:10:34,549 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:10:41,035 basehttp "GET /ticket/4/resolve/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:10:41,090 basehttp "GET /ticket/4/ HTTP/1.1" 200 50196
+INFO 2026-05-05 22:10:41,138 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:10:43,308 basehttp "GET /ticket/4/rate/ HTTP/1.1" 200 51167
+INFO 2026-05-05 22:10:43,361 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:10:55,323 basehttp "POST /ticket/4/rate/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:10:55,379 basehttp "GET /ticket/4/ HTTP/1.1" 200 49896
+INFO 2026-05-05 22:10:55,438 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:10:59,848 basehttp "GET /ticket/new/ HTTP/1.1" 200 39745
+INFO 2026-05-05 22:10:59,897 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:11:00,739 basehttp "GET /resolved-history/ HTTP/1.1" 200 42463
+INFO 2026-05-05 22:11:00,790 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:11:05,318 basehttp "GET /notifications/ HTTP/1.1" 200 43633
+INFO 2026-05-05 22:11:05,363 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:11:07,136 basehttp "POST /notifications/mark-all-read/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:11:07,183 basehttp "GET /notifications/?filter=all HTTP/1.1" 200 40803
+INFO 2026-05-05 22:11:07,227 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:11:08,315 basehttp "GET /dashboard/ HTTP/1.1" 200 45724
+INFO 2026-05-05 22:11:08,364 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:11:30,873 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 46932
+INFO 2026-05-05 22:11:30,924 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:11:34,645 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:11:34,650 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:11:34,690 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:11:35,308 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:11:35,347 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:11:37,091 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 22:11:40,343 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:11:40,399 basehttp "GET /dashboard/ HTTP/1.1" 200 48465
+INFO 2026-05-05 22:11:40,453 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:11:41,804 basehttp "GET /notifications/ HTTP/1.1" 200 47045
+INFO 2026-05-05 22:11:41,852 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:11:42,999 basehttp "POST /notifications/mark-all-read/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:11:43,065 basehttp "GET /notifications/?filter=all HTTP/1.1" 200 43293
+INFO 2026-05-05 22:11:43,114 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:11:44,193 basehttp "GET /dashboard/ HTTP/1.1" 200 47260
+INFO 2026-05-05 22:11:44,240 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:11:52,633 basehttp "GET /ticket/new/ HTTP/1.1" 200 39369
+INFO 2026-05-05 22:11:52,679 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:12:23,117 views AI priority prediction started for new ticket submit.
+INFO 2026-05-05 22:12:23,324 views AI priority prediction applied: URGENT
+INFO 2026-05-05 22:12:23,327 views ML department prediction applied: IT Support
+INFO 2026-05-05 22:12:27,541 basehttp "POST /ticket/new/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:12:27,597 basehttp "GET /dashboard/ HTTP/1.1" 200 47520
+INFO 2026-05-05 22:12:27,648 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:12:29,627 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 48922
+INFO 2026-05-05 22:12:29,678 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:12:34,193 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:12:34,198 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:12:34,237 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:12:34,897 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:12:34,932 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:12:38,640 basehttp "GET /api/username-exists/?username=Pi HTTP/1.1" 200 17
+INFO 2026-05-05 22:12:39,467 basehttp "GET /api/username-exists/?username=Piyus HTTP/1.1" 200 17
+INFO 2026-05-05 22:12:40,003 basehttp "GET /api/username-exists/?username=Piyush HTTP/1.1" 200 16
+INFO 2026-05-05 22:12:43,173 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:12:43,228 basehttp "GET /dashboard/ HTTP/1.1" 200 46314
+INFO 2026-05-05 22:12:43,295 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:12:46,537 basehttp "GET /ticket/5/ HTTP/1.1" 200 45495
+INFO 2026-05-05 22:12:46,590 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:12:48,384 basehttp "GET /ticket/5/comment/closing_comment/ HTTP/1.1" 200 43021
+INFO 2026-05-05 22:12:48,435 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:00,922 basehttp "POST /ticket/5/comment/closing_comment/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:13:00,976 basehttp "GET /dashboard/ HTTP/1.1" 200 46285
+INFO 2026-05-05 22:13:01,032 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:04,619 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:13:04,624 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:13:04,661 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:05,183 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:13:05,218 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:06,233 basehttp "GET /api/username-exists/?username=A HTTP/1.1" 200 17
+INFO 2026-05-05 22:13:06,815 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 22:13:09,965 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 22:13:13,125 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:13:13,183 basehttp "GET /dashboard/ HTTP/1.1" 200 48292
+INFO 2026-05-05 22:13:13,238 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:15,541 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 49701
+INFO 2026-05-05 22:13:15,589 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:16,572 basehttp "GET /ticket/5/?mine_only=1 HTTP/1.1" 200 47732
+INFO 2026-05-05 22:13:16,616 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:18,562 basehttp "GET /ticket/5/resolve/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:13:18,616 basehttp "GET /ticket/5/ HTTP/1.1" 200 48166
+INFO 2026-05-05 22:13:18,667 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:20,091 basehttp "GET /resolved-history/ HTTP/1.1" 200 44513
+INFO 2026-05-05 22:13:20,141 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:22,149 basehttp "GET /notifications/ HTTP/1.1" 200 47041
+INFO 2026-05-05 22:13:22,200 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:23,106 basehttp "POST /notifications/mark-all-read/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:13:23,158 basehttp "GET /notifications/?filter=all HTTP/1.1" 200 45183
+INFO 2026-05-05 22:13:23,206 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:24,663 basehttp "GET /dashboard/ HTTP/1.1" 200 47219
+INFO 2026-05-05 22:13:24,713 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:27,610 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:13:27,616 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:13:27,653 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:31,748 basehttp "GET /login/?role=admin HTTP/1.1" 200 13727
+INFO 2026-05-05 22:13:31,784 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:40,615 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-05 22:13:40,665 basehttp "GET /dashboard/ HTTP/1.1" 200 48714
+INFO 2026-05-05 22:13:40,715 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:45,057 basehttp "GET /ticket/new/ HTTP/1.1" 200 36049
+INFO 2026-05-05 22:13:45,105 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:45,634 basehttp "GET /pie-chart/ HTTP/1.1" 200 37187
+INFO 2026-05-05 22:13:45,688 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:50,960 basehttp "GET /admin-departments/ HTTP/1.1" 200 112170
+INFO 2026-05-05 22:13:51,018 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:52,338 basehttp "GET /notifications/ HTTP/1.1" 200 33330
+INFO 2026-05-05 22:13:52,386 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:13:54,323 basehttp "GET /profile/ HTTP/1.1" 200 44596
+INFO 2026-05-05 22:13:54,376 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:14:00,518 basehttp "GET /categories/ HTTP/1.1" 200 56049
+INFO 2026-05-05 22:14:00,572 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:14:05,098 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:14:05,103 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:14:05,141 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:14:06,476 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:14:06,515 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:14:09,456 basehttp "GET /api/username-exists/?username=Nami HTTP/1.1" 200 17
+INFO 2026-05-05 22:14:09,922 basehttp "GET /api/username-exists/?username=Namita HTTP/1.1" 200 16
+INFO 2026-05-05 22:14:10,225 basehttp "GET /api/username-exists/?username=Namita HTTP/1.1" 200 16
+INFO 2026-05-05 22:14:13,305 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:14:13,357 basehttp "GET /dashboard/ HTTP/1.1" 200 45986
+INFO 2026-05-05 22:14:13,415 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:14:15,425 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 46934
+INFO 2026-05-05 22:14:15,474 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:14:18,253 basehttp "GET /ticket/new/ HTTP/1.1" 200 38842
+INFO 2026-05-05 22:14:18,303 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:14:19,077 basehttp "GET /my-tickets/ HTTP/1.1" 200 38742
+INFO 2026-05-05 22:14:19,125 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:14:20,613 basehttp "GET /resolved-history/ HTTP/1.1" 200 43211
+INFO 2026-05-05 22:14:20,663 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:14:22,622 basehttp "GET /notifications/ HTTP/1.1" 200 40541
+INFO 2026-05-05 22:14:22,669 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:14:23,143 basehttp "GET /profile/ HTTP/1.1" 200 47396
+INFO 2026-05-05 22:14:23,189 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:14:27,324 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:14:27,330 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:14:27,363 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:16:24,264 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:16:24,305 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:16:26,162 basehttp "GET /api/username-exists/?username=A HTTP/1.1" 200 17
+INFO 2026-05-05 22:16:27,412 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 22:16:31,571 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:16:31,625 basehttp "GET /dashboard/ HTTP/1.1" 200 47477
+INFO 2026-05-05 22:16:31,676 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:16:33,631 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:16:33,636 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:16:33,673 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:16:34,497 basehttp "GET /login/?role=admin HTTP/1.1" 200 13727
+INFO 2026-05-05 22:16:34,536 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:16:43,199 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-05 22:16:43,255 basehttp "GET /dashboard/ HTTP/1.1" 200 48714
+INFO 2026-05-05 22:16:43,305 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:16:47,235 basehttp "GET /admin-departments/ HTTP/1.1" 200 112170
+INFO 2026-05-05 22:16:47,291 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:16:51,971 basehttp "POST /admin-departments/5/remove-member/5/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:16:52,058 basehttp "GET /admin-departments/ HTTP/1.1" 200 111197
+INFO 2026-05-05 22:16:52,112 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:16:58,780 basehttp "POST /admin-departments/3/add-member/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:16:58,871 basehttp "GET /admin-departments/ HTTP/1.1" 200 112422
+INFO 2026-05-05 22:16:58,925 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:17:04,314 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:17:04,320 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:17:04,361 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:17:05,476 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:17:05,511 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:17:06,985 basehttp "GET /api/username-exists/?username=Da HTTP/1.1" 200 17
+INFO 2026-05-05 22:17:07,692 basehttp "GET /api/username-exists/?username=Daksh HTTP/1.1" 200 16
+INFO 2026-05-05 22:17:08,177 basehttp "GET /api/username-exists/?username=Daksh HTTP/1.1" 200 16
+INFO 2026-05-05 22:17:11,529 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:17:11,614 basehttp "GET /dashboard/ HTTP/1.1" 200 44178
+INFO 2026-05-05 22:17:11,681 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:17:15,460 basehttp "GET /ticket/new/ HTTP/1.1" 200 37014
+INFO 2026-05-05 22:17:15,511 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:17:43,285 views AI priority prediction started for new ticket submit.
+INFO 2026-05-05 22:17:43,488 views AI priority prediction applied: LOW
+INFO 2026-05-05 22:17:43,491 views ML department prediction applied: HR
+INFO 2026-05-05 22:17:52,973 basehttp "POST /ticket/new/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:17:53,024 basehttp "GET /dashboard/ HTTP/1.1" 200 44176
+INFO 2026-05-05 22:17:53,074 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:17:55,975 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 44938
+INFO 2026-05-05 22:17:56,023 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:18:02,560 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:18:02,566 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:18:02,604 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:18:03,873 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:18:03,915 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:18:07,987 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 22:18:11,038 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:18:11,094 basehttp "GET /dashboard/ HTTP/1.1" 200 49547
+INFO 2026-05-05 22:18:11,139 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:18:12,818 basehttp "GET /my-tickets/ HTTP/1.1" 200 41520
+INFO 2026-05-05 22:18:12,866 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:18:14,528 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:18:14,533 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:18:14,575 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:18:15,135 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:18:15,173 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:18:16,619 basehttp "GET /api/username-exists/?username=G HTTP/1.1" 200 17
+INFO 2026-05-05 22:18:17,042 basehttp "GET /api/username-exists/?username=Gha HTTP/1.1" 200 17
+INFO 2026-05-05 22:18:17,969 basehttp "GET /api/username-exists/?username=Ghazal HTTP/1.1" 200 16
+INFO 2026-05-05 22:18:20,730 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:18:20,789 basehttp "GET /dashboard/ HTTP/1.1" 200 47482
+INFO 2026-05-05 22:18:20,851 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:18:23,179 basehttp "GET /my-tickets/ HTTP/1.1" 200 39453
+INFO 2026-05-05 22:18:23,230 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:18:26,400 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:18:26,405 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:18:26,442 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:18:26,920 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:18:26,958 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:18:28,917 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 22:18:31,752 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:18:31,809 basehttp "GET /dashboard/ HTTP/1.1" 200 49547
+INFO 2026-05-05 22:18:31,859 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:18:33,622 basehttp "GET /my-tickets/ HTTP/1.1" 200 41520
+INFO 2026-05-05 22:18:33,670 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:18:34,968 basehttp "GET /ticket/6/reject/ HTTP/1.1" 200 36931
+INFO 2026-05-05 22:18:35,019 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:18:54,258 basehttp "POST /ticket/6/reject/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:18:54,325 basehttp "GET /my-tickets/ HTTP/1.1" 200 40313
+INFO 2026-05-05 22:18:54,377 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:18:57,948 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:18:57,953 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:18:57,992 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:18:59,976 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:19:00,014 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:19:01,959 basehttp "GET /api/username-exists/?username=Gha HTTP/1.1" 200 17
+INFO 2026-05-05 22:19:02,863 basehttp "GET /api/username-exists/?username=Ghazal HTTP/1.1" 200 16
+INFO 2026-05-05 22:19:03,181 basehttp "GET /api/username-exists/?username=Ghazal HTTP/1.1" 200 16
+INFO 2026-05-05 22:19:06,880 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:19:06,935 basehttp "GET /dashboard/ HTTP/1.1" 200 48259
+INFO 2026-05-05 22:19:06,993 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:19:09,702 basehttp "GET /my-tickets/ HTTP/1.1" 200 39890
+INFO 2026-05-05 22:19:09,754 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:19:10,870 basehttp "GET /notifications/ HTTP/1.1" 200 39823
+INFO 2026-05-05 22:19:10,916 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:19:13,035 basehttp "GET /my-tickets/ HTTP/1.1" 200 39890
+INFO 2026-05-05 22:19:13,082 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:19:14,343 basehttp "GET /ticket/6/?from_assigned=1 HTTP/1.1" 200 46039
+INFO 2026-05-05 22:19:14,393 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:19:17,278 basehttp "GET /ticket/6/comment/closing_comment/ HTTP/1.1" 200 43544
+INFO 2026-05-05 22:19:17,329 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:19:34,135 basehttp "POST /ticket/6/comment/closing_comment/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:19:34,190 basehttp "GET /dashboard/ HTTP/1.1" 200 48231
+INFO 2026-05-05 22:19:34,248 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:19:36,785 basehttp "GET /notifications/ HTTP/1.1" 200 39791
+INFO 2026-05-05 22:19:36,830 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:19:38,665 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:19:38,671 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:19:38,709 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:19:39,334 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:19:39,377 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:19:46,498 basehttp "GET /api/username-exists/?username=D HTTP/1.1" 200 17
+INFO 2026-05-05 22:19:47,001 basehttp "GET /api/username-exists/?username=Dak HTTP/1.1" 200 17
+INFO 2026-05-05 22:19:47,725 basehttp "GET /api/username-exists/?username=Daksh HTTP/1.1" 200 16
+INFO 2026-05-05 22:19:50,832 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:19:50,884 basehttp "GET /dashboard/ HTTP/1.1" 200 45779
+INFO 2026-05-05 22:19:50,948 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:19:53,829 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 46716
+INFO 2026-05-05 22:19:53,876 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:19:56,571 basehttp "GET /notifications/ HTTP/1.1" 200 39693
+INFO 2026-05-05 22:19:56,621 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:19:58,167 basehttp "POST /notifications/mark-all-read/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:19:58,213 basehttp "GET /notifications/?filter=all HTTP/1.1" 200 37835
+INFO 2026-05-05 22:19:58,257 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:19:59,298 basehttp "GET /dashboard/ HTTP/1.1" 200 44701
+INFO 2026-05-05 22:19:59,346 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:20:01,907 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 45901
+INFO 2026-05-05 22:20:01,952 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:20:03,356 basehttp "GET /ticket/6/?mine_only=1 HTTP/1.1" 200 45372
+INFO 2026-05-05 22:20:03,405 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:20:04,647 basehttp "GET /ticket/6/resolve/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:20:04,697 basehttp "GET /ticket/6/ HTTP/1.1" 200 45806
+INFO 2026-05-05 22:20:04,745 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:20:07,629 basehttp "GET /ticket/6/rate/ HTTP/1.1" 200 49220
+INFO 2026-05-05 22:20:07,676 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:20:19,802 basehttp "POST /ticket/6/rate/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:20:19,852 basehttp "GET /ticket/6/ HTTP/1.1" 200 45504
+INFO 2026-05-05 22:20:19,907 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:20:22,402 basehttp "GET /resolved-history/ HTTP/1.1" 200 43756
+INFO 2026-05-05 22:20:22,451 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:20:33,716 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:20:33,723 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:20:33,763 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:20:41,844 basehttp "GET /login/?role=admin HTTP/1.1" 200 13727
+INFO 2026-05-05 22:20:41,885 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:20:47,945 basehttp "POST /login/?role=admin HTTP/1.1" 200 13745
+INFO 2026-05-05 22:20:47,978 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:20:53,155 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-05 22:20:53,206 basehttp "GET /dashboard/ HTTP/1.1" 200 50804
+INFO 2026-05-05 22:20:53,255 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:20:58,205 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 43461
+INFO 2026-05-05 22:20:58,253 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:20:59,941 basehttp "GET /dashboard/?status=Resolved HTTP/1.1" 200 50672
+INFO 2026-05-05 22:20:59,990 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:21:01,135 basehttp "GET /dashboard/?status= HTTP/1.1" 200 50656
+INFO 2026-05-05 22:21:01,183 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:21:11,799 basehttp "GET /admin-departments/ HTTP/1.1" 200 112170
+INFO 2026-05-05 22:21:11,855 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:21:19,525 basehttp "POST /admin-departments/3/delete/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:21:19,611 basehttp "GET /admin-departments/ HTTP/1.1" 200 109275
+INFO 2026-05-05 22:21:19,664 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:21:27,959 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:21:27,966 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:21:28,009 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:21:28,847 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:21:28,881 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:21:31,981 basehttp "GET /api/username-exists/?username=Da HTTP/1.1" 200 17
+INFO 2026-05-05 22:21:32,848 basehttp "GET /api/username-exists/?username=Daksh HTTP/1.1" 200 16
+INFO 2026-05-05 22:21:35,545 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:21:35,597 basehttp "GET /dashboard/ HTTP/1.1" 200 44964
+INFO 2026-05-05 22:21:35,651 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:21:38,826 basehttp "GET /ticket/new/ HTTP/1.1" 200 37800
+INFO 2026-05-05 22:21:38,876 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:22:08,810 views AI priority prediction started for new ticket submit.
+INFO 2026-05-05 22:22:09,140 views AI priority prediction applied: LOW
+INFO 2026-05-05 22:22:09,270 views ML department prediction applied: Operations
+INFO 2026-05-05 22:22:13,460 basehttp "POST /ticket/new/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:22:13,509 basehttp "GET /dashboard/ HTTP/1.1" 200 44962
+INFO 2026-05-05 22:22:13,566 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:22:16,862 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 45913
+INFO 2026-05-05 22:22:16,909 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:26:52,741 autoreload H:\DjangoHelpdeskProject\DjangoProject\myapp\views.py changed, reloading.
+INFO 2026-05-05 22:26:53,854 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 22:27:21,181 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:27:21,195 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:27:21,233 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:27:21,731 basehttp "GET /login/?role=admin HTTP/1.1" 200 13727
+INFO 2026-05-05 22:27:21,774 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:27:27,376 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-05 22:27:27,446 basehttp "GET /dashboard/ HTTP/1.1" 200 44897
+INFO 2026-05-05 22:27:27,496 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:27:32,572 basehttp "POST /tickets/bulk-delete/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:27:32,616 basehttp "GET /dashboard/ HTTP/1.1" 200 43427
+INFO 2026-05-05 22:27:32,658 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:27:34,073 basehttp "GET /admin-departments/ HTTP/1.1" 200 108999
+INFO 2026-05-05 22:27:34,128 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:27:38,247 basehttp "POST /admin-departments/3/reactivate/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:27:38,333 basehttp "GET /admin-departments/ HTTP/1.1" 200 112442
+INFO 2026-05-05 22:27:38,389 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:27:40,401 basehttp "GET /dashboard/ HTTP/1.1" 200 50264
+INFO 2026-05-05 22:27:40,451 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:27:46,617 basehttp "POST /tickets/bulk-delete/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:27:46,661 basehttp "GET /dashboard/ HTTP/1.1" 200 43481
+INFO 2026-05-05 22:27:46,703 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:27:48,146 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 43461
+INFO 2026-05-05 22:27:48,198 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:27:49,992 basehttp "GET /admin-departments/ HTTP/1.1" 200 112170
+INFO 2026-05-05 22:27:50,053 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:27:56,589 basehttp "POST /admin-departments/3/delete/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:27:56,673 basehttp "GET /admin-departments/ HTTP/1.1" 200 109275
+INFO 2026-05-05 22:27:56,731 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:27:58,699 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:27:58,705 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:27:58,743 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:27:59,316 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:27:59,356 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:28:04,466 basehttp "GET /api/username-exists/?username=Pi HTTP/1.1" 200 17
+INFO 2026-05-05 22:28:05,125 basehttp "GET /api/username-exists/?username=Piyus HTTP/1.1" 200 17
+INFO 2026-05-05 22:28:05,671 basehttp "GET /api/username-exists/?username=Piyush HTTP/1.1" 200 16
+INFO 2026-05-05 22:28:09,187 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:28:09,239 basehttp "GET /dashboard/ HTTP/1.1" 200 44161
+INFO 2026-05-05 22:28:09,301 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:28:12,051 basehttp "GET /my-tickets/ HTTP/1.1" 200 36911
+INFO 2026-05-05 22:28:12,096 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:28:12,526 basehttp "GET /ticket/new/ HTTP/1.1" 200 37011
+INFO 2026-05-05 22:28:12,576 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:28:25,442 views AI priority prediction started for new ticket submit.
+INFO 2026-05-05 22:28:25,968 views AI priority prediction applied: LOW
+INFO 2026-05-05 22:28:26,121 views ML department prediction applied: Operations
+INFO 2026-05-05 22:28:30,806 basehttp "POST /ticket/new/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:28:30,860 basehttp "GET /dashboard/ HTTP/1.1" 200 44161
+INFO 2026-05-05 22:28:30,915 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:28:33,687 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 45113
+INFO 2026-05-05 22:28:33,736 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:32:41,084 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 22:32:45,259 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:32:45,271 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:32:45,342 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:32:46,333 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:32:46,372 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:32:47,701 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:32:48,234 basehttp "GET /login/?role=user HTTP/1.1" 200 13452
+INFO 2026-05-05 22:32:48,268 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:32:49,475 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:32:50,293 basehttp "GET /login/?role=admin HTTP/1.1" 200 13515
+INFO 2026-05-05 22:32:50,326 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:32:55,387 basehttp "POST /login/?role=admin HTTP/1.1" 200 13745
+INFO 2026-05-05 22:32:55,419 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:33:00,290 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-05 22:33:00,353 basehttp "GET /dashboard/ HTTP/1.1" 200 44898
+INFO 2026-05-05 22:33:00,414 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:33:05,022 basehttp "POST /tickets/bulk-delete/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:33:05,063 basehttp "GET /dashboard/ HTTP/1.1" 200 43427
+INFO 2026-05-05 22:33:05,107 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:33:06,233 basehttp "GET /analytics/ HTTP/1.1" 200 52139
+INFO 2026-05-05 22:33:06,282 basehttp "GET /api/tickets-over-time/?range=30_days HTTP/1.1" 200 425
+INFO 2026-05-05 22:33:06,289 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:33:06,609 basehttp "GET /ticket/new/ HTTP/1.1" 200 36049
+INFO 2026-05-05 22:33:06,659 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:33:07,995 basehttp "GET /admin-departments/ HTTP/1.1" 200 108999
+INFO 2026-05-05 22:33:08,055 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:33:13,396 basehttp "POST /admin-departments/3/reactivate/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:33:13,492 basehttp "GET /admin-departments/ HTTP/1.1" 200 112442
+INFO 2026-05-05 22:33:13,544 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:33:20,293 basehttp "POST /admin-departments/3/delete/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:33:20,377 basehttp "GET /admin-departments/ HTTP/1.1" 200 109275
+INFO 2026-05-05 22:33:20,428 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:33:25,915 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:33:25,922 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:33:25,961 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:33:26,403 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:33:26,444 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:33:29,196 basehttp "GET /api/username-exists/?username=Daksh HTTP/1.1" 200 16
+INFO 2026-05-05 22:33:31,956 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:33:32,011 basehttp "GET /dashboard/ HTTP/1.1" 200 44178
+INFO 2026-05-05 22:33:32,071 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:33:33,750 basehttp "GET /ticket/new/ HTTP/1.1" 200 37014
+INFO 2026-05-05 22:33:33,796 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:34:04,140 views AI priority prediction started for new ticket submit.
+INFO 2026-05-05 22:34:05,012 views AI priority prediction applied: LOW
+INFO 2026-05-05 22:34:05,041 basehttp "POST /ticket/new/ HTTP/1.1" 200 37429
+INFO 2026-05-05 22:34:05,085 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:34:11,769 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:34:11,774 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:34:11,807 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:34:12,951 basehttp "GET /login/?role=admin HTTP/1.1" 200 13727
+INFO 2026-05-05 22:34:12,987 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:34:19,220 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-05 22:34:19,262 basehttp "GET /dashboard/ HTTP/1.1" 200 43437
+INFO 2026-05-05 22:34:19,313 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:34:21,418 basehttp "GET /categories/ HTTP/1.1" 200 56049
+INFO 2026-05-05 22:34:21,475 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:34:24,162 basehttp "GET /notifications/ HTTP/1.1" 200 33330
+INFO 2026-05-05 22:34:24,206 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:34:26,098 basehttp "GET /dashboard/ HTTP/1.1" 200 43161
+INFO 2026-05-05 22:34:26,140 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:34:28,151 basehttp "GET /admin-departments/ HTTP/1.1" 200 108999
+INFO 2026-05-05 22:34:28,211 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:34:30,640 basehttp "GET /profile/ HTTP/1.1" 200 44596
+INFO 2026-05-05 22:34:30,690 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:34:31,134 basehttp "GET /notifications/ HTTP/1.1" 200 33330
+INFO 2026-05-05 22:34:31,179 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:34:32,193 basehttp "GET /admin-departments/ HTTP/1.1" 200 108999
+INFO 2026-05-05 22:34:32,253 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:34:35,667 basehttp "POST /admin-departments/3/reactivate/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:34:35,754 basehttp "GET /admin-departments/ HTTP/1.1" 200 112442
+INFO 2026-05-05 22:34:35,814 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:35:59,724 autoreload H:\DjangoHelpdeskProject\DjangoProject\myapp\ml_models\department_predictor.py changed, reloading.
+INFO 2026-05-05 22:36:00,736 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 22:37:25,959 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 22:38:10,380 basehttp "GET /admin-departments/ HTTP/1.1" 200 112170
+INFO 2026-05-05 22:38:10,437 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:38:11,777 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:38:11,787 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:38:11,828 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:38:13,513 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:38:13,551 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:38:24,385 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:38:25,476 basehttp "GET /login/?role=admin HTTP/1.1" 200 13515
+INFO 2026-05-05 22:38:25,514 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:38:37,100 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-05 22:38:37,146 basehttp "GET /dashboard/ HTTP/1.1" 200 43491
+INFO 2026-05-05 22:38:37,201 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:38:40,824 basehttp "GET /admin-departments/ HTTP/1.1" 200 112170
+INFO 2026-05-05 22:38:40,889 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:38:41,377 basehttp "GET /pie-chart/ HTTP/1.1" 200 37175
+INFO 2026-05-05 22:38:41,427 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:38:42,108 basehttp "GET /analytics/ HTTP/1.1" 200 53573
+INFO 2026-05-05 22:38:42,146 basehttp "GET /api/tickets-over-time/?range=30_days HTTP/1.1" 200 425
+INFO 2026-05-05 22:38:42,158 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:38:42,594 basehttp "GET /ticket/new/ HTTP/1.1" 200 36049
+INFO 2026-05-05 22:38:42,643 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:38:43,518 basehttp "GET /dashboard/ HTTP/1.1" 200 43215
+INFO 2026-05-05 22:38:43,564 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:38:44,429 basehttp "GET /notifications/ HTTP/1.1" 200 33330
+INFO 2026-05-05 22:38:44,472 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:38:44,809 basehttp "GET /profile/ HTTP/1.1" 200 44596
+INFO 2026-05-05 22:38:44,854 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:38:45,222 basehttp "GET /categories/ HTTP/1.1" 200 56049
+INFO 2026-05-05 22:38:45,273 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:38:47,458 basehttp "GET /dashboard/ HTTP/1.1" 200 43215
+INFO 2026-05-05 22:38:47,504 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:38:49,323 basehttp "GET /analytics/ HTTP/1.1" 200 53573
+INFO 2026-05-05 22:38:49,365 basehttp "GET /api/tickets-over-time/?range=30_days HTTP/1.1" 200 425
+INFO 2026-05-05 22:38:49,373 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:38:50,842 basehttp "GET /admin-departments/ HTTP/1.1" 200 112170
+INFO 2026-05-05 22:38:50,902 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:39:14,911 basehttp "POST /admin-departments/3/update/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:39:15,012 basehttp "GET /admin-departments/ HTTP/1.1" 200 112409
+INFO 2026-05-05 22:39:15,064 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:39:45,449 basehttp "POST /admin-departments/create/ HTTP/1.1" 200 112549
+INFO 2026-05-05 22:39:45,512 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:39:56,627 basehttp "POST /admin-departments/create/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:39:56,728 basehttp "GET /admin-departments/ HTTP/1.1" 200 120206
+INFO 2026-05-05 22:39:56,890 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:40:24,564 basehttp "POST /admin-departments/7/delete/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:40:24,658 basehttp "GET /admin-departments/ HTTP/1.1" 200 117067
+INFO 2026-05-05 22:40:24,709 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:40:29,618 basehttp "POST /admin-departments/inactive/delete/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:40:29,703 basehttp "GET /admin-departments/ HTTP/1.1" 200 112434
+INFO 2026-05-05 22:40:29,756 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:40:40,965 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:40:40,971 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:40:41,010 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:42:32,065 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:42:32,108 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:42:36,363 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:42:36,404 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:42:37,208 basehttp "GET /login/?role=admin HTTP/1.1" 200 13515
+INFO 2026-05-05 22:42:37,244 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:42:43,717 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-05 22:42:43,754 basehttp "GET /dashboard/ HTTP/1.1" 200 43491
+INFO 2026-05-05 22:42:43,806 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:42:46,686 basehttp "GET /admin-departments/ HTTP/1.1" 200 112152
+INFO 2026-05-05 22:42:46,744 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:42:48,779 basehttp "GET /dashboard/ HTTP/1.1" 200 43215
+INFO 2026-05-05 22:42:48,822 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:42:50,469 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:42:50,474 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:42:50,511 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:42:50,920 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:42:50,963 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:42:53,337 basehttp "GET /api/username-exists/?username=Daksh HTTP/1.1" 200 16
+INFO 2026-05-05 22:42:53,606 basehttp "GET /api/username-exists/?username=Daksh HTTP/1.1" 200 16
+INFO 2026-05-05 22:42:56,687 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:42:56,735 basehttp "GET /dashboard/ HTTP/1.1" 200 44178
+INFO 2026-05-05 22:42:56,783 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:43:01,383 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:43:01,389 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:43:01,424 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:43:01,946 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:43:01,986 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:43:04,245 basehttp "GET /api/username-exists/?username=Tanma HTTP/1.1" 200 17
+INFO 2026-05-05 22:43:04,645 basehttp "GET /api/username-exists/?username=Tanmay HTTP/1.1" 200 17
+INFO 2026-05-05 22:43:06,352 basehttp "GET /api/username-exists/?username=Tanmay HTTP/1.1" 200 17
+INFO 2026-05-05 22:43:10,327 basehttp "GET /api/username-exists/?username=D HTTP/1.1" 200 17
+INFO 2026-05-05 22:43:10,978 basehttp "GET /api/username-exists/?username=Daks HTTP/1.1" 200 17
+INFO 2026-05-05 22:43:11,284 basehttp "GET /api/username-exists/?username=Daksh HTTP/1.1" 200 16
+INFO 2026-05-05 22:43:11,987 basehttp "GET /api/username-exists/?username=Daksh HTTP/1.1" 200 16
+INFO 2026-05-05 22:43:15,048 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:43:15,096 basehttp "GET /dashboard/ HTTP/1.1" 200 44178
+INFO 2026-05-05 22:43:15,145 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:43:17,262 basehttp "GET /ticket/new/ HTTP/1.1" 200 37014
+INFO 2026-05-05 22:43:17,309 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:43:30,667 views AI priority prediction started for new ticket submit.
+INFO 2026-05-05 22:43:31,391 views AI priority prediction applied: LOW
+INFO 2026-05-05 22:43:31,393 views ML department prediction applied: HR
+INFO 2026-05-05 22:43:42,063 basehttp "POST /ticket/new/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:43:42,109 basehttp "GET /dashboard/ HTTP/1.1" 200 44176
+INFO 2026-05-05 22:43:42,157 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:43:45,624 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 44949
+INFO 2026-05-05 22:43:45,668 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:43:47,443 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:43:47,450 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:43:47,484 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:43:48,021 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:43:48,059 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:43:51,370 basehttp "GET /api/username-exists/?username=H HTTP/1.1" 200 17
+INFO 2026-05-05 22:43:53,329 basehttp "GET /api/username-exists/?username=Gha HTTP/1.1" 200 17
+INFO 2026-05-05 22:43:54,133 basehttp "GET /api/username-exists/?username=Ghazal HTTP/1.1" 200 16
+INFO 2026-05-05 22:43:54,482 basehttp "GET /api/username-exists/?username=Ghazal HTTP/1.1" 200 16
+INFO 2026-05-05 22:43:58,952 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:43:58,999 basehttp "GET /dashboard/ HTTP/1.1" 200 46082
+INFO 2026-05-05 22:43:59,057 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:44:02,021 basehttp "GET /my-tickets/ HTTP/1.1" 200 39475
+INFO 2026-05-05 22:44:02,072 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:44:03,798 basehttp "GET /ticket/9/reject/ HTTP/1.1" 200 34886
+INFO 2026-05-05 22:44:03,847 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:44:16,359 basehttp "POST /ticket/9/reject/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:44:16,404 basehttp "GET /my-tickets/ HTTP/1.1" 200 38256
+INFO 2026-05-05 22:44:16,460 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:44:19,093 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:44:19,099 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:44:19,134 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:44:19,553 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:44:19,598 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:44:20,701 basehttp "GET /api/username-exists/?username=A HTTP/1.1" 200 17
+INFO 2026-05-05 22:44:21,463 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 22:44:24,506 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:44:24,584 basehttp "GET /dashboard/ HTTP/1.1" 200 46861
+INFO 2026-05-05 22:44:24,636 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:44:26,286 basehttp "GET /my-tickets/ HTTP/1.1" 200 39918
+INFO 2026-05-05 22:44:26,329 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:44:27,803 basehttp "GET /ticket/9/?from_assigned=1 HTTP/1.1" 200 46059
+INFO 2026-05-05 22:44:27,853 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:44:30,844 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:44:30,849 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:44:30,892 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:44:31,376 basehttp "GET /login/?role=admin HTTP/1.1" 200 13727
+INFO 2026-05-05 22:44:31,415 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:44:37,077 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-05 22:44:37,118 basehttp "GET /dashboard/ HTTP/1.1" 200 45149
+INFO 2026-05-05 22:44:37,169 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:44:41,090 basehttp "GET /ticket/9/ HTTP/1.1" 200 44855
+INFO 2026-05-05 22:44:41,136 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:44:43,934 basehttp "GET /ticket/9/edit/ HTTP/1.1" 200 40344
+INFO 2026-05-05 22:44:43,977 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:45:04,938 basehttp "POST /ticket/9/edit/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:45:04,981 basehttp "GET /ticket/9/ HTTP/1.1" 200 45126
+INFO 2026-05-05 22:45:05,033 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:45:26,092 basehttp "POST /ticket/9/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:45:26,130 basehttp "GET /ticket/9/ HTTP/1.1" 200 44651
+INFO 2026-05-05 22:45:26,176 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:45:27,941 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:45:27,946 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:45:27,985 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:45:28,713 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:45:28,754 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:45:30,417 basehttp "GET /api/username-exists/?username=Gha HTTP/1.1" 200 17
+INFO 2026-05-05 22:45:31,058 basehttp "GET /api/username-exists/?username=Ghazal HTTP/1.1" 200 16
+INFO 2026-05-05 22:45:31,539 basehttp "GET /api/username-exists/?username=Ghazal HTTP/1.1" 200 16
+INFO 2026-05-05 22:45:34,398 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:45:34,446 basehttp "GET /dashboard/ HTTP/1.1" 200 47309
+INFO 2026-05-05 22:45:34,498 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:45:35,958 basehttp "GET /my-tickets/ HTTP/1.1" 200 40494
+INFO 2026-05-05 22:45:36,008 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:45:37,807 basehttp "GET /ticket/9/?from_assigned=1 HTTP/1.1" 200 46165
+INFO 2026-05-05 22:45:37,855 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:45:44,869 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:45:44,875 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:45:44,910 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:45:45,355 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:45:45,392 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:45:47,255 basehttp "GET /api/username-exists/?username=Aman HTTP/1.1" 200 16
+INFO 2026-05-05 22:45:50,297 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:45:50,345 basehttp "GET /dashboard/ HTTP/1.1" 200 47294
+INFO 2026-05-05 22:45:50,397 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:45:58,187 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 46386
+INFO 2026-05-05 22:45:58,234 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:45:59,301 basehttp "GET /dashboard/?status= HTTP/1.1" 200 47155
+INFO 2026-05-05 22:45:59,347 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:46:00,586 basehttp "GET /ticket/9/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:46:00,635 basehttp "GET /dashboard/ HTTP/1.1" 200 47310
+INFO 2026-05-05 22:46:00,686 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:46:02,952 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:46:02,957 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:46:02,996 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:46:04,472 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-05 22:46:04,506 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:46:06,082 basehttp "GET /api/username-exists/?username=Gha HTTP/1.1" 200 17
+INFO 2026-05-05 22:46:07,054 basehttp "GET /api/username-exists/?username=Ghazal HTTP/1.1" 200 16
+INFO 2026-05-05 22:46:10,344 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-05 22:46:10,393 basehttp "GET /dashboard/ HTTP/1.1" 200 47309
+INFO 2026-05-05 22:46:10,443 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:46:12,707 basehttp "GET /notifications/ HTTP/1.1" 200 41871
+INFO 2026-05-05 22:46:12,758 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:46:14,245 basehttp "POST /notifications/mark-all-read/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:46:14,290 basehttp "GET /notifications/?filter=all HTTP/1.1" 200 39528
+INFO 2026-05-05 22:46:14,335 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:46:16,248 basehttp "GET /my-tickets/ HTTP/1.1" 200 39635
+INFO 2026-05-05 22:46:16,295 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:46:18,361 basehttp "GET /ticket/9/?from_assigned=1 HTTP/1.1" 200 45305
+INFO 2026-05-05 22:46:18,415 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:46:21,024 basehttp "GET /ticket/9/comment/closing_comment/ HTTP/1.1" 200 43300
+INFO 2026-05-05 22:46:21,071 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:46:34,297 basehttp "POST /ticket/9/comment/closing_comment/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:46:34,347 basehttp "GET /dashboard/ HTTP/1.1" 200 46421
+INFO 2026-05-05 22:46:34,401 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:47:06,619 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:47:06,625 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:47:06,664 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:47:09,015 basehttp "GET /login/?role=admin HTTP/1.1" 200 13727
+INFO 2026-05-05 22:47:09,057 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:47:15,039 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-05 22:47:15,090 basehttp "GET /dashboard/ HTTP/1.1" 200 45025
+INFO 2026-05-05 22:47:15,139 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:47:16,637 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:47:16,643 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:47:16,681 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:47:22,537 basehttp "GET /admin/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:47:22,554 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4322
+INFO 2026-05-05 22:47:22,567 basehttp "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2929
+INFO 2026-05-05 22:47:22,569 basehttp "GET /static/admin/css/base.css HTTP/1.1" 200 21310
+INFO 2026-05-05 22:47:22,570 basehttp "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2694
+INFO 2026-05-05 22:47:22,571 basehttp "GET /static/admin/css/login.css HTTP/1.1" 200 958
+INFO 2026-05-05 22:47:22,572 basehttp "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2026-05-05 22:47:22,573 basehttp "GET /static/admin/js/theme.js HTTP/1.1" 200 1943
+INFO 2026-05-05 22:47:22,573 basehttp "GET /static/admin/css/responsive.css HTTP/1.1" 200 18559
+INFO 2026-05-05 22:47:22,578 basehttp "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO 2026-05-05 22:47:22,599 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:47:30,116 basehttp "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:47:30,152 basehttp "GET /admin/ HTTP/1.1" 200 11871
+INFO 2026-05-05 22:47:30,167 basehttp "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO 2026-05-05 22:47:30,170 basehttp "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO 2026-05-05 22:47:30,170 basehttp "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO 2026-05-05 22:47:30,205 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+ERROR 2026-05-05 22:47:32,369 log Internal Server Error: /admin/myapp/aimllog/
+Traceback (most recent call last):
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\contrib\admin\templatetags\base.py", line 45, in render
+    return super().render(context)
+           ~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\library.py", line 271, in render
+    new_context = context.new(_dict)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 265, in new
+    new_context = super().new(values)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 110, in new
+    new_context = copy(self)
+  File "C:\Program Files\Python314\Lib\copy.py", line 82, in copy
+    return copier(x)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 158, in __copy__
+    duplicate = super().__copy__()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 39, in __copy__
+    duplicate.dicts = self.dicts[:]
+    ^^^^^^^^^^^^^^^
+AttributeError: 'super' object has no attribute 'dicts' and no __dict__ for setting new attributes
+ERROR 2026-05-05 22:47:32,376 basehttp "GET /admin/myapp/aimllog/ HTTP/1.1" 500 471223
+INFO 2026-05-05 22:47:32,462 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:47:34,871 basehttp "GET /admin/ HTTP/1.1" 200 11871
+INFO 2026-05-05 22:47:34,912 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+ERROR 2026-05-05 22:47:36,753 log Internal Server Error: /admin/myapp/activitylog/
+Traceback (most recent call last):
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\contrib\admin\templatetags\base.py", line 45, in render
+    return super().render(context)
+           ~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\library.py", line 271, in render
+    new_context = context.new(_dict)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 265, in new
+    new_context = super().new(values)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 110, in new
+    new_context = copy(self)
+  File "C:\Program Files\Python314\Lib\copy.py", line 82, in copy
+    return copier(x)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 158, in __copy__
+    duplicate = super().__copy__()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 39, in __copy__
+    duplicate.dicts = self.dicts[:]
+    ^^^^^^^^^^^^^^^
+AttributeError: 'super' object has no attribute 'dicts' and no __dict__ for setting new attributes
+ERROR 2026-05-05 22:47:36,757 basehttp "GET /admin/myapp/activitylog/ HTTP/1.1" 500 471271
+INFO 2026-05-05 22:47:36,841 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:47:38,371 basehttp "GET /admin/ HTTP/1.1" 200 11871
+INFO 2026-05-05 22:47:38,412 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+ERROR 2026-05-05 22:47:39,760 log Internal Server Error: /admin/myapp/cannedresponse/
+Traceback (most recent call last):
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\contrib\admin\templatetags\base.py", line 45, in render
+    return super().render(context)
+           ~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\library.py", line 271, in render
+    new_context = context.new(_dict)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 265, in new
+    new_context = super().new(values)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 110, in new
+    new_context = copy(self)
+  File "C:\Program Files\Python314\Lib\copy.py", line 82, in copy
+    return copier(x)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 158, in __copy__
+    duplicate = super().__copy__()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 39, in __copy__
+    duplicate.dicts = self.dicts[:]
+    ^^^^^^^^^^^^^^^
+AttributeError: 'super' object has no attribute 'dicts' and no __dict__ for setting new attributes
+ERROR 2026-05-05 22:47:39,764 basehttp "GET /admin/myapp/cannedresponse/ HTTP/1.1" 500 471307
+INFO 2026-05-05 22:47:39,813 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:47:42,594 basehttp "GET /admin/ HTTP/1.1" 200 11871
+INFO 2026-05-05 22:47:42,639 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+ERROR 2026-05-05 22:47:43,841 log Internal Server Error: /admin/myapp/category/
+Traceback (most recent call last):
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\contrib\admin\templatetags\base.py", line 45, in render
+    return super().render(context)
+           ~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\library.py", line 271, in render
+    new_context = context.new(_dict)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 265, in new
+    new_context = super().new(values)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 110, in new
+    new_context = copy(self)
+  File "C:\Program Files\Python314\Lib\copy.py", line 82, in copy
+    return copier(x)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 158, in __copy__
+    duplicate = super().__copy__()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 39, in __copy__
+    duplicate.dicts = self.dicts[:]
+    ^^^^^^^^^^^^^^^
+AttributeError: 'super' object has no attribute 'dicts' and no __dict__ for setting new attributes
+ERROR 2026-05-05 22:47:43,846 basehttp "GET /admin/myapp/category/ HTTP/1.1" 500 471235
+INFO 2026-05-05 22:47:43,909 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:47:45,231 basehttp "GET /admin/ HTTP/1.1" 200 11871
+INFO 2026-05-05 22:47:45,269 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+ERROR 2026-05-05 22:47:47,060 log Internal Server Error: /admin/myapp/departmentmember/
+Traceback (most recent call last):
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\contrib\admin\templatetags\base.py", line 45, in render
+    return super().render(context)
+           ~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\library.py", line 271, in render
+    new_context = context.new(_dict)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 265, in new
+    new_context = super().new(values)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 110, in new
+    new_context = copy(self)
+  File "C:\Program Files\Python314\Lib\copy.py", line 82, in copy
+    return copier(x)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 158, in __copy__
+    duplicate = super().__copy__()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 39, in __copy__
+    duplicate.dicts = self.dicts[:]
+    ^^^^^^^^^^^^^^^
+AttributeError: 'super' object has no attribute 'dicts' and no __dict__ for setting new attributes
+ERROR 2026-05-05 22:47:47,064 basehttp "GET /admin/myapp/departmentmember/ HTTP/1.1" 500 471331
+INFO 2026-05-05 22:47:47,138 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:47:48,596 basehttp "GET /admin/ HTTP/1.1" 200 11871
+INFO 2026-05-05 22:47:48,638 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+ERROR 2026-05-05 22:47:50,644 log Internal Server Error: /admin/myapp/department/
+Traceback (most recent call last):
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\contrib\admin\templatetags\base.py", line 45, in render
+    return super().render(context)
+           ~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\library.py", line 271, in render
+    new_context = context.new(_dict)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 265, in new
+    new_context = super().new(values)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 110, in new
+    new_context = copy(self)
+  File "C:\Program Files\Python314\Lib\copy.py", line 82, in copy
+    return copier(x)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 158, in __copy__
+    duplicate = super().__copy__()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 39, in __copy__
+    duplicate.dicts = self.dicts[:]
+    ^^^^^^^^^^^^^^^
+AttributeError: 'super' object has no attribute 'dicts' and no __dict__ for setting new attributes
+ERROR 2026-05-05 22:47:50,648 basehttp "GET /admin/myapp/department/ HTTP/1.1" 500 471259
+INFO 2026-05-05 22:47:50,709 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:47:52,873 basehttp "GET /admin/ HTTP/1.1" 200 11871
+INFO 2026-05-05 22:47:52,917 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+ERROR 2026-05-05 22:47:57,142 log Internal Server Error: /admin/myapp/cannedresponse/
+Traceback (most recent call last):
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\contrib\admin\templatetags\base.py", line 45, in render
+    return super().render(context)
+           ~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\library.py", line 271, in render
+    new_context = context.new(_dict)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 265, in new
+    new_context = super().new(values)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 110, in new
+    new_context = copy(self)
+  File "C:\Program Files\Python314\Lib\copy.py", line 82, in copy
+    return copier(x)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 158, in __copy__
+    duplicate = super().__copy__()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 39, in __copy__
+    duplicate.dicts = self.dicts[:]
+    ^^^^^^^^^^^^^^^
+AttributeError: 'super' object has no attribute 'dicts' and no __dict__ for setting new attributes
+ERROR 2026-05-05 22:47:57,147 basehttp "GET /admin/myapp/cannedresponse/ HTTP/1.1" 500 471307
+INFO 2026-05-05 22:47:57,212 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:50:50,862 autoreload H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py changed, reloading.
+INFO 2026-05-05 22:50:51,933 autoreload Watching for file changes with StatReloader
+ERROR 2026-05-05 22:51:04,124 log Internal Server Error: /admin/myapp/aimllog/
+Traceback (most recent call last):
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\contrib\admin\templatetags\base.py", line 45, in render
+    return super().render(context)
+           ~~~~~~~~~~~~~~^^^^^^^^^
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\library.py", line 271, in render
+    new_context = context.new(_dict)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 265, in new
+    new_context = super().new(values)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 110, in new
+    new_context = copy(self)
+  File "C:\Program Files\Python314\Lib\copy.py", line 82, in copy
+    return copier(x)
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 158, in __copy__
+    duplicate = super().__copy__()
+  File "H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py", line 38, in __copy__
+    duplicate = self.__class__()
+TypeError: RequestContext.__init__() missing 1 required positional argument: 'request'
+INFO 2026-05-05 22:51:26,998 autoreload H:\DjangoHelpdeskProject\venv\Lib\site-packages\django\template\context.py changed, reloading.
+INFO 2026-05-05 22:51:27,917 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 22:52:12,203 autoreload Watching for file changes with StatReloader
+INFO 2026-05-05 22:52:26,454 basehttp "GET /admin/ HTTP/1.1" 200 11871
+INFO 2026-05-05 22:52:26,492 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:52:30,292 basehttp "POST /admin/logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:52:30,298 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:52:30,330 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+WARNING 2026-05-05 22:52:34,822 log Not Found: /admin.
+WARNING 2026-05-05 22:52:34,823 basehttp "GET /admin. HTTP/1.1" 404 16274
+INFO 2026-05-05 22:52:34,847 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:52:39,221 basehttp "GET /admin/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:52:39,246 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4191
+INFO 2026-05-05 22:52:39,283 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:52:47,808 basehttp "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:52:47,839 basehttp "GET /admin/ HTTP/1.1" 200 11871
+INFO 2026-05-05 22:52:47,887 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:52:49,728 basehttp "GET /admin/myapp/aimllog/ HTTP/1.1" 200 15907
+INFO 2026-05-05 22:52:49,745 basehttp "GET /static/admin/css/changelists.css HTTP/1.1" 200 6566
+INFO 2026-05-05 22:52:49,748 basehttp "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2026-05-05 22:52:49,751 basehttp "GET /static/admin/js/core.js HTTP/1.1" 200 5682
+INFO 2026-05-05 22:52:49,753 basehttp "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+INFO 2026-05-05 22:52:49,753 basehttp "GET /static/admin/js/actions.js HTTP/1.1" 200 7872
+INFO 2026-05-05 22:52:49,756 basehttp "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 8943
+INFO 2026-05-05 22:52:49,758 basehttp "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO 2026-05-05 22:52:49,760 basehttp "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 292458
+INFO 2026-05-05 22:52:49,761 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2026-05-05 22:52:49,763 basehttp "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 232381
+INFO 2026-05-05 22:52:49,764 basehttp "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO 2026-05-05 22:52:49,765 basehttp "GET /static/admin/img/icon-unknown.svg HTTP/1.1" 200 655
+INFO 2026-05-05 22:52:49,773 basehttp "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+INFO 2026-05-05 22:52:49,781 basehttp "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+INFO 2026-05-05 22:52:49,804 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:52:55,180 basehttp "GET /admin/myapp/aimllog/9/change/ HTTP/1.1" 200 16125
+INFO 2026-05-05 22:52:55,193 basehttp "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+INFO 2026-05-05 22:52:55,194 basehttp "GET /static/admin/css/forms.css HTTP/1.1" 200 9090
+INFO 2026-05-05 22:52:55,200 basehttp "GET /static/admin/css/widgets.css HTTP/1.1" 200 11921
+INFO 2026-05-05 22:52:55,203 basehttp "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO 2026-05-05 22:52:55,203 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2026-05-05 22:52:55,234 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:52:58,839 basehttp "GET /admin/myapp/activitylog/ HTTP/1.1" 200 50002
+INFO 2026-05-05 22:52:58,861 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2026-05-05 22:52:58,904 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:53:05,753 basehttp "GET /admin/myapp/cannedresponse/ HTTP/1.1" 200 13757
+INFO 2026-05-05 22:53:05,775 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2026-05-05 22:53:05,785 basehttp "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO 2026-05-05 22:53:05,808 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:53:06,858 basehttp "GET /admin/myapp/category/ HTTP/1.1" 200 17628
+INFO 2026-05-05 22:53:06,880 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2026-05-05 22:53:06,910 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:53:08,530 basehttp "GET /admin/myapp/departmentmember/ HTTP/1.1" 200 22898
+INFO 2026-05-05 22:53:08,549 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2026-05-05 22:53:08,581 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:53:09,974 basehttp "GET /admin/myapp/department/ HTTP/1.1" 200 19865
+INFO 2026-05-05 22:53:09,990 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2026-05-05 22:53:10,020 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:53:11,287 basehttp "GET /admin/myapp/knowledgebase/ HTTP/1.1" 200 13610
+INFO 2026-05-05 22:53:11,306 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2026-05-05 22:53:11,334 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:53:12,970 basehttp "GET /admin/myapp/mycart/ HTTP/1.1" 200 13383
+INFO 2026-05-05 22:53:12,990 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2026-05-05 22:53:13,022 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:53:15,149 basehttp "GET /admin/myapp/notification/ HTTP/1.1" 200 23053
+INFO 2026-05-05 22:53:15,159 basehttp "GET /static/admin/img/icon-no.svg HTTP/1.1" 200 560
+INFO 2026-05-05 22:53:15,169 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2026-05-05 22:53:15,201 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:53:18,016 basehttp "GET /admin/myapp/tickethistory/ HTTP/1.1" 200 18656
+INFO 2026-05-05 22:53:18,039 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2026-05-05 22:53:18,069 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:53:20,656 basehttp "GET /admin/myapp/ticketrating/ HTTP/1.1" 200 14010
+INFO 2026-05-05 22:53:20,678 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2026-05-05 22:53:20,715 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:53:23,565 basehttp "GET /admin/myapp/ticketdetail/ HTTP/1.1" 200 19316
+INFO 2026-05-05 22:53:23,584 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2026-05-05 22:53:23,613 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:53:25,670 basehttp "GET /admin/myapp/userprofile/ HTTP/1.1" 200 18405
+INFO 2026-05-05 22:53:25,686 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2026-05-05 22:53:25,719 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:53:27,115 basehttp "GET /admin/myapp/usercomment/ HTTP/1.1" 200 14750
+INFO 2026-05-05 22:53:27,134 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+INFO 2026-05-05 22:53:27,163 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-05 22:53:30,139 basehttp "POST /admin/logout/ HTTP/1.1" 302 0
+INFO 2026-05-05 22:53:30,145 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-05 22:53:30,178 basehttp "GET /favicon.ico HTTP/1.1" 204 0

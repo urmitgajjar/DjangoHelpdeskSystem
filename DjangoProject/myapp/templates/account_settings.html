@@ -1,0 +1,131 @@
+{% extends "Base.html" %}
+{% block title %}Account Settings - HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <strong>Account Settings</strong>
+{% endblock %}
+
+{% block content %}
+<div class="row g-3 mb-3">
+  <div class="col-6 col-md-4">
+    <div class="stat-card">
+      <div class="stat-icon si-indigo"><i class="fas fa-users"></i></div>
+      <div><div class="stat-label">Users</div><div class="stat-value">{{ total_users }}</div></div>
+    </div>
+  </div>
+  <div class="col-6 col-md-4">
+    <div class="stat-card">
+      <div class="stat-icon si-blue"><i class="fas fa-user-shield"></i></div>
+      <div><div class="stat-label">Active Admins</div><div class="stat-value">{{ active_admins }}</div></div>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="stat-card">
+      <div class="stat-icon si-green"><i class="fas fa-building"></i></div>
+      <div><div class="stat-label">Departments</div><div class="stat-value">{{ dept_count }}</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="hd-card">
+  <div class="hd-card-header">
+    <div class="hd-card-title"><i class="fas fa-user-cog" style="color:var(--brand);"></i> Manage User</div>
+  </div>
+  <div class="hd-card-body">
+    <form method="post" id="settingsForm" class="row g-3">
+      {% csrf_token %}
+      <div class="col-12 col-md-6">
+        <label class="form-label">Target User</label>
+        {{ form.target_user }}
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="form-label d-block mb-2">Action</label>
+        {{ form.action }}
+      </div>
+
+      <div class="col-12 col-md-6 action-field" id="fieldDepartment">
+        <label class="form-label">Department</label>
+        {{ form.department }}
+      </div>
+      <div class="col-12 col-md-6 action-field" id="fieldRole">
+        <label class="form-label">Role</label>
+        {{ form.role }}
+      </div>
+
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit"><i class="fas fa-save me-1"></i> Apply</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  (function(){
+    const form = document.getElementById('settingsForm');
+    const targetUser = document.getElementById('id_target_user');
+    const department = document.getElementById('id_department');
+    const role = document.getElementById('id_role');
+
+    function clearErr(el) {
+      if (!el) return;
+      el.classList.remove('is-invalid');
+      const err = el.parentElement.querySelector('.js-invalid-feedback');
+      if (err) err.remove();
+    }
+
+    function showErr(el, msg) {
+      if (!el) return;
+      el.classList.add('is-invalid');
+      let err = el.parentElement.querySelector('.js-invalid-feedback');
+      if (!err) {
+        err = document.createElement('div');
+        err.className = 'js-invalid-feedback';
+        el.insertAdjacentElement('afterend', err);
+      }
+      err.textContent = msg;
+    }
+
+    function selectedAction(){
+      const checked = document.querySelector('input[name="action"]:checked');
+      return checked ? checked.value : '';
+    }
+    function toggleFields(){
+      const a = selectedAction();
+      const fDept = document.getElementById('fieldDepartment');
+      const fRole = document.getElementById('fieldRole');
+      fDept.style.display = (a === 'department') ? '' : 'none';
+      fRole.style.display = (a === 'role') ? '' : 'none';
+    }
+    document.querySelectorAll('input[name="action"]').forEach(el => {
+      el.addEventListener('change', toggleFields);
+    });
+
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        let valid = true;
+        const action = selectedAction();
+
+        clearErr(targetUser);
+        clearErr(department);
+        clearErr(role);
+
+        if (!targetUser || !targetUser.value) {
+          showErr(targetUser, 'Please select a user.');
+          valid = false;
+        }
+        if (action === 'department' && (!department || !department.value)) {
+          showErr(department, 'Please select a department.');
+          valid = false;
+        }
+        if (action === 'role' && (!role || !role.value)) {
+          showErr(role, 'Please select a role.');
+          valid = false;
+        }
+        if (!valid) e.preventDefault();
+      });
+    }
+
+    toggleFields();
+  })();
+</script>
+{% endblock %}

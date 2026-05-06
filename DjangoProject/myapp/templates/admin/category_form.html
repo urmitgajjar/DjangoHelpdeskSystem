@@ -1,0 +1,392 @@
+{% extends "Base.html" %}
+{% load string_filters %}
+{% block title %}{% if form.instance.pk %}Edit{% else %}New{% endif %} Category — HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <a href="{% url 'category_list' %}">Categories</a>
+  <span class="bc-sep">/</span>
+  <strong>{% if form.instance.pk %}Edit {{ form.instance.name }}{% else %}New Category{% endif %}</strong>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .cat-form-wrap { max-width: 760px; margin: 0 auto; }
+
+  .preview-card {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 22px;
+    border-radius: var(--r-lg);
+    background: var(--slate-50);
+    border: 2px dashed var(--slate-200);
+    transition: all .3s;
+  }
+  .preview-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0; transition: all .2s;
+  }
+  .preview-name  { font-size: 16px; font-weight: 800; color: var(--slate-900); transition: all .2s; }
+  .preview-color-val {
+    font-size: 12px; font-family: 'IBM Plex Mono', monospace;
+    margin-top: 3px; transition: all .2s;
+  }
+  .preview-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 700;
+    padding: 3px 10px; border-radius: 20px;
+    margin-top: 6px; transition: all .2s;
+  }
+
+  .icon-picker { display: grid; grid-template-columns: repeat(auto-fill, 36px); gap: 6px; }
+  .icon-btn {
+    width: 36px; height: 36px; border-radius: 8px;
+    border: 1.5px solid var(--slate-200); background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: var(--slate-500); cursor: pointer;
+    transition: all .12s;
+  }
+  .icon-btn:hover { border-color: var(--brand); color: var(--brand); background: var(--brand-light); }
+  .icon-btn.selected { border-color: var(--brand); background: var(--brand); color: #fff; }
+
+  .kw-tag-wrap {
+    display: flex; flex-wrap: wrap; gap: 5px;
+    padding: 8px 10px;
+    border: 1.5px solid var(--slate-200); border-radius: var(--r);
+    background: #fff; min-height: 42px; align-items: center;
+    cursor: text; transition: border-color .15s;
+  }
+  .kw-tag-wrap:focus-within { border-color: var(--brand); box-shadow: 0 0 0 3px rgba(79,70,229,.1); }
+  .kw-tag {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--brand-light); color: var(--brand);
+    border: 1px solid var(--brand-muted);
+    font-size: 12px; font-weight: 600; padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .kw-tag-remove {
+    cursor: pointer; color: var(--brand); font-size: 10px;
+    opacity: .7; line-height: 1;
+  }
+  .kw-tag-remove:hover { opacity: 1; color: var(--danger); }
+  .kw-input {
+    border: none; outline: none; font-size: 13px;
+    color: var(--slate-700); background: transparent;
+    min-width: 120px; flex: 1;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .kw-hint { font-size: 11.5px; color: var(--slate-400); margin-top: 5px; }
+
+  .active-toggle {
+    display: flex; align-items: flex-start; gap: 13px;
+    padding: 13px 15px;
+    background: var(--slate-50); border: 1px solid var(--slate-200);
+    border-radius: var(--r-lg); cursor: pointer; transition: all .15s;
+  }
+  .active-toggle:hover { border-color: var(--success-border); background: var(--success-bg); }
+  .active-toggle input[type=checkbox] {
+    width: 17px; height: 17px; accent-color: var(--success);
+    margin-top: 2px; flex-shrink: 0; cursor: pointer;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="cat-form-wrap">
+
+  <div class="page-header">
+    <div class="page-title">
+      {% if form.instance.pk %}Edit Category{% else %}New Category{% endif %}
+    </div>
+    <div class="page-sub">Categories power AI routing and ML-based ticket auto-classification</div>
+  </div>
+
+  <form method="POST" id="catForm" novalidate>
+    {% csrf_token %}
+
+    <div class="hd-card mb-4">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-eye" style="color:var(--brand);"></i>
+          Live Preview
+        </div>
+      </div>
+      <div class="hd-card-body">
+        <div class="preview-card" id="previewCard">
+          <div class="preview-icon" id="previewIcon">
+            <i id="previewIconEl" class="fas fa-folder"></i>
+          </div>
+          <div>
+            <div class="preview-name" id="previewName">
+              {% if form.instance.name %}{{ form.instance.name }}{% else %}Category Name{% endif %}
+            </div>
+            <div class="preview-color-val" id="previewColorVal">
+              {% if form.instance.color %}{{ form.instance.color }}{% else %}#4F46E5{% endif %}
+            </div>
+            <div class="preview-badge" id="previewBadge">
+              <i class="fas fa-folder" id="previewBadgeIcon"></i>
+              <span id="previewBadgeName">
+                {% if form.instance.name %}{{ form.instance.name }}{% else %}Category Name{% endif %}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hd-card mb-4">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-tag" style="color:var(--brand);"></i>
+          Category Details
+        </div>
+      </div>
+      <div class="hd-card-body">
+        <div class="row g-4">
+
+          <div class="col-12">
+            <label class="form-label">Name <span class="text-danger">*</span></label>
+            {{ form.name }}
+            <div class="form-text">Unique, descriptive name (e.g. "Network Issue", "Software Bug")</div>
+            {% if form.name.errors %}<div class="field-error">{{ form.name.errors.0 }}</div>{% endif %}
+            <div class="field-error" id="err_name" style="display:none;">Name is required.</div>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Description</label>
+            {{ form.description }}
+            <div class="form-text">Explain what types of issues belong in this category</div>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Icon <span class="text-danger">*</span></label>
+            <div style="display:none;">{{ form.icon }}</div>
+
+            <div class="icon-picker mb-2" id="iconPickerGrid">
+              {% for ico in "fa-folder fa-wifi fa-laptop fa-bug fa-wrench fa-database fa-server fa-lock fa-shield-alt fa-user fa-envelope fa-phone fa-print fa-hdd fa-network-wired fa-desktop fa-mobile-alt fa-code fa-cog fa-bolt fa-fire fa-star fa-tag fa-comment-alt fa-exclamation-triangle fa-tools fa-headset fa-tickets fa-clipboard fa-sitemap"|split:" " %}
+              <button type="button" class="icon-btn" data-icon="{{ ico }}"
+                      onclick="selectIcon('{{ ico }}')"
+                      title="{{ ico }}">
+                <i class="fas {{ ico }}"></i>
+              </button>
+              {% endfor %}
+            </div>
+            <div class="form-text">Click an icon above, or type a custom Font Awesome class below</div>
+            <input type="text" id="iconCustomInput" class="form-control mt-2"
+                   placeholder="Custom icon, e.g. fa-wifi"
+                   style="font-family:'IBM Plex Mono',monospace;font-size:13px;"
+                   value="{{ form.instance.icon|default:'' }}">
+            {% if form.icon.errors %}<div class="field-error">{{ form.icon.errors.0 }}</div>{% endif %}
+            <div class="field-error" id="err_icon" style="display:none;">Please select or enter an icon.</div>
+          </div>
+
+          <div class="col-sm-5">
+            <label class="form-label">Colour <span class="text-danger">*</span></label>
+            <div style="display:flex;align-items:center;gap:10px;">
+              {{ form.color }}
+              <span id="colorHexLabel"
+                    style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--slate-600);">
+                {% if form.instance.color %}{{ form.instance.color }}{% else %}#4F46E5{% endif %}
+              </span>
+            </div>
+            {% if form.color.errors %}<div class="field-error">{{ form.color.errors.0 }}</div>{% endif %}
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">ML Keywords</label>
+            <div style="display:none;">{{ form.ml_keywords }}</div>
+
+            <div class="kw-tag-wrap" id="kwTagWrap" onclick="document.getElementById('kwRealInput').focus()">
+              <div id="kwTagsContainer" style="display:contents;"></div>
+              <input type="text" id="kwRealInput" class="kw-input"
+                     placeholder="Type a keyword and press Enter or comma…">
+            </div>
+            <div class="kw-hint">
+              <i class="fas fa-info-circle me-1"></i>
+              Press <kbd>Enter</kbd> or <kbd>,</kbd> to add a keyword.
+              These help the AI auto-classify tickets into this category.
+            </div>
+            {% if form.ml_keywords.errors %}<div class="field-error">{{ form.ml_keywords.errors.0 }}</div>{% endif %}
+          </div>
+
+          <div class="col-12">
+            <label class="active-toggle" for="{{ form.is_active.id_for_label }}">
+              {{ form.is_active }}
+              <div>
+                <div style="font-size:13.5px;font-weight:700;color:var(--slate-800);">Active</div>
+                <div style="font-size:12px;color:var(--slate-500);margin-top:2px;">
+                  Inactive categories are hidden from ticket creation forms
+                </div>
+              </div>
+            </label>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="hd-card">
+      <div class="hd-card-body d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <a href="{% url 'category_list' %}" class="btn btn-outline-secondary">
+          <i class="fas fa-times me-1"></i>Cancel
+        </a>
+        <button type="submit" class="btn btn-primary px-4" id="saveBtn">
+          <i class="fas fa-save me-2"></i>
+          {% if form.instance.pk %}Save Changes{% else %}Create Category{% endif %}
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+ 
+  const nameInput    = document.getElementById('id_name');
+  const iconInput    = document.getElementById('id_icon'); 
+  const colorInput   = document.getElementById('id_color');
+  const customIcon   = document.getElementById('iconCustomInput');
+  const kwHidden     = document.getElementById('id_ml_keywords');
+  const kwInput      = document.getElementById('kwRealInput');
+  const kwContainer  = document.getElementById('kwTagsContainer');
+  const colorHexLbl  = document.getElementById('colorHexLabel');
+
+  const previewCard     = document.getElementById('previewCard');
+  const previewIcon     = document.getElementById('previewIcon');
+  const previewIconEl   = document.getElementById('previewIconEl');
+  const previewName     = document.getElementById('previewName');
+  const previewColorVal = document.getElementById('previewColorVal');
+  const previewBadge    = document.getElementById('previewBadge');
+  const previewBadgeIcon= document.getElementById('previewBadgeIcon');
+  const previewBadgeName= document.getElementById('previewBadgeName');
+
+  function updatePreview() {
+    const name  = nameInput ? nameInput.value.trim() : '';
+    const icon  = (customIcon && customIcon.value.trim()) ? customIcon.value.trim() : (iconInput ? iconInput.value.trim() : 'fa-folder');
+    const color = colorInput ? colorInput.value : '#4F46E5';
+    const bg    = color + '18';
+    const border= color + '30';
+
+    if (previewName)     previewName.textContent     = name || 'Category Name';
+    if (previewColorVal) { previewColorVal.textContent = color; previewColorVal.style.color = color; }
+    if (previewIconEl)   previewIconEl.className     = `fas ${icon || 'fa-folder'}`;
+    if (previewIcon)     {
+      previewIcon.style.background   = bg;
+      previewIcon.style.color        = color;
+      previewIcon.style.borderColor  = border;
+    }
+    if (previewBadge)    {
+      previewBadge.style.background  = bg;
+      previewBadge.style.color       = color;
+      previewBadge.style.border      = `1px solid ${border}`;
+    }
+    if (previewBadgeIcon) previewBadgeIcon.className = `fas ${icon || 'fa-folder'}`;
+    if (previewBadgeName) previewBadgeName.textContent = name || 'Category Name';
+    if (colorHexLbl)      colorHexLbl.textContent    = color;
+  }
+
+  [nameInput, colorInput].forEach(el => { if (el) el.addEventListener('input', updatePreview); });
+  if (customIcon) customIcon.addEventListener('input', () => {
+    if (iconInput) iconInput.value = customIcon.value;
+    updatePreview();
+  });
+
+  function selectIcon(iconClass) {
+    document.querySelectorAll('.icon-btn').forEach(b => b.classList.remove('selected'));
+    const btn = document.querySelector(`.icon-btn[data-icon="${iconClass}"]`);
+    if (btn) btn.classList.add('selected');
+    if (iconInput)  iconInput.value  = iconClass;
+    if (customIcon) customIcon.value = iconClass;
+    updatePreview();
+  }
+
+  const existingIcon = iconInput ? iconInput.value.trim() : '';
+  if (existingIcon) {
+    const btn = document.querySelector(`.icon-btn[data-icon="${existingIcon}"]`);
+    if (btn) btn.classList.add('selected');
+  }
+
+  let keywords = [];
+
+  function initKeywords() {
+    if (!kwHidden || !kwHidden.value.trim()) return;
+    kwHidden.value.split(',').forEach(kw => {
+      const k = kw.trim();
+      if (k && !keywords.includes(k)) keywords.push(k);
+    });
+    renderTags();
+  }
+
+  function renderTags() {
+    kwContainer.innerHTML = '';
+    keywords.forEach(kw => {
+      const span = document.createElement('span');
+      span.className = 'kw-tag';
+      span.innerHTML = `${kw} <span class="kw-tag-remove" onclick="removeKw('${kw}')"><i class="fas fa-times"></i></span>`;
+      kwContainer.appendChild(span);
+    });
+    syncKwHidden();
+  }
+
+  function addKw(val) {
+    const kw = val.trim().toLowerCase().replace(/,/g, '');
+    if (!kw || keywords.includes(kw)) return;
+    keywords.push(kw);
+    renderTags();
+  }
+
+  function removeKw(kw) {
+    keywords = keywords.filter(k => k !== kw);
+    renderTags();
+  }
+
+  function syncKwHidden() {
+    if (kwHidden) kwHidden.value = keywords.join(', ');
+  }
+
+  kwInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      addKw(this.value);
+      this.value = '';
+    } else if (e.key === 'Backspace' && !this.value && keywords.length) {
+      removeKw(keywords[keywords.length - 1]);
+    }
+  });
+
+  kwInput.addEventListener('blur', function() {
+    if (this.value.trim()) { addKw(this.value); this.value = ''; }
+  });
+
+  initKeywords();
+
+  document.getElementById('catForm').addEventListener('submit', function(e) {
+    let valid = true;
+
+    const nm = document.getElementById('id_name');
+    const errN = document.getElementById('err_name');
+    if (nm && !nm.value.trim()) {
+      nm.classList.add('is-invalid'); errN.style.display = 'block'; valid = false;
+    } else if (nm) {
+      nm.classList.remove('is-invalid'); errN.style.display = 'none';
+    }
+
+    const ic = iconInput;
+    const errI = document.getElementById('err_icon');
+    if (ic && !ic.value.trim()) {
+      errI.style.display = 'block'; valid = false;
+    } else if (ic) {
+      errI.style.display = 'none';
+    }
+
+    if (!valid) { e.preventDefault(); return; }
+
+    const btn = document.getElementById('saveBtn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Saving…';
+    btn.disabled = true;
+  });
+
+  updatePreview();
+</script>
+{% endblock %}

@@ -1,0 +1,331 @@
+{% extends "Base.html" %}
+{% block title %}Categories — HelpDesk Admin{% endblock %}
+
+{% block breadcrumb %}
+  <strong>Categories</strong>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 14px;
+  }
+  .cat-card {
+    background: #fff;
+    border: 1px solid var(--slate-200);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    transition: box-shadow .15s, transform .15s;
+  }
+  .cat-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+  .cat-card-top {
+    padding: 16px 18px 14px;
+    display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid var(--slate-100);
+  }
+  .cat-icon-box {
+    width: 42px; height: 42px; border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .cat-name  { font-size: 14px; font-weight: 800; color: var(--slate-900); }
+  .cat-color { font-size: 11px; font-family: 'IBM Plex Mono', monospace; margin-top: 2px; }
+
+  .cat-card-body { padding: 12px 18px; }
+  .cat-desc {
+    font-size: 12.5px; color: var(--slate-500); line-height: 1.55;
+    margin-bottom: 10px; min-height: 36px;
+  }
+
+  .kw-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .kw-chip {
+    font-size: 10.5px; font-weight: 600;
+    padding: 2px 7px; border-radius: 4px;
+    background: var(--slate-100); color: var(--slate-600);
+    border: 1px solid var(--slate-200);
+  }
+
+  .cat-card-footer {
+    padding: 10px 18px;
+    background: var(--slate-50);
+    border-top: 1px solid var(--slate-100);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .cat-search-wrap {
+    position: relative; max-width: 260px;
+  }
+  .cat-search-wrap i {
+    position: absolute; left: 11px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--slate-400); font-size: 13px;
+    pointer-events: none;
+  }
+  .cat-search-wrap input {
+    padding-left: 34px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header d-flex align-items-center justify-content-between flex-wrap gap-3">
+  <div>
+    <div class="page-title">
+      <i class="fas fa-shield-alt me-2" style="color:var(--danger);font-size:16px;"></i>
+      Category Management
+    </div>
+    <div class="page-sub">Create and manage ticket categories for AI routing and ML classification</div>
+  </div>
+  <a href="{% url 'category_create' %}" class="btn btn-primary btn-sm">
+    <i class="fas fa-plus me-1"></i>New Category
+  </a>
+</div>
+
+{% if categories %}
+
+<div class="row g-3 mb-4">
+  <div class="col-6 col-sm-3">
+    <div class="stat-card">
+      <div class="stat-icon si-indigo"><i class="fas fa-tags"></i></div>
+      <div><div class="stat-label">Total</div><div class="stat-value">{{ categories|length }}</div></div>
+    </div>
+  </div>
+  <div class="col-6 col-sm-3">
+    <div class="stat-card">
+      <div class="stat-icon si-green"><i class="fas fa-check-circle"></i></div>
+      <div>
+        <div class="stat-label">Active</div>
+        <div class="stat-value" id="activeCount">{{ categories|length }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-sm-3">
+    <div class="stat-card">
+      <div class="stat-icon si-yellow"><i class="fas fa-brain"></i></div>
+      <div>
+        <div class="stat-label">With Keywords</div>
+        <div class="stat-value" id="kwCount">—</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-sm-3">
+    <div class="stat-card">
+      <div class="stat-icon si-blue"><i class="fas fa-robot"></i></div>
+      <div>
+        <div class="stat-label">AI-Routable</div>
+        <div class="stat-value" id="routeCount">—</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
+  <div class="cat-search-wrap">
+    <i class="fas fa-search"></i>
+    <input type="text" class="form-control" id="catSearch"
+           placeholder="Search categories…" oninput="filterCats()">
+  </div>
+  <div class="d-flex gap-2">
+    <button class="btn btn-xs btn-outline-secondary" onclick="filterActive(true)"  id="btnActive">Active</button>
+    <button class="btn btn-xs btn-outline-secondary" onclick="filterActive(false)" id="btnInactive">Inactive</button>
+    <button class="btn btn-xs btn-outline-secondary" onclick="filterActive(null)"  id="btnAll">All</button>
+  </div>
+</div>
+
+<div class="hd-card">
+  <div class="hd-card-header">
+    <div class="hd-card-title">
+      <i class="fas fa-list" style="color:var(--brand);"></i>
+      All Categories
+      <span id="catCounter" style="background:var(--slate-100);color:var(--slate-500);
+                                   font-size:11px;font-weight:700;padding:1px 7px;
+                                   border-radius:20px;margin-left:6px;">
+        {{ categories|length }}
+      </span>
+    </div>
+    <a href="{% url 'category_create' %}" class="btn btn-xs btn-primary">
+      <i class="fas fa-plus me-1"></i>Add
+    </a>
+  </div>
+  <div class="hd-card-body">
+
+    {% if categories %}
+    <div class="cat-grid" id="catGrid">
+      {% for cat in categories %}
+      <div class="cat-card"
+           data-name="{{ cat.name|lower }}"
+           data-desc="{{ cat.description|lower }}"
+           data-active="{{ cat.is_active|yesno:'true,false' }}"
+           data-kw="{{ cat.ml_keywords|lower|default:'' }}">
+
+        <div class="cat-card-top">
+          <div class="cat-icon-box"
+               style="background:{{ cat.color }}18;border:1px solid {{ cat.color }}30;
+                      color:{{ cat.color }};">
+            <i class="fas {{ cat.icon }}"></i>
+          </div>
+          <div style="flex:1;min-width:0;">
+            <div class="cat-name">{{ cat.name }}</div>
+            <div class="cat-color" style="color:{{ cat.color }};">{{ cat.color }}</div>
+          </div>
+          {% if cat.is_active %}
+          <span style="display:inline-flex;align-items:center;gap:4px;
+                       background:var(--success-bg);color:var(--success);
+                       border:1px solid var(--success-border);
+                       font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px;">
+            <i class="fas fa-circle" style="font-size:5px;"></i> Active
+          </span>
+          {% else %}
+          <span style="display:inline-flex;align-items:center;gap:4px;
+                       background:var(--slate-100);color:var(--slate-400);
+                       border:1px solid var(--slate-200);
+                       font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px;">
+            <i class="fas fa-circle" style="font-size:5px;"></i> Inactive
+          </span>
+          {% endif %}
+        </div>
+
+        <div class="cat-card-body">
+          <div class="cat-desc">{{ cat.description|truncatechars:80|default:"No description provided." }}</div>
+
+          {% if cat.ml_keywords %}
+          <div class="kw-chips">
+            {% for kw in cat.keywords_list|slice:":6" %}
+            <span class="kw-chip">{{ kw|truncatechars:18 }}</span>
+            {% endfor %}
+            {% if cat.keywords_list|length > 6 %}
+            <span class="kw-chip" style="background:var(--brand-light);color:var(--brand);border-color:var(--brand-muted);">
+              +{{ cat.keywords_list|length|add:"-6" }} more
+            </span>
+            {% endif %}
+          </div>
+          {% else %}
+          <div style="font-size:11.5px;color:var(--slate-300);display:flex;align-items:center;gap:5px;">
+            <i class="fas fa-exclamation-circle"></i>
+            No ML keywords — AI routing may be less accurate
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="cat-card-footer">
+          <span style="font-size:11.5px;color:var(--slate-400);">
+            <i class="fas fa-calendar-alt me-1"></i>{{ cat.created_at|date:"M d, Y" }}
+          </span>
+          <div class="d-flex gap-1">
+            <a href="{% url 'category_edit' cat.id %}"
+               class="btn btn-xs btn-outline-secondary" title="Edit">
+              <i class="fas fa-edit"></i>
+            </a>
+            <form method="post"
+                action="{% url 'category_delete' cat.id %}"
+                style="display:inline;"
+                onsubmit="return confirm('Delete category &quot;{{ cat.name }}&quot; This may affect existing tickets.');">
+              {% csrf_token %}
+              <button type="submit"
+                      class="btn btn-xs btn-outline-danger"
+                      title="Delete">
+                <i class="fas fa-trash"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+
+    <div id="catEmpty" style="display:none;">
+      <div class="empty-state" style="padding:48px;">
+        <div class="empty-icon"><i class="fas fa-search"></i></div>
+        <div class="empty-title">No categories match</div>
+        <div class="empty-text">Try a different search term or filter.</div>
+      </div>
+    </div>
+
+    {% else %}
+    <div class="empty-state" style="padding:56px;">
+      <div class="empty-icon"><i class="fas fa-tags"></i></div>
+      <div class="empty-title">No categories yet</div>
+      <div class="empty-text">
+        Categories organise tickets and power the AI's auto-classification engine.
+        Add ML keywords to each category to improve routing accuracy.
+      </div>
+      <a href="{% url 'category_create' %}" class="btn btn-sm btn-primary">
+        <i class="fas fa-plus me-1"></i>Create First Category
+      </a>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+
+<div style="margin-top:14px;background:var(--brand-light);border:1px solid var(--brand-muted);
+            border-radius:var(--r-lg);padding:13px 18px;
+            display:flex;align-items:flex-start;gap:11px;">
+  <i class="fas fa-robot mt-1" style="color:var(--brand);font-size:14px;flex-shrink:0;"></i>
+  <div style="font-size:13px;color:var(--slate-600);line-height:1.6;">
+    <strong style="color:var(--slate-800);">AI Routing Tip:</strong>
+    Add comma-separated ML keywords to each category so the AI engine can auto-classify
+    incoming tickets. Use terms that frequently appear in ticket titles and descriptions
+    for that category (e.g. <code style="font-size:11px;">wifi, internet, network, slow connection</code>).
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  let activeFilter = null;
+
+  function filterCats() {
+    const q = document.getElementById('catSearch').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.cat-card');
+    let visible = 0;
+
+    cards.forEach(c => {
+      const matchText = c.dataset.name.includes(q) || c.dataset.desc.includes(q) || c.dataset.kw.includes(q);
+      const matchActive = activeFilter === null ? true : (c.dataset.active === String(activeFilter));
+      const show = matchText && matchActive;
+      c.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    document.getElementById('catCounter').textContent = visible;
+    document.getElementById('catEmpty').style.display = visible === 0 && cards.length > 0 ? 'block' : 'none';
+  }
+
+  function filterActive(val) {
+    activeFilter = val;
+    ['btnActive','btnInactive','btnAll'].forEach(id => {
+      document.getElementById(id).classList.remove('btn-primary','btn-outline-secondary');
+    });
+    if (val === true)  { document.getElementById('btnActive').classList.add('btn-primary'); }
+    else if (val === false) { document.getElementById('btnInactive').classList.add('btn-primary'); }
+    else               { document.getElementById('btnAll').classList.add('btn-primary'); }
+    document.getElementById('catSearch').dispatchEvent(new Event('input'));
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.cat-card');
+    let active = 0, withKw = 0;
+    cards.forEach(c => {
+      if (c.dataset.active === 'true') active++;
+      if (c.dataset.kw && c.dataset.kw.trim()) withKw++;
+    });
+    const ac = document.getElementById('activeCount');
+    const kc = document.getElementById('kwCount');
+    const rc = document.getElementById('routeCount');
+    if (ac) ac.textContent = active;
+    if (kc) kc.textContent = withKw;
+    if (rc) rc.textContent = withKw; 
+
+    filterActive(null);
+  });
+</script>
+{% endblock %}

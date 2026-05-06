@@ -1,0 +1,589 @@
+{% extends "Base.html" %}
+{% block title %}Analytics Dashboard — HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <strong>Analytics</strong>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  
+  .analytics-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px; margin-bottom: 28px;
+  }
+  .analytics-filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .dept-completion-bar {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .dcb-track {
+    flex: 1; height: 5px; background: var(--slate-100);
+    border-radius: 3px; overflow: hidden; min-width: 50px;
+  }
+  .dcb-fill { height: 100%; border-radius: 3px; }
+
+  .lb-row {
+    display: flex; align-items: center; gap: 11px;
+    padding: 11px 18px;
+    border-bottom: 1px solid var(--slate-100);
+  }
+  .lb-row:last-child { border-bottom: none; }
+  .lb-rank {
+    font-size: 13px; font-weight: 800; color: var(--slate-200);
+    width: 20px; text-align: center; flex-shrink: 0;
+  }
+  .lb-rank.top { color: var(--warning); }
+
+  .cat-bar-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 18px;
+    border-bottom: 1px solid var(--slate-100);
+  }
+  .cat-bar-row:last-child { border-bottom: none; }
+  .cat-icon-cell {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; flex-shrink: 0;
+  }
+
+  .chart-container {
+    position: relative;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid var(--slate-100);
+    padding: 10px;
+  }
+  .chart-panel {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    height: 100%;
+  }
+  .chart-canvas-wrap {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 320px;
+  }
+  .priority-chart-wrap {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 10px 0;
+  }
+  .priority-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1 1 auto;
+    height: 100%;
+    gap: 12px;
+  }
+  .priority-legend-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 16px;
+    padding: 4px 4px 0;
+  }
+  .priority-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--slate-700);
+    line-height: 1.2;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="analytics-bar">
+  <div>
+    <div class="page-title">Analytics Dashboard</div>
+    <div class="page-sub">
+      {{ start_date|date:"M d, Y" }} — {{ end_date|date:"M d, Y" }}
+      {% if selected_department %} · <strong>{{ selected_department.name }}</strong>{% endif %}
+    </div>
+  </div>
+
+  <div class="analytics-filters">
+    <select class="form-select form-select-sm" style="width:auto;" onchange="applyFilter();" id="rangeSelect">
+      <option value="7_days"    {% if range_type == '7_days'    %}selected{% endif %}>Last 7 Days</option>
+      <option value="30_days"   {% if range_type == '30_days'   %}selected{% endif %}>Last 30 Days</option>
+      <option value="90_days"   {% if range_type == '90_days'   %}selected{% endif %}>Last 90 Days</option>
+      <option value="this_month"{% if range_type == 'this_month'%}selected{% endif %}>This Month</option>
+      <option value="last_month"{% if range_type == 'last_month'%}selected{% endif %}>Last Month</option>
+      <option value="this_year" {% if range_type == 'this_year' %}selected{% endif %}>This Year</option>
+    </select>
+
+    <select class="form-select form-select-sm" style="width:auto;" onchange="applyFilter();" id="deptSelect">
+      <option value="">All Departments</option>
+      {% for dept in departments %}
+      <option value="{{ dept.id }}"
+              {% if selected_department and selected_department.id == dept.id %}selected{% endif %}>
+        {{ dept.name }}
+      </option>
+      {% endfor %}
+    </select>
+
+    <a href="{% url 'export_analytics_excel' %}?range={{ range_type|urlencode }}{% if selected_department %}&department={{ selected_department.id }}{% endif %}{% if selected_resolver_department %}&resolver_department={{ selected_resolver_department.id }}{% endif %}{% if selected_creator_department %}&creator_department={{ selected_creator_department.id }}{% endif %}"
+       class="btn btn-sm btn-outline-secondary" title="Export to Excel">
+      <i class="fas fa-file-excel" style="color:#16A34A;"></i> Excel
+    </a>
+    <a href="{% url 'export_analytics_pdf' %}?range={{ range_type|urlencode }}{% if selected_department %}&department={{ selected_department.id }}{% endif %}{% if selected_resolver_department %}&resolver_department={{ selected_resolver_department.id }}{% endif %}{% if selected_creator_department %}&creator_department={{ selected_creator_department.id }}{% endif %}"
+       class="btn btn-sm btn-outline-secondary" title="Export to PDF">
+      <i class="fas fa-file-pdf" style="color:var(--danger);"></i> PDF
+    </a>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="stat-card">
+      <div class="stat-icon si-indigo"><i class="fas fa-ticket-alt"></i></div>
+      <div><div class="stat-label">Total</div><div class="stat-value">{{ stats.total }}</div></div>
+    </div>
+  </div>
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="stat-card">
+      <div class="stat-icon si-yellow"><i class="fas fa-circle"></i></div>
+      <div><div class="stat-label">Open</div><div class="stat-value">{{ stats.open }}</div></div>
+    </div>
+  </div>
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="stat-card">
+      <div class="stat-icon si-blue"><i class="fas fa-spinner"></i></div>
+      <div><div class="stat-label">In Progress</div><div class="stat-value">{{ stats.in_progress }}</div></div>
+    </div>
+  </div>
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="stat-card">
+      <div class="stat-icon si-green"><i class="fas fa-check-double"></i></div>
+      <div>
+        <div class="stat-label">Resolved</div>
+        <div class="stat-value">{{ stats.closed|add:stats.resolved }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="stat-card">
+      <div class="stat-icon si-purple"><i class="fas fa-percentage"></i></div>
+      <div>
+        <div class="stat-label">Completion</div>
+        <div class="stat-value" style="font-size:20px;">{{ stats.completion_rate|floatformat:1 }}%</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="stat-card">
+      <div class="stat-icon si-blue"><i class="fas fa-clock"></i></div>
+      <div>
+        <div class="stat-label">Avg. Resolution</div>
+        <div class="stat-value" style="font-size:19px;">{{ stats.avg_resolution_hours }}h</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row g-4 mb-4">
+
+  <div class="col-12 col-lg-7">
+    <div class="hd-card h-100 d-flex flex-column">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-chart-line" style="color:var(--brand);"></i>
+          Tickets Over Time
+        </div>
+        <span style="font-size:12px;color:var(--slate-400);">{{ range_type|default:"30 days"|title }}</span>
+      </div>
+      <div class="hd-card-body chart-container chart-panel">
+        <div class="chart-canvas-wrap">
+          <canvas id="lineChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-5">
+    <div class="hd-card h-100 d-flex flex-column">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-chart-pie" style="color:var(--brand);"></i>
+          Priority Distribution
+        </div>
+      </div>
+      <div class="hd-card-body chart-container priority-panel">
+        <div class="priority-chart-wrap">
+          <canvas id="priorityChart"></canvas>
+        </div>
+        {% if priority_dist %}
+        <div class="priority-legend-row">
+          <div class="priority-legend-item">
+            <span style="width:9px;height:9px;border-radius:50%;background:#EF4444;display:inline-block;"></span>
+            Urgent ({{ priority_dist.URGENT|default:0 }})
+          </div>
+          <div class="priority-legend-item">
+            <span style="width:9px;height:9px;border-radius:50%;background:#F59E0B;display:inline-block;"></span>
+            High ({{ priority_dist.HIGH|default:0 }})
+          </div>
+          <div class="priority-legend-item">
+            <span style="width:9px;height:9px;border-radius:50%;background:#4F46E5;display:inline-block;"></span>
+            Medium ({{ priority_dist.MEDIUM|default:0 }})
+          </div>
+          <div class="priority-legend-item">
+            <span style="width:9px;height:9px;border-radius:50%;background:#94A3B8;display:inline-block;"></span>
+            Low ({{ priority_dist.LOW|default:0 }})
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% if dept_stats %}
+<div class="hd-card mb-4">
+  <div class="hd-card-header">
+    <div class="hd-card-title">
+      <i class="fas fa-building" style="color:var(--brand);"></i>
+      Department Performance
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="hd-table">
+      <thead>
+        <tr>
+          <th>Department</th>
+          <th>Total</th>
+          <th>Open</th>
+          <th>Resolved</th>
+          <th>Completion</th>
+          <th>Avg. Resolution</th>
+          <th>Members</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in dept_stats %}
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:9px;">
+              <span style="width:10px;height:10px;border-radius:50%;
+                           background:{{ d.color }};flex-shrink:0;display:inline-block;"></span>
+              <span style="font-weight:600;color:var(--slate-800);">{{ d.name }}</span>
+            </div>
+          </td>
+          <td><strong>{{ d.total_tickets }}</strong></td>
+          <td><span style="color:var(--warning);font-weight:600;">{{ d.open_tickets }}</span></td>
+          <td><span style="color:var(--success);font-weight:600;">{{ d.closed_tickets }}</span></td>
+          <td>
+            <div class="dept-completion-bar">
+              <div class="dcb-track">
+                <div class="dcb-fill" style="
+                  width:{{ d.completion_rate|floatformat:0 }}%;
+                  background:{% if d.completion_rate >= 80 %}var(--success){% elif d.completion_rate >= 50 %}var(--warning){% else %}var(--danger){% endif %};">
+                </div>
+              </div>
+              <span style="font-size:12px;font-weight:600;color:var(--slate-700);white-space:nowrap;">
+                {{ d.completion_rate|floatformat:1 }}%
+              </span>
+            </div>
+          </td>
+          <td style="font-size:13px;color:var(--slate-600);">
+            {% if d.avg_resolution_hours %}{{ d.avg_resolution_hours }}h{% else %}—{% endif %}
+          </td>
+          <td style="font-size:13px;">{{ d.members_count }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
+
+<div class="row g-4 mb-4">
+
+  <div class="col-12 col-md-6">
+    <div class="hd-card h-100">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-trophy" style="color:var(--warning);"></i>
+          Top Resolvers
+        </div>
+        <select class="form-select form-select-sm" style="width:auto;" onchange="applyLeaderboardFilter('resolver_department', this.value);">
+          <option value="">All Departments</option>
+          {% for dept in departments %}
+          <option value="{{ dept.id }}"
+                  {% if selected_resolver_department and selected_resolver_department.id == dept.id %}selected{% endif %}>
+            {{ dept.name }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      {% if top_resolvers %}
+      {% for item in top_resolvers %}
+      <div class="lb-row">
+        <div class="lb-rank {% if forloop.counter <= 3 %}top{% endif %}">{{ forloop.counter }}</div>
+        <div class="hd-avatar" style="width:32px;height:32px;font-size:12px;flex-shrink:0;">
+          {{ item.username|first|upper }}
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:600;color:var(--slate-800);">{{ item.username }}</div>
+          {% if item.avg_resolution_hours %}
+          <div style="font-size:11.5px;color:var(--slate-400);">avg {{ item.avg_resolution_hours }}h</div>
+          {% endif %}
+        </div>
+        <span style="background:var(--success-bg);color:var(--success);
+                     font-weight:700;font-size:12px;padding:2px 9px;border-radius:5px;">
+          {{ item.count }}
+        </span>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="empty-state" style="padding:32px 20px;">
+        <div class="empty-icon" style="width:40px;height:40px;font-size:16px;"><i class="fas fa-trophy"></i></div>
+        <div class="empty-text">No data for this period</div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <div class="hd-card h-100">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-pencil-alt" style="color:var(--brand);"></i>
+          Top Ticket Creators
+        </div>
+        <select class="form-select form-select-sm" style="width:auto;" onchange="applyLeaderboardFilter('creator_department', this.value);">
+          <option value="">All Departments</option>
+          {% for dept in departments %}
+          <option value="{{ dept.id }}"
+                  {% if selected_creator_department and selected_creator_department.id == dept.id %}selected{% endif %}>
+            {{ dept.name }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      {% if top_creators %}
+      {% for item in top_creators %}
+      <div class="lb-row">
+        <div class="lb-rank {% if forloop.counter <= 3 %}top{% endif %}">{{ forloop.counter }}</div>
+        <div class="hd-avatar" style="width:32px;height:32px;font-size:12px;flex-shrink:0;background:var(--brand);">
+          {{ item.username|first|upper }}
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:600;color:var(--slate-800);">{{ item.username }}</div>
+        </div>
+        <span style="background:var(--brand-light);color:var(--brand);
+                     font-weight:700;font-size:12px;padding:2px 9px;border-radius:5px;">
+          {{ item.count }}
+        </span>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="empty-state" style="padding:32px 20px;">
+        <div class="empty-icon" style="width:40px;height:40px;font-size:16px;"><i class="fas fa-users"></i></div>
+        <div class="empty-text">No data for this period</div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+
+{% if category_dist %}
+<div class="hd-card">
+  <div class="hd-card-header">
+    <div class="hd-card-title">
+      <i class="fas fa-tags" style="color:var(--brand);"></i>
+      Category Breakdown
+    </div>
+  </div>
+  <div class="row g-0">
+    {% for cat in category_dist %}
+    <div class="col-12 col-sm-6 col-lg-4">
+      <div class="cat-bar-row">
+        <div class="cat-icon-cell"
+             style="background:{{ cat.color }}18;color:{{ cat.color }};border:1px solid {{ cat.color }}30;">
+          <i class="{{ cat.icon }}"></i>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:600;color:var(--slate-800);">{{ cat.name }}</div>
+          <div style="height:4px;background:var(--slate-100);border-radius:3px;margin-top:5px;">
+            {% with total=stats.total %}
+            {% if total %}
+            <div style="height:100%;border-radius:3px;background:{{ cat.color }};
+                        width:{% widthratio cat.count total 100 %}%;"></div>
+            {% endif %}
+            {% endwith %}
+          </div>
+        </div>
+        <span style="font-size:14px;font-weight:700;color:var(--slate-700);flex-shrink:0;">
+          {{ cat.count }}
+        </span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+
+function applyFilter() {
+  const range = document.getElementById('rangeSelect').value;
+  const dept = document.getElementById('deptSelect').value;
+  const resolverDept = '{{ selected_resolver_department.id|default:"" }}';
+  const creatorDept = '{{ selected_creator_department.id|default:"" }}';
+  const params = new URLSearchParams();
+  params.set('range', range);
+  if (dept) params.set('department', dept);
+  if (resolverDept) params.set('resolver_department', resolverDept);
+  if (creatorDept) params.set('creator_department', creatorDept);
+  window.location.href = `?${params.toString()}`;
+}
+
+function applyLeaderboardFilter(paramName, value) {
+  const params = new URLSearchParams(window.location.search);
+  const range = document.getElementById('rangeSelect').value;
+  const dept = document.getElementById('deptSelect').value;
+
+  params.set('range', range);
+
+  if (dept) {
+    params.set('department', dept);
+  } else {
+    params.delete('department');
+  }
+
+  if (value) {
+    params.set(paramName, value);
+  } else {
+    params.delete(paramName);
+  }
+
+  window.location.href = `?${params.toString()}`;
+}
+
+const priorityCtx = document.getElementById('priorityChart');
+if (priorityCtx) {
+  new Chart(priorityCtx, {
+    type: 'pie',
+    data: {
+      labels: ['Urgent', 'High', 'Medium', 'Low'],
+      datasets: [{
+        data: [
+          {{ priority_dist.URGENT|default:0 }},
+          {{ priority_dist.HIGH|default:0 }},
+          {{ priority_dist.MEDIUM|default:0 }},
+          {{ priority_dist.LOW|default:0 }}
+        ],
+        backgroundColor: ['#EF4444', '#F59E0B', '#4F46E5', '#94A3B8'],
+        borderColor: '#FFFFFF',
+        borderWidth: 3,
+        hoverOffset: 8,
+        radius: '88%'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#0F172A',
+          titleColor: '#fff',
+          bodyColor: '#E2E8F0',
+          displayColors: true,
+          padding: 10,
+        },
+      }
+    }
+  });
+}
+
+const lineCtx = document.getElementById('lineChart');
+if (lineCtx) {
+  const range = '{{ range_type }}';
+  const dept  = '{{ selected_department.id|default:"" }}';
+  let apiUrl  = `{% url 'api_tickets_over_time' %}?range=${encodeURIComponent(range)}`;
+  if (dept) apiUrl += `&department=${dept}`;
+
+  fetch(apiUrl)
+    .then(r => r.json())
+    .then(data => {
+      const labels = data.labels || [];
+      const values = data.data || [];
+      if (!labels.length) {
+        lineCtx.parentElement.innerHTML =
+          '<p style="font-size:13px;color:var(--slate-400);text-align:center;padding:48px 0;">No ticket trend data for selected filters</p>';
+        return;
+      }
+
+      const gradient = lineCtx.getContext('2d').createLinearGradient(0, 0, 0, 220);
+      gradient.addColorStop(0, 'rgba(79,70,229,0.30)');
+      gradient.addColorStop(1, 'rgba(79,70,229,0.02)');
+
+      new Chart(lineCtx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Tickets',
+            data: values,
+            borderColor: '#4F46E5',
+            backgroundColor: gradient,
+            borderWidth: 3,
+            pointRadius: 3.5,
+            pointHoverRadius: 5,
+            pointBackgroundColor: '#4F46E5',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 1.5,
+            tension: 0.4,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#0F172A',
+              titleColor: '#fff',
+              bodyColor: '#E2E8F0',
+              displayColors: false,
+              padding: 10,
+            },
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { font: { size: 11, weight: 600 }, color: '#64748B' }
+            },
+            y: {
+              beginAtZero: true,
+              grid: { color: '#E2E8F0' },
+              ticks: { font: { size: 11, weight: 600 }, color: '#64748B', stepSize: 1 }
+            }
+          }
+        }
+      });
+    })
+    .catch(() => {
+      lineCtx.parentElement.innerHTML =
+        '<p style="font-size:13px;color:var(--slate-400);text-align:center;padding:48px 0;">Chart data unavailable</p>';
+    });
+}
+</script>
+{% endblock %}

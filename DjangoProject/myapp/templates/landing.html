@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HelpDesk — AI-Powered Support Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --brand:#0F766E; --brand-dark:#115E59; --brand-light:#ECFEFF; --brand-muted:#99F6E4;
+      --slate-50:#F8FAFC; --slate-100:#F1F5F9; --slate-200:#E2E8F0;
+      --slate-400:#94A3B8; --slate-500:#64748B; --slate-600:#475569;
+      --slate-700:#334155; --slate-800:#1E293B; --slate-900:#0F172A;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'DM Sans',sans-serif;background:var(--slate-50);min-height:100vh;overflow-x:hidden;}
+    .land-nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;height:64px;
+      background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--slate-200);
+      display:flex;align-items:center;justify-content:space-between;padding:0 40px;
+    }
+    .land-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+    .land-logo-mark{width:36px;height:36px;border-radius:10px;background:var(--brand);display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;}
+    .land-logo-text{font-size:16px;font-weight:800;color:var(--slate-900);letter-spacing:-.3px;}
+    .nav-reg{font-size:13.5px;font-weight:600;color:var(--slate-600);padding:8px 18px;border-radius:8px;border:1.5px solid var(--slate-200);background:#fff;transition:all .15s;text-decoration:none;}
+    .nav-reg:hover{border-color:var(--brand);color:var(--brand);}
+    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 20px 48px;text-align:center;background:radial-gradient(1000px 600px at 90% 0%,#d1fae5 0%,transparent 50%),radial-gradient(800px 500px at -5% 20%,#cffafe 0%,transparent 45%),var(--slate-50);position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%230F766E' fill-opacity='0.025'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/svg%3E");}
+    .hero-inner{position:relative;max-width:800px;width:100%;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--brand-light);border:1px solid var(--brand-muted);color:var(--brand);font-size:12.5px;font-weight:700;padding:6px 16px;border-radius:20px;margin-bottom:28px;}
+    .badge-dot{width:7px;height:7px;border-radius:50%;background:var(--brand);animation:pulse 2s infinite;}
+    .hero-title{font-size:clamp(36px,6vw,62px);font-weight:800;letter-spacing:-2.5px;color:var(--slate-900);line-height:1.08;margin-bottom:20px;}
+    .hero-title span{color:var(--brand);}
+    .hero-sub{font-size:17px;color:var(--slate-500);line-height:1.7;max-width:540px;margin:0 auto 48px;}
+    .login-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:540px;margin:0 auto 40px;}
+    .login-card{background:#fff;border:2px solid var(--slate-200);border-radius:18px;padding:28px 22px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;transition:all .2s;position:relative;overflow:hidden;}
+    .login-card::after{content:'';position:absolute;inset:0;opacity:0;transition:opacity .2s;}
+    .user-card:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(15,118,110,.14);border-color:var(--brand);}
+    .user-card::after{background:linear-gradient(135deg,#ECFEFF 0%,transparent 65%);}
+    .admin-card:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(124,58,237,.14);border-color:#7C3AED;}
+    .admin-card::after{background:linear-gradient(135deg,#F5F3FF 0%,transparent 65%);}
+    .login-card:hover::after{opacity:1;}
+    .lc-icon{width:62px;height:62px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;position:relative;z-index:1;}
+    .user-card .lc-icon{background:var(--brand-light);color:var(--brand);border:1.5px solid var(--brand-muted);}
+    .admin-card .lc-icon{background:#F5F3FF;color:#7C3AED;border:1.5px solid #DDD6FE;}
+    .lc-title{font-size:16px;font-weight:800;color:var(--slate-900);position:relative;z-index:1;}
+    .lc-sub{font-size:12.5px;color:var(--slate-500);line-height:1.5;position:relative;z-index:1;}
+    .lc-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:8px 18px;border-radius:8px;position:relative;z-index:1;transition:transform .15s;}
+    .user-card .lc-btn{background:var(--brand-light);color:var(--brand);}
+    .admin-card .lc-btn{background:#F5F3FF;color:#7C3AED;}
+    .login-card:hover .lc-btn{transform:translateX(4px);}
+    .feat-row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:8px 0 44px;}
+    .feat{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--slate-500);font-weight:500;}
+    .feat-i{color:var(--brand);}
+    .stats-bar{display:flex;max-width:580px;margin:0 auto;background:#fff;border:1px solid var(--slate-200);border-radius:14px;box-shadow:0 4px 20px rgba(15,23,42,.05);overflow:hidden;}
+    .stat-seg{flex:1;padding:18px 14px;text-align:center;border-right:1px solid var(--slate-100);}
+    .stat-seg:last-child{border-right:none;}
+    .stat-n{font-size:24px;font-weight:800;color:var(--slate-900);letter-spacing:-1px;}
+    .stat-l{font-size:11px;color:var(--slate-400);font-weight:600;margin-top:3px;}
+    .reg-note{margin-top:18px;font-size:13px;color:var(--slate-400);}
+    .reg-note a{color:var(--brand);font-weight:700;text-decoration:none;}
+    .land-footer{background:var(--slate-900);padding:22px 40px;text-align:center;font-size:12.5px;color:var(--slate-500);}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.8);}}
+    @media(max-width:540px){.login-cards{grid-template-columns:1fr;}.land-nav{padding:0 20px;}}
+  </style>
+</head>
+<body>
+
+<nav class="land-nav">
+  <a href="/" class="land-logo">
+    <div class="land-logo-mark"><i class="fas fa-headset"></i></div>
+    <span class="land-logo-text">HelpDesk</span>
+  </a>
+  <a href="{% url 'register' %}" class="nav-reg">Register</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge"><div class="badge-dot"></div> AI-Powered Ticket Management</div>
+    <h1 class="hero-title">Resolve support tickets<br><span>faster with AI</span></h1>
+    <p class="hero-sub">Smart ticket routing, due-date tracking, department dashboards and real-time alerts - all in one modern helpdesk platform.</p>
+
+    <div class="login-cards">
+      <a href="{% url 'login' %}?role=user" class="login-card user-card">
+        <div class="lc-icon"><i class="fas fa-user"></i></div>
+        <div>
+          <div class="lc-title">User Login</div>
+          <div class="lc-sub">View your department tickets, create requests and track progress</div>
+        </div>
+        <div class="lc-btn"><i class="fas fa-arrow-right"></i> Sign In</div>
+      </a>
+      <a href="{% url 'login' %}?role=admin" class="login-card admin-card">
+        <div class="lc-icon"><i class="fas fa-shield-alt"></i></div>
+        <div>
+          <div class="lc-title">Admin Login</div>
+          <div class="lc-sub">Manage all tickets, departments, analytics and user accounts</div>
+        </div>
+        <div class="lc-btn"><i class="fas fa-arrow-right"></i> Admin Portal</div>
+      </a>
+    </div>
+
+    <div class="feat-row">
+      <div class="feat"><i class="fas fa-robot feat-i"></i> AI Auto-Assignment</div>
+      <div class="feat"><i class="fas fa-clock feat-i"></i> Deadline Tracking</div>
+      <div class="feat"><i class="fas fa-bell feat-i"></i> Real-time Alerts</div>
+      <div class="feat"><i class="fas fa-chart-bar feat-i"></i> Analytics</div>
+      <div class="feat"><i class="fas fa-building feat-i"></i> Dept Routing</div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat-seg"><div class="stat-n">AI</div><div class="stat-l">Smart Routing</div></div>
+      <div class="stat-seg"><div class="stat-n">Due Dates</div><div class="stat-l">Auto-Tracked</div></div>
+      <div class="stat-seg"><div class="stat-n">24/7</div><div class="stat-l">Notifications</div></div>
+      <div class="stat-seg"><div class="stat-n">Multi</div><div class="stat-l">Departments</div></div>
+    </div>
+    <div class="reg-note">Don't have an account <a href="{% url 'register' %}">Register here</a></div>
+  </div>
+</section>
+
+<footer class="land-footer">HelpDesk · AI-Powered Support Platform · Built with Django &amp; PostgreSQL</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+

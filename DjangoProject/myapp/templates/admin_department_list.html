@@ -1,0 +1,1095 @@
+{% extends "Base.html" %}
+{% load avatar_tags %}
+{% block title %}Department Management - HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <strong>Department Management</strong>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .dept-page {
+    display: grid;
+    gap: 18px;
+  }
+  .dept-topbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(320px, .95fr);
+    gap: 18px;
+  }
+  .dept-hero,
+  .dept-create-card,
+  .dept-searchbar,
+  .dept-panel,
+  .dept-members-card,
+  .dept-edit-card,
+  .dept-delete-card {
+    background: #fff;
+    border: 1px solid rgba(148, 163, 184, .22);
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, .06);
+  }
+  .dept-hero {
+    padding: 24px;
+    background:
+      radial-gradient(circle at top right, rgba(15, 118, 110, .18), transparent 34%),
+      linear-gradient(180deg, #ffffff 0%, #f8fbfb 100%);
+  }
+  .dept-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: var(--brand-light);
+    color: var(--brand);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .dept-hero h2 {
+    margin: 16px 0 8px;
+    font-size: 28px;
+    line-height: 1.1;
+    font-weight: 800;
+    color: var(--slate-900);
+  }
+  .dept-hero p {
+    margin: 0;
+    max-width: 720px;
+    font-size: 14px;
+    color: var(--slate-500);
+  }
+  .dept-overview {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .dept-kpi {
+    padding: 16px;
+    border-radius: 16px;
+    background: rgba(248, 250, 252, .9);
+    border: 1px solid var(--slate-200);
+  }
+  .dept-kpi-label {
+    font-size: 11px;
+    color: var(--slate-400);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-weight: 700;
+  }
+  .dept-kpi-value {
+    margin-top: 6px;
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 800;
+    color: var(--slate-900);
+  }
+  .dept-create-card {
+    padding: 22px;
+    background:
+      linear-gradient(180deg, rgba(240, 253, 250, .88) 0%, #ffffff 100%);
+  }
+  .dept-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .dept-card-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--slate-900);
+  }
+  .dept-card-sub {
+    font-size: 12.5px;
+    color: var(--slate-500);
+  }
+  .dept-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .dept-field { margin-bottom: 12px; }
+  .dept-field label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--slate-500);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+  .dept-field-full { grid-column: 1 / -1; }
+  .dept-error {
+    margin-top: 5px;
+    font-size: 12px;
+    color: var(--danger);
+  }
+  .dept-searchbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+  }
+  .dept-list-toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 14px;
+    align-items: stretch;
+  }
+  .dept-inactive-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    background: #fff;
+    border: 1px solid rgba(148, 163, 184, .22);
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, .06);
+  }
+  .dept-inactive-bar .form-select {
+    min-width: 0;
+  }
+  .dept-searchbar i { color: var(--slate-400); }
+  .dept-searchbar input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--slate-800);
+  }
+  .dept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    grid-auto-rows: 1fr;
+    gap: 18px;
+  }
+  .dept-panel {
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .dept-panel-head {
+    padding: 20px 22px 18px;
+    background:
+      linear-gradient(135deg, rgba(15, 23, 42, .84), rgba(30, 41, 59, .52));
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+  }
+  .dept-panel-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .dept-heading-btn {
+    display: block;
+    width: 100%;
+    padding: 0;
+    text-align: left;
+    background: none;
+    border: 0;
+    color: inherit;
+    text-decoration: none;
+  }
+  .dept-panel-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+  .dept-panel-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .16);
+    border: 1px solid rgba(255, 255, 255, .18);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .dept-panel-title h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+  }
+  .dept-panel-title p {
+    margin: 4px 0 0;
+    font-size: 12.5px;
+    color: rgba(255, 255, 255, .76);
+  }
+  .dept-state-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, .12);
+    border: 1px solid rgba(255, 255, 255, .14);
+    color: #fff;
+  }
+  .dept-state-badge.inactive {
+    background: rgba(220, 38, 38, .16);
+    border-color: rgba(254, 202, 202, .22);
+  }
+  .dept-stat-strip {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .dept-stat {
+    padding: 12px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, .12);
+    border: 1px solid rgba(255, 255, 255, .14);
+  }
+  .dept-stat-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, .68);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+  .dept-stat-value {
+    margin-top: 5px;
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+  }
+  .dept-panel-body {
+    padding: 18px;
+    display: grid;
+    gap: 14px;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
+    flex: 1;
+    align-content: start;
+  }
+  .dept-section {
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid var(--slate-200);
+    background: #fff;
+  }
+  .dept-section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .dept-section-head h4 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--slate-900);
+  }
+  .dept-section-head span {
+    font-size: 12px;
+    color: var(--slate-500);
+  }
+  .dept-member-add {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) 130px 92px;
+    gap: 10px;
+  }
+  .dept-members-card {
+    overflow: hidden;
+    min-height: 386px;
+    display: flex;
+    flex-direction: column;
+  }
+  .dept-members-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--slate-100);
+    background: #f8fafc;
+  }
+  .dept-members-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--slate-200);
+    border-radius: 12px;
+    background: #fff;
+  }
+  .dept-members-search i {
+    color: var(--slate-400);
+    font-size: 12px;
+  }
+  .dept-members-search input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--slate-800);
+    font-size: 13px;
+  }
+  .dept-members-empty {
+    display: none;
+    padding: 20px 14px;
+    text-align: center;
+    color: var(--slate-500);
+    font-size: 13px;
+    border-top: 1px solid var(--slate-100);
+    background: #fff;
+  }
+  .dept-members-scroll {
+    max-height: 320px;
+    overflow: auto;
+    flex: 1;
+  }
+  .dept-members-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .dept-members-table th,
+  .dept-members-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--slate-100);
+    vertical-align: middle;
+  }
+  .dept-members-table th {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--slate-500);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    background: #f8fafc;
+  }
+  .dept-members-table tr:last-child td { border-bottom: 0; }
+  .adm-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .adm-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #E2E8F0;
+    color: #334155;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1px solid #CBD5E1;
+  }
+  .adm-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .role-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: var(--brand-light);
+    color: var(--brand);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .dept-row-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .dept-row-actions form {
+    margin: 0;
+  }
+  .dept-role-edit {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .dept-edit-card,
+  .dept-delete-card {
+    padding: 16px;
+  }
+  .dept-delete-card {
+    border-style: dashed;
+    background: linear-gradient(180deg, #fff 0%, #fff8f8 100%);
+  }
+  .dept-btn-warning {
+    background: var(--warning-bg);
+    border-color: var(--warning-border);
+    color: var(--warning);
+    font-weight: 700;
+  }
+  .dept-btn-warning:hover {
+    background: #fef3c7;
+    border-color: #f59e0b;
+    color: #b45309;
+  }
+  .dept-btn-success {
+    background: var(--success-bg);
+    border-color: var(--success-border);
+    color: var(--success);
+    font-weight: 700;
+  }
+  .dept-btn-success:hover {
+    background: #d1fae5;
+    border-color: #34d399;
+    color: #047857;
+  }
+  .dept-empty {
+    padding: 54px 22px;
+    text-align: center;
+    color: var(--slate-500);
+  }
+  .dept-members-card .dept-empty {
+    padding: 32px 18px;
+  }
+  .dept-hidden { display: none !important; }
+  .dept-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1080;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(15, 23, 42, .58);
+    backdrop-filter: blur(6px);
+  }
+  .dept-modal-backdrop.show {
+    display: flex;
+  }
+  .dept-modal {
+    width: min(100%, 520px);
+    background: #fff;
+    border: 1px solid rgba(148, 163, 184, .24);
+    border-radius: 24px;
+    box-shadow: 0 28px 80px rgba(15, 23, 42, .24);
+    overflow: hidden;
+  }
+  .dept-modal-head {
+    padding: 20px 22px 14px;
+    border-bottom: 1px solid var(--slate-200);
+  }
+  .dept-modal-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(245, 158, 11, .12);
+    color: #b45309;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .dept-modal-head h3 {
+    margin: 14px 0 6px;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--slate-900);
+  }
+  .dept-modal-head p {
+    margin: 0;
+    color: var(--slate-500);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .dept-modal-body {
+    padding: 18px 22px;
+  }
+  .dept-modal-note {
+    margin: 0;
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: #f8fafc;
+    border: 1px solid var(--slate-200);
+    color: var(--slate-600);
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .dept-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 18px 22px 22px;
+    border-top: 1px solid var(--slate-200);
+    background: #f8fafc;
+  }
+  .dept-modal-danger {
+    background: #b91c1c;
+    border-color: #b91c1c;
+    color: #fff;
+  }
+  .dept-modal-danger:hover,
+  .dept-modal-danger:focus {
+    background: #991b1b;
+    border-color: #991b1b;
+    color: #fff;
+  }
+  @media (min-width: 992px) {
+    .dept-grid > .dept-panel:only-child {
+      grid-column: 1 / -1;
+    }
+    .dept-grid > .dept-panel:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 1199px) {
+    .dept-topbar {
+      grid-template-columns: 1fr;
+    }
+    .dept-list-toolbar {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 767px) {
+    .dept-overview,
+    .dept-form-grid,
+    .dept-stat-strip,
+    .dept-member-add,
+    .dept-grid {
+      grid-template-columns: 1fr;
+    }
+    .dept-grid {
+      grid-auto-rows: auto;
+    }
+    .dept-members-card {
+      min-height: 0;
+    }
+    .dept-panel-top,
+    .dept-section-head,
+    .dept-row-actions {
+      align-items: stretch;
+    }
+    .dept-role-edit {
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .dept-row-actions form,
+    .dept-row-actions .btn,
+    .dept-role-edit .form-select,
+    .dept-role-edit .btn {
+      width: 100%;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dept-page">
+  <div class="dept-topbar">
+    <section class="dept-hero">
+      <span class="dept-eyebrow"><i class="fas fa-sitemap"></i>Department Control</span>
+      <h2>Manage departments with a clearer control surface</h2>
+      <p>All department actions stay here, but the layout is cleaner: overview first, creation second, then focused cards for staffing and maintenance.</p>
+
+      <div class="dept-overview">
+        <div class="dept-kpi">
+          <div class="dept-kpi-label">Departments</div>
+          <div class="dept-kpi-value">{{ department_count }}</div>
+        </div>
+        <div class="dept-kpi">
+          <div class="dept-kpi-label">Active Members</div>
+          <div class="dept-kpi-value">{{ member_count }}</div>
+        </div>
+        <div class="dept-kpi">
+          <div class="dept-kpi-label">Open Tickets</div>
+          <div class="dept-kpi-value">{{ open_ticket_count }}</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dept-create-card">
+      <div class="dept-card-head">
+        <div>
+          <div class="dept-card-title">Create Department</div>
+          <div class="dept-card-sub">Add a new team without leaving this page.</div>
+        </div>
+      </div>
+
+      <form method="post" action="/admin-departments/create/" novalidate>
+        {% csrf_token %}
+        <div class="dept-form-grid">
+          <div class="dept-field">
+            <label for="{{ create_form.name.id_for_label }}">Department Name</label>
+            {{ create_form.name }}
+            {% if create_form.name.errors %}<div class="dept-error">{{ create_form.name.errors.0 }}</div>{% endif %}
+          </div>
+          <div class="dept-field">
+            <label for="{{ create_form.code.id_for_label }}">Code</label>
+            {{ create_form.code }}
+            {% if create_form.code.errors %}<div class="dept-error">{{ create_form.code.errors.0 }}</div>{% endif %}
+          </div>
+          <div class="dept-field">
+            <label for="{{ create_form.email.id_for_label }}">Email</label>
+            {{ create_form.email }}
+            {% if create_form.email.errors %}<div class="dept-error">{{ create_form.email.errors.0 }}</div>{% endif %}
+          </div>
+          <div class="dept-field">
+            <label for="{{ create_form.icon.id_for_label }}">Icon</label>
+            {{ create_form.icon }}
+            {% if create_form.icon.errors %}<div class="dept-error">{{ create_form.icon.errors.0 }}</div>{% endif %}
+          </div>
+          <div class="dept-field">
+            <label for="{{ create_form.color.id_for_label }}">Color</label>
+            {{ create_form.color }}
+            {% if create_form.color.errors %}<div class="dept-error">{{ create_form.color.errors.0 }}</div>{% endif %}
+          </div>
+          <div class="dept-field dept-field-full">
+            <label for="{{ create_form.description.id_for_label }}">Description</label>
+            {{ create_form.description }}
+            {% if create_form.description.errors %}<div class="dept-error">{{ create_form.description.errors.0 }}</div>{% endif %}
+            {% if create_form.non_field_errors %}<div class="dept-error">{{ create_form.non_field_errors.0 }}</div>{% endif %}
+          </div>
+        </div>
+        <button class="btn btn-primary w-100" type="submit">
+          <i class="fas fa-plus me-2"></i>Create Department
+        </button>
+      </form>
+    </section>
+  </div>
+
+  <div class="dept-list-toolbar">
+    <div class="dept-inactive-bar">
+      <i class="fas fa-box-archive text-danger"></i>
+      <form method="post" action="/admin-departments/inactive/delete/" class="d-flex gap-2 w-100 align-items-center js-inactive-delete-form">
+        {% csrf_token %}
+        <select name="inactive_department_id" class="form-select js-inactive-delete-select">
+          <option value="">Inactive departments</option>
+          {% for inactive_dept in inactive_departments %}
+            <option value="{{ inactive_dept.id }}">{{ inactive_dept.name }}</option>
+          {% endfor %}
+        </select>
+        <button class="btn btn-outline-danger js-open-delete-modal" type="button" {% if not inactive_departments %}disabled{% endif %}>
+          Delete
+        </button>
+      </form>
+    </div>
+
+    <div class="dept-searchbar">
+      <i class="fas fa-search"></i>
+      <input type="search" id="deptSearch" placeholder="Search department by name or code">
+    </div>
+  </div>
+
+  {% if dept_data %}
+    <div class="dept-grid">
+      {% for item in dept_data %}
+        <article class="dept-panel js-dept-card" data-dept-name="{{ item.department.name|lower }}" data-dept-code="{{ item.department.code|lower }}">
+          <div class="dept-panel-head">
+            <div class="dept-panel-top">
+              <a href="{% url 'admin_department_tickets' item.department.id %}" class="dept-heading-btn">
+                <div class="dept-panel-title">
+                  <div class="dept-panel-icon" style="color:{{ item.department.color }};">
+                    <i class="{{ item.department.icon }}"></i>
+                  </div>
+                  <div>
+                    <h3>{{ item.department.name }}</h3>
+                    <p>{{ item.department.code }}{% if item.department.email %} | {{ item.department.email }}{% endif %}</p>
+                  </div>
+                </div>
+              </a>
+              <span class="dept-state-badge {% if not item.department.is_active %}inactive{% endif %}">
+                {% if item.department.is_active %}Active{% else %}Inactive{% endif %}
+              </span>
+            </div>
+            <div class="dept-stat-strip">
+              <div class="dept-stat">
+                <div class="dept-stat-label">Members</div>
+                <div class="dept-stat-value">{{ item.member_count }}</div>
+              </div>
+              <div class="dept-stat">
+                <div class="dept-stat-label">Created</div>
+                <div class="dept-stat-value">{{ item.created_ticket_count }}</div>
+              </div>
+              <div class="dept-stat">
+                <div class="dept-stat-label">Active</div>
+                <div class="dept-stat-value">{{ item.active_tickets }}</div>
+              </div>
+              <div class="dept-stat">
+                <div class="dept-stat-label">Resolved</div>
+                <div class="dept-stat-value">{{ item.resolved }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dept-panel-body">
+            <section class="dept-section">
+              <div class="dept-section-head">
+                <h4>{% if item.department.is_active %}Add or Reactivate Member{% else %}Department Inactive{% endif %}</h4>
+                <span>{% if item.department.is_active %}Members are added with the standard member role.{% else %}Reactivate this department to manage members again.{% endif %}</span>
+              </div>
+              {% if item.department.description %}
+                <div class="text-muted small mb-3">{{ item.department.description }}</div>
+              {% endif %}
+              {% if item.department.is_active %}
+                <form method="post" action="{% url 'admin_add_member' item.department.id %}">
+                  {% csrf_token %}
+                  <div class="dept-member-add">
+                    <div>{{ item.member_form.user_id }}</div>
+                    <input type="hidden" name="{{ item.member_form.role.html_name }}" value="MEMBER">
+                    <div><button class="btn btn-primary w-100" type="submit">Add</button></div>
+                  </div>
+                </form>
+              {% else %}
+                <div class="text-muted small">This department is inactive. Use the status action below to reactivate it.</div>
+              {% endif %}
+            </section>
+
+            <section class="dept-members-card">
+              <div class="dept-members-toolbar">
+                <div class="dept-members-search">
+                  <i class="fas fa-search"></i>
+                  <input
+                    type="search"
+                    class="js-member-search"
+                    placeholder="Find user by username"
+                    data-department-id="{{ item.department.id }}"
+                  >
+                </div>
+              </div>
+              <div class="dept-members-scroll">
+                <table class="dept-members-table">
+                  <thead>
+                    <tr>
+                      <th>User</th>
+                      <th>Role</th>
+                      <th class="text-end">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for m in item.members %}
+                    <tr class="js-member-row" data-member-username="{{ m.user.username|lower }}">
+                      <td>
+                        <div class="adm-user">
+                            <div class="adm-avatar">
+                              {{ m.user|avatar_initial }}
+                            </div>
+                            <div>
+                              <div class="fw-semibold text-dark">{{ m.user.username }}</div>
+                              <div class="text-muted small">{{ m.user.email|default:"No email" }}</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td><span class="role-pill">{{ m.display_role }}</span></td>
+                        <td class="text-end">
+                          <div class="dept-row-actions">
+                            <form method="post" action="{% url 'admin_remove_member' item.department.id m.user.id %}">
+                              {% csrf_token %}
+                              <button class="btn btn-sm btn-outline-danger" type="submit" {% if not item.department.is_active %}disabled{% endif %}>Remove</button>
+                            </form>
+                          </div>
+                        </td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="3" class="dept-empty">No active members yet.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <div class="dept-members-empty js-member-empty">No matching users found in this department.</div>
+            </section>
+
+            <section class="dept-edit-card">
+              <div class="dept-section-head">
+                <h4>Edit Department</h4>
+                <span>Update core details only for this department.</span>
+              </div>
+              {% if item.department.is_active %}
+                <form method="post" action="/admin-departments/{{ item.department.id }}/update/" novalidate>
+                  {% csrf_token %}
+                  <div class="dept-form-grid">
+                    <div class="dept-field">
+                      <label for="{{ item.edit_form.name.id_for_label }}">Department Name</label>
+                      {{ item.edit_form.name }}
+                      {% if item.edit_form.name.errors %}<div class="dept-error">{{ item.edit_form.name.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="dept-field">
+                      <label for="{{ item.edit_form.code.id_for_label }}">Code</label>
+                      {{ item.edit_form.code }}
+                      {% if item.edit_form.code.errors %}<div class="dept-error">{{ item.edit_form.code.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="dept-field">
+                      <label for="{{ item.edit_form.email.id_for_label }}">Email</label>
+                      {{ item.edit_form.email }}
+                      {% if item.edit_form.email.errors %}<div class="dept-error">{{ item.edit_form.email.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="dept-field">
+                      <label for="{{ item.edit_form.icon.id_for_label }}">Icon</label>
+                      {{ item.edit_form.icon }}
+                      {% if item.edit_form.icon.errors %}<div class="dept-error">{{ item.edit_form.icon.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="dept-field">
+                      <label for="{{ item.edit_form.color.id_for_label }}">Color</label>
+                      {{ item.edit_form.color }}
+                      {% if item.edit_form.color.errors %}<div class="dept-error">{{ item.edit_form.color.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="dept-field dept-field-full">
+                      <label for="{{ item.edit_form.description.id_for_label }}">Description</label>
+                      {{ item.edit_form.description }}
+                      {% if item.edit_form.description.errors %}<div class="dept-error">{{ item.edit_form.description.errors.0 }}</div>{% endif %}
+                      {% if item.edit_form.non_field_errors %}<div class="dept-error">{{ item.edit_form.non_field_errors.0 }}</div>{% endif %}
+                    </div>
+                  </div>
+                  <button class="btn btn-primary" type="submit">Save Changes</button>
+                </form>
+              {% else %}
+                <div class="text-muted small">Editing is disabled while the department is inactive. Reactivate it first if you want to change its settings.</div>
+              {% endif %}
+            </section>
+
+            <section class="dept-delete-card">
+              <div class="dept-section-head">
+                <h4>{% if item.department.is_active %}Inactive Department{% else %}Department Status{% endif %}</h4>
+                <span>{% if item.department.is_active %}Keep the department record and switch it off.{% else %}This department is currently inactive.{% endif %}</span>
+              </div>
+              {% if item.department.is_active %}
+                <form method="post" action="/admin-departments/{{ item.department.id }}/delete/" class="js-inactivate-form">
+                  {% csrf_token %}
+                  <button class="btn dept-btn-warning js-open-inactivate-modal" type="button" data-department-name="{{ item.department.name }}">Mark as Inactive</button>
+                </form>
+              {% else %}
+                <form method="post" action="/admin-departments/{{ item.department.id }}/reactivate/">
+                  {% csrf_token %}
+                  <button class="btn dept-btn-success" type="submit">Reactivate Department</button>
+                </form>
+              {% endif %}
+              <div class="text-muted small mt-2">
+                Tickets tied to inactive departments stay available here in department control, but are hidden from the normal ticket views.
+              </div>
+            </section>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="dept-panel">
+      <div class="dept-empty">
+        <h3 class="mb-2">No departments available</h3>
+        <p class="mb-0">Create the first department using the form above.</p>
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+<div class="dept-modal-backdrop" id="deptConfirmModal" aria-hidden="true">
+  <div class="dept-modal" role="dialog" aria-modal="true" aria-labelledby="deptConfirmTitle">
+    <div class="dept-modal-head">
+      <span class="dept-modal-eyebrow" id="deptConfirmEyebrow"><i class="fas fa-circle-info"></i>Confirm action</span>
+      <h3 id="deptConfirmTitle">Please confirm this action</h3>
+      <p id="deptConfirmMessage">Review the action before continuing.</p>
+    </div>
+    <div class="dept-modal-body">
+      <p class="dept-modal-note" id="deptConfirmNote">This change only affects the selected department.</p>
+    </div>
+    <div class="dept-modal-actions">
+      <button type="button" class="btn btn-outline-secondary" id="deptConfirmCancel">Cancel</button>
+      <button type="button" class="btn" id="deptConfirmSubmit">Continue</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  (function () {
+    const searchInput = document.getElementById('deptSearch');
+    const cards = Array.from(document.querySelectorAll('.js-dept-card'));
+    const memberSearchInputs = Array.from(document.querySelectorAll('.js-member-search'));
+    const confirmModal = document.getElementById('deptConfirmModal');
+    const confirmCancel = document.getElementById('deptConfirmCancel');
+    const confirmSubmit = document.getElementById('deptConfirmSubmit');
+    const confirmTitle = document.getElementById('deptConfirmTitle');
+    const confirmMessage = document.getElementById('deptConfirmMessage');
+    const confirmNote = document.getElementById('deptConfirmNote');
+    const confirmEyebrow = document.getElementById('deptConfirmEyebrow');
+    const inactiveDeleteForm = document.querySelector('.js-inactive-delete-form');
+    const inactiveDeleteSelect = document.querySelector('.js-inactive-delete-select');
+    let pendingForm = null;
+    const deptBackgrounds = {
+      hr: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=80',
+      'human resources': 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=80',
+      it: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1400&q=80',
+      'information technology': 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1400&q=80',
+      finance: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1400&q=80',
+      accounting: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1400&q=80',
+      operations: 'https://images.unsplash.com/photo-1553413077-190dd305871c?w=1400&q=80',
+      support: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1400&q=80',
+      'customer support': 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1400&q=80',
+      management: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1400&q=80',
+      manager: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1400&q=80',
+    };
+    const fallbackBg = 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1400&q=80';
+
+    cards.forEach((card) => {
+      const head = card.querySelector('.dept-panel-head');
+      if (!head) return;
+
+      const deptName = (card.getAttribute('data-dept-name') || '').trim();
+      const deptCode = (card.getAttribute('data-dept-code') || '').trim();
+
+      let bg = deptBackgrounds[deptName] || deptBackgrounds[deptCode] || '';
+      if (!bg) {
+        for (const key of Object.keys(deptBackgrounds)) {
+          if (deptName.includes(key) || key.includes(deptName)) {
+            bg = deptBackgrounds[key];
+            break;
+          }
+        }
+      }
+
+      head.style.backgroundImage =
+        `linear-gradient(135deg, rgba(15,23,42,.84), rgba(30,41,59,.52)), url('${bg || fallbackBg}')`;
+    });
+
+    memberSearchInputs.forEach((input) => {
+      input.addEventListener('input', function () {
+        const card = this.closest('.js-dept-card');
+        if (!card) return;
+
+        const term = this.value.trim().toLowerCase();
+        const rows = Array.from(card.querySelectorAll('.js-member-row'));
+        const emptyState = card.querySelector('.js-member-empty');
+        let visibleCount = 0;
+
+        rows.forEach((row) => {
+          const username = row.getAttribute('data-member-username') || '';
+          const matches = !term || username.includes(term);
+          row.classList.toggle('dept-hidden', !matches);
+          if (matches) visibleCount += 1;
+        });
+
+        if (emptyState) {
+          emptyState.style.display = rows.length && visibleCount === 0 ? 'block' : 'none';
+        }
+      });
+    });
+
+    function closeConfirmModal() {
+      if (!confirmModal) return;
+      confirmModal.classList.remove('show');
+      confirmModal.setAttribute('aria-hidden', 'true');
+      pendingForm = null;
+    }
+
+    function openConfirmModal(config) {
+      if (!confirmModal || !confirmSubmit) return;
+      pendingForm = config.form || null;
+      confirmTitle.textContent = config.title || 'Please confirm this action';
+      confirmMessage.textContent = config.message || 'Review the action before continuing.';
+      confirmNote.textContent = config.note || 'This change only affects the selected department.';
+      confirmEyebrow.innerHTML = config.eyebrow || '<i class="fas fa-circle-info"></i>Confirm action';
+      confirmSubmit.className = `btn ${config.confirmClass || 'btn-primary'}`;
+      confirmSubmit.textContent = config.confirmLabel || 'Continue';
+      confirmModal.classList.add('show');
+      confirmModal.setAttribute('aria-hidden', 'false');
+    }
+
+    document.querySelectorAll('.js-open-inactivate-modal').forEach((button) => {
+      button.addEventListener('click', function () {
+        const form = this.closest('form');
+        const departmentName = this.getAttribute('data-department-name') || 'This department';
+        openConfirmModal({
+          form,
+          eyebrow: '<i class="fas fa-triangle-exclamation"></i>Mark as inactive',
+          title: `Mark ${departmentName} as inactive?`,
+          message: `${departmentName} will stop accepting ticket creation and department assignment until it is reactivated.`,
+          note: 'Members stay attached to the department. Admins can still inspect department tickets and reactivate it later.',
+          confirmLabel: 'Mark as Inactive',
+          confirmClass: 'dept-btn-warning',
+        });
+      });
+    });
+
+    if (inactiveDeleteForm && inactiveDeleteSelect) {
+      const deleteTrigger = inactiveDeleteForm.querySelector('.js-open-delete-modal');
+      if (deleteTrigger) {
+        deleteTrigger.addEventListener('click', function () {
+          const selectedOption = inactiveDeleteSelect.options[inactiveDeleteSelect.selectedIndex];
+          const departmentName = selectedOption && selectedOption.value ? selectedOption.text : '';
+          if (!departmentName) {
+            inactiveDeleteForm.requestSubmit();
+            return;
+          }
+          openConfirmModal({
+            form: inactiveDeleteForm,
+            eyebrow: '<i class="fas fa-trash"></i>Permanently delete',
+            title: `Delete ${departmentName}?`,
+            message: `${departmentName} will be permanently removed from the system.`,
+            note: 'Use this only when the inactive department should no longer exist at all. This action cannot be undone.',
+            confirmLabel: 'Delete Department',
+            confirmClass: 'dept-modal-danger',
+          });
+        });
+      }
+    }
+
+    if (confirmCancel) {
+      confirmCancel.addEventListener('click', closeConfirmModal);
+    }
+
+    if (confirmSubmit) {
+      confirmSubmit.addEventListener('click', function () {
+        if (pendingForm) {
+          pendingForm.submit();
+        }
+        closeConfirmModal();
+      });
+    }
+
+    if (confirmModal) {
+      confirmModal.addEventListener('click', function (event) {
+        if (event.target === confirmModal) {
+          closeConfirmModal();
+        }
+      });
+    }
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closeConfirmModal();
+      }
+    });
+
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', function () {
+      const term = this.value.trim().toLowerCase();
+      cards.forEach((card) => {
+        const name = card.getAttribute('data-dept-name') || '';
+        const code = card.getAttribute('data-dept-code') || '';
+        const matches = !term || name.includes(term) || code.includes(term);
+        card.classList.toggle('dept-hidden', !matches);
+      });
+    });
+  })();
+</script>
+{% endblock %}

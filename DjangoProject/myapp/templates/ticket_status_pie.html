@@ -1,0 +1,228 @@
+{% extends "Base.html" %}
+{% block title %}Status Charts - HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <strong>Status Charts</strong>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .charts-wrap {
+    width: 100%;
+  }
+  .chart-shell {
+    border: 1px solid var(--slate-100);
+    border-radius: 12px;
+    padding: 16px 16px 10px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    min-height: 430px;
+    display: flex;
+    flex-direction: column;
+  }
+  .chart-canvas-wrap {
+    position: relative;
+    width: 100%;
+    min-height: 340px;
+    flex: 1 1 auto;
+  }
+  .chart-caption {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--slate-500);
+    text-align: center;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="charts-wrap">
+  <div class="row g-4">
+  <div class="col-12 col-xl-6">
+    <div class="hd-card">
+      <div class="hd-card-header">
+        <div class="hd-card-title"><i class="fas fa-chart-bar" style="color:var(--brand);"></i> Status Distribution</div>
+      </div>
+      <div class="hd-card-body text-center">
+        <div class="chart-shell">
+          <div class="chart-canvas-wrap">
+            <canvas id="statusDistributionChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-caption">Quick share of current ticket statuses.</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-xl-6">
+    <div class="hd-card">
+      <div class="hd-card-header">
+        <div class="hd-card-title"><i class="fas fa-chart-pie" style="color:var(--brand);"></i> Workflow Snapshot</div>
+      </div>
+      <div class="hd-card-body text-center">
+        <div class="chart-shell">
+          <div class="chart-canvas-wrap">
+            <canvas id="workflowSnapshotChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-caption">Open workload versus completed and reopened tickets.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+const statusLabels = {{ status_labels|safe }};
+const statusCounts = {{ status_counts|safe }};
+const statusColors = {{ status_colors|safe }};
+const statusPercentages = {{ status_percentages|safe }};
+const statusTotal = {{ status_total|default:0 }};
+
+const defaultTooltip = {
+  backgroundColor: '#0F172A',
+  titleColor: '#fff',
+  bodyColor: '#E2E8F0',
+  displayColors: true,
+  padding: 10,
+};
+
+const distributionCtx = document.getElementById('statusDistributionChart');
+if (distributionCtx) {
+  new Chart(distributionCtx, {
+    type: 'polarArea',
+    data: {
+      labels: statusLabels.map((label, index) => `${label} (${statusCounts[index] || 0})`),
+      datasets: [{
+        label: 'Status Share',
+        data: statusCounts,
+        backgroundColor: statusColors,
+        borderColor: '#FFFFFF',
+        borderWidth: 2,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            color: '#334155',
+            font: { size: 12, weight: 700 },
+            padding: 16,
+            usePointStyle: true,
+            pointStyle: 'circle',
+          }
+        },
+        tooltip: {
+          ...defaultTooltip,
+          callbacks: {
+            label: (context) => {
+              const count = statusCounts[context.dataIndex] || 0;
+              const value = statusPercentages[context.dataIndex] || 0;
+              return `${count} tickets (${value}%)`;
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+const workflowCtx = document.getElementById('workflowSnapshotChart');
+if (workflowCtx) {
+  const workflowBuckets = {
+    active: 0,
+    completed: 0,
+    reopened: 0,
+  };
+
+  statusLabels.forEach((label, index) => {
+    const normalizedLabel = String(label || '').toLowerCase();
+    const count = statusCounts[index] || 0;
+
+    if (normalizedLabel === 'closed' || normalizedLabel === 'resolved') {
+      workflowBuckets.completed += count;
+    } else if (normalizedLabel === 'reopen') {
+      workflowBuckets.reopened += count;
+    } else {
+      workflowBuckets.active += count;
+    }
+  });
+
+  const workflowLabels = ['Active Queue', 'Completed', 'Reopened'];
+  const workflowData = [
+    workflowBuckets.active,
+    workflowBuckets.completed,
+    workflowBuckets.reopened,
+  ];
+  const workflowColors = ['#0F766E', '#2563EB', '#F59E0B'];
+
+  new Chart(workflowCtx, {
+    type: 'doughnut',
+    data: {
+      labels: workflowLabels,
+      datasets: [{
+        label: 'Workflow',
+        data: workflowData,
+        backgroundColor: workflowColors,
+        borderColor: '#FFFFFF',
+        borderWidth: 3,
+        hoverOffset: 10,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '62%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            color: '#334155',
+            font: { size: 12, weight: 700 },
+            padding: 16,
+            usePointStyle: true,
+            pointStyle: 'circle',
+          }
+        },
+        tooltip: {
+          ...defaultTooltip,
+          callbacks: {
+            label: (context) => {
+              const value = context.raw || 0;
+              const percent = statusTotal ? ((value / statusTotal) * 100).toFixed(1) : '0.0';
+              return `${value} tickets (${percent}%)`;
+            }
+          }
+        }
+      }
+    },
+    plugins: [{
+      id: 'workflowCenterLabel',
+      afterDatasetsDraw(chart) {
+        const {ctx} = chart;
+        const meta = chart.getDatasetMeta(0);
+        if (!meta.data.length) {
+          return;
+        }
+        const centerX = meta.data[0].x;
+        const centerY = meta.data[0].y;
+        ctx.save();
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#64748B';
+        ctx.font = '600 12px sans-serif';
+        ctx.fillText('Total', centerX, centerY - 10);
+        ctx.fillStyle = '#0F172A';
+        ctx.font = '700 22px sans-serif';
+        ctx.fillText(String(statusTotal || 0), centerX, centerY + 14);
+        ctx.restore();
+      }
+    }]
+  });
+}
+</script>
+{% endblock %}

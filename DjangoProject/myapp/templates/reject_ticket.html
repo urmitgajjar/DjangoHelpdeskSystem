@@ -1,0 +1,44 @@
+{% extends "Base.html" %}
+{% block title %}Reject Ticket - HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <strong>Reject Ticket #{{ ticket.id }}</strong>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-9 col-lg-7">
+    <div class="hd-card">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-times-circle" style="color:var(--danger);"></i>
+          Reject Ticket #{{ ticket.id }}
+        </div>
+      </div>
+      <div class="hd-card-body">
+        <p style="font-size:13px;color:var(--slate-600);margin-bottom:14px;">
+          Tell us why you want to reject this ticket. It will be reassigned based on the current rules.
+        </p>
+        <div style="font-size:13px;font-weight:700;color:var(--slate-800);margin-bottom:10px;">
+          {{ ticket.TICKET_TITLE }}
+        </div>
+
+        <form method="POST" action="{% url 'removeticket' ticket.id %}">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="reject_reason" class="form-label" style="font-size:12px;font-weight:700;">Reason <span class="text-danger">*</span></label>
+            <textarea id="reject_reason" name="reject_reason" class="form-control" rows="4" required minlength="5"
+                      placeholder="Explain why you are rejecting this ticket..."></textarea>
+          </div>
+          <div class="d-flex gap-2">
+            <a href="{% url 'ticketinfo' ticket.id %}" class="btn btn-outline-secondary">Cancel</a>
+            <button type="submit" class="btn btn-danger">
+              <i class="fas fa-times me-1"></i>Reject Ticket
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

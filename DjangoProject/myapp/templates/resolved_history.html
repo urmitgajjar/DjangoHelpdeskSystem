@@ -1,0 +1,305 @@
+{% extends "Base.html" %}
+{% block title %}Resolved History - HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <a href="{{ dashboard_url|default:'/' }}">Dashboard</a>
+  <span class="bc-sep">/</span>
+  <strong>Resolved History</strong>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .stars { display: inline-flex; gap: 2px; }
+  .star  { font-size: 13px; color: var(--gray-300); }
+  .star.filled { color: #F59E0B; }
+
+  .ticket-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: start;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--gray-100);
+    transition: background .12s;
+  }
+  .ticket-row:last-child { border-bottom: none; }
+  .ticket-row:hover      { background: var(--gray-50); }
+
+  .res-time {
+    font-size: 11.5px; font-weight: 600;
+    padding: 3px 9px; border-radius: 20px;
+    background: var(--info-bg); color: var(--info);
+    white-space: nowrap;
+  }
+
+  .filter-pill {
+    font-size: 12px; font-weight: 600;
+    padding: 5px 14px; border-radius: 20px;
+    border: 1.5px solid var(--gray-200);
+    background: #fff; cursor: pointer;
+    transition: all .15s; white-space: nowrap;
+    text-decoration: none; color: var(--gray-600);
+  }
+  .filter-pill:hover,
+  .filter-pill.active {
+    background: var(--brand); color: #fff; border-color: var(--brand);
+  }
+
+  .search-wrap { position: relative; max-width: 280px; }
+  .search-wrap i {
+    position: absolute; left: 10px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray-400); font-size: 12px; pointer-events: none;
+  }
+  .search-wrap input { padding-left: 30px; }
+
+  .empty-wrap {
+    text-align: center;
+    padding: 64px 24px;
+  }
+  .empty-wrap .empty-icon {
+    width: 64px; height: 64px;
+    background: var(--gray-100); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px; font-size: 24px; color: var(--gray-400);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header d-flex align-items-center justify-content-between flex-wrap gap-3">
+  <div>
+    <div class="page-title"><i class="fas fa-history me-2 text-success"></i>Resolved History</div>
+    <div class="page-sub">Resolved and closed tickets across all departments</div>
+  </div>
+  <a href="{% url 'ticketdetail' %}" class="btn btn-primary btn-sm">
+    <i class="fas fa-plus"></i> New Ticket
+  </a>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon si-green"><i class="fas fa-check-double"></i></div>
+      <div>
+        <div class="stat-label">Total Resolved</div>
+        <div class="stat-value">{{ stats.total_resolved }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon si-blue"><i class="fas fa-check"></i></div>
+      <div>
+        <div class="stat-label">Resolved</div>
+        <div class="stat-value">{{ stats.resolved }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-card">
+      <div class="stat-icon si-yellow"><i class="fas fa-star"></i></div>
+      <div>
+        <div class="stat-label">Avg. Rating</div>
+        <div class="stat-value">
+          {% if stats.avg_rating %}
+            {{ stats.avg_rating|floatformat:1 }}<span style="font-size:14px;color:var(--gray-400);font-weight:500;">/5</span>
+          {% else %}
+            <span style="font-size:16px;color:var(--gray-400);font-weight:500;">-</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hd-card mb-4">
+  <div class="hd-card-body">
+    <form method="get" class="d-flex align-items-center flex-wrap gap-3">
+      <div style="min-width:180px;">
+        <select name="search_by" class="form-select form-select-sm">
+          <option value="all" {% if search_by == 'all' %}selected{% endif %}>All Fields</option>
+          <option value="id" {% if search_by == 'id' %}selected{% endif %}>Ticket ID</option>
+          <option value="title" {% if search_by == 'title' %}selected{% endif %}>Title</option>
+          <option value="description" {% if search_by == 'description' %}selected{% endif %}>Description</option>
+          <option value="name" {% if search_by == 'name' %}selected{% endif %}>User Name</option>
+          <option value="department" {% if search_by == 'department' %}selected{% endif %}>Department</option>
+        </select>
+      </div>
+
+      <div class="search-wrap flex-grow-1">
+        <i class="fas fa-search"></i>
+        <input type="text" name="q" value="{{ request.GET.q }}"
+               class="form-control form-control-sm"
+               placeholder="Enter search text...">
+      </div>
+      <button type="submit" class="btn btn-sm btn-outline-secondary">Search</button>
+
+    </form>
+  </div>
+</div>
+
+{% if resolved_tickets %}
+<div class="hd-card">
+  <div class="hd-card-header">
+    <span class="hd-card-title">
+      <i class="fas fa-list me-2 text-success"></i>
+      Tickets - {{ resolved_tickets.paginator.count }} total
+    </span>
+    <span style="font-size:12px;color:var(--gray-400);">
+      Page {{ resolved_tickets.number }} of {{ resolved_tickets.paginator.num_pages }}
+    </span>
+  </div>
+
+  <div>
+    {% for ticket in resolved_tickets %}
+    <div class="ticket-row">
+
+      <div>
+        <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
+          <span class="ticket-id">#{{ ticket.id }}</span>
+
+          <span class="status-badge {% if ticket.TICKET_STATUS == 'Closed' %}sb-closed{% else %}sb-resolved{% endif %}">
+            {{ ticket.TICKET_STATUS }}
+          </span>
+
+          {% if ticket.effective_priority == 'URGENT' %}
+            <span class="priority-badge pb-urgent"><i class="fas fa-fire"></i> Urgent</span>
+          {% elif ticket.effective_priority == 'HIGH' %}
+            <span class="priority-badge pb-high">High</span>
+          {% elif ticket.effective_priority == 'MEDIUM' %}
+            <span class="priority-badge pb-medium">Medium</span>
+          {% elif ticket.effective_priority == 'LOW' %}
+            <span class="priority-badge pb-low">Low</span>
+          {% endif %}
+
+          {% if ticket.category %}
+          <span style="font-size:11.5px;color:var(--gray-500);">
+            <i class="{{ ticket.category.icon }} me-1" style="color:{{ ticket.category.color }};"></i>
+            {{ ticket.category.name }}
+          </span>
+          {% endif %}
+        </div>
+
+        <div class="ticket-title mb-1">
+          {{ ticket.TICKET_TITLE }}
+        </div>
+
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+          <span class="ticket-meta">
+            <i class="fas fa-calendar-plus me-1"></i>
+            Created {{ ticket.TICKET_CREATED_ON|date:"M d, Y" }}
+          </span>
+          {% if ticket.TICKET_CLOSED_ON %}
+          <span class="ticket-meta">
+            <i class="fas fa-calendar-check me-1"></i>
+            Closed {{ ticket.TICKET_CLOSED_ON|date:"M d, Y" }}
+          </span>
+          {% endif %}
+          {% if ticket.assigned_to %}
+          <span class="ticket-meta">
+            <i class="fas fa-user-check me-1"></i>
+            Handled by <strong>{{ ticket.assigned_to.get_full_name|default:ticket.assigned_to.username }}</strong>
+          </span>
+          {% endif %}
+          {% if ticket.assigned_department %}
+          <span class="ticket-meta">
+            <i class="fas fa-building me-1"></i>
+            {{ ticket.assigned_department.name }}
+          </span>
+          {% endif %}
+        </div>
+
+        {% if ticket.ticketrating_set.first %}
+        {% with rating=ticket.ticketrating_set.first %}
+        <div class="d-flex align-items-center gap-2 mt-2">
+          <div class="stars">
+            {% for i in "12345" %}
+              <i class="fas fa-star star {% if forloop.counter <= rating.rating %}filled{% endif %}"></i>
+            {% endfor %}
+          </div>
+          {% if rating.feedback %}
+          <span style="font-size:12px;color:var(--gray-500);font-style:italic;">
+            "{{ rating.feedback|truncatechars:80 }}"
+          </span>
+          {% endif %}
+        </div>
+        {% endwith %}
+        {% endif %}
+      </div>
+
+      <div class="d-flex flex-column align-items-end gap-2">
+        {% if ticket.TICKET_CLOSED_ON and ticket.TICKET_CREATED_ON %}
+          <span class="res-time">
+            <i class="fas fa-clock me-1"></i>
+            {{ ticket.TICKET_CLOSED_ON|timesince:ticket.TICKET_CREATED_ON }}
+          </span>
+        {% endif %}
+      </div>
+
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if resolved_tickets.has_other_pages %}
+  <div class="hd-card-footer d-flex align-items-center justify-content-between">
+    <span style="font-size:12.5px;color:var(--gray-500);">
+      Showing {{ resolved_tickets.start_index }}-{{ resolved_tickets.end_index }}
+      of {{ resolved_tickets.paginator.count }} tickets
+    </span>
+    <nav class="hd-pager">
+      {% if resolved_tickets.has_previous %}
+        <a href="?page={{ resolved_tickets.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}{% if search_by %}&search_by={{ search_by|urlencode }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status|urlencode }}{% endif %}"
+           class="hd-page"><i class="fas fa-chevron-left"></i></a>
+      {% else %}
+        <span class="hd-page disabled"><i class="fas fa-chevron-left"></i></span>
+      {% endif %}
+
+      {% for num in resolved_tickets.paginator.page_range %}
+        {% if resolved_tickets.number == num %}
+          <span class="hd-page active">{{ num }}</span>
+        {% elif num >= resolved_tickets.number|add:"-2" and num <= resolved_tickets.number|add:"2" %}
+          <a href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}{% if search_by %}&search_by={{ search_by|urlencode }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status|urlencode }}{% endif %}"
+             class="hd-page">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if resolved_tickets.has_next %}
+        <a href="?page={{ resolved_tickets.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}{% if search_by %}&search_by={{ search_by|urlencode }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status|urlencode }}{% endif %}"
+           class="hd-page"><i class="fas fa-chevron-right"></i></a>
+      {% else %}
+        <span class="hd-page disabled"><i class="fas fa-chevron-right"></i></span>
+      {% endif %}
+    </nav>
+  </div>
+  {% endif %}
+
+</div>
+
+{% else %}
+
+<div class="hd-card">
+  <div class="empty-wrap">
+    <div class="empty-icon"><i class="fas fa-history"></i></div>
+    <div class="empty-title">No resolved tickets yet</div>
+    <div class="empty-text">
+      {% if request.GET.q %}
+        No tickets match your current filters. Try clearing the search or filter.
+      {% else %}
+        Tickets will appear here once they are closed or resolved.
+      {% endif %}
+    </div>
+    {% if request.GET.q %}
+      <a href="{% url 'resolved_history' %}" class="btn btn-sm btn-outline-secondary me-2">
+        <i class="fas fa-times me-1"></i>Clear Filters
+      </a>
+    {% endif %}
+    <a href="{% url 'ticketdetail' %}" class="btn btn-sm btn-primary">
+      <i class="fas fa-plus me-1"></i>Create a Ticket
+    </a>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,248 @@
+{% extends "Base.html" %}
+{% load string_filters %}
+{% block title %}Activity Log — HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <a href="{% url 'profile' %}">My Profile</a>
+  <span class="bc-sep">/</span>
+  <strong>Activity Log</strong>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  
+  .act-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--slate-100);
+    transition: background .12s;
+  }
+  .act-row:last-child { border-bottom: none; }
+  .act-row:hover { background: var(--slate-50); }
+
+  .act-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; flex-shrink: 0;
+    color: #fff;
+  }
+
+  .act-title { font-size: 13.5px; font-weight: 600; color: var(--slate-800); }
+  .act-meta  { font-size: 12px; color: var(--slate-400); margin-top: 2px; }
+
+  .act-type-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 10.5px; font-weight: 700;
+    padding: 2px 8px; border-radius: 20px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+
+  .search-wrap { position: relative; max-width: 280px; }
+  .search-wrap i { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--slate-400); font-size: 12px; pointer-events: none; }
+  .search-wrap input { padding-left: 30px; }
+
+  .type-pill {
+    font-size: 11.5px; font-weight: 700;
+    padding: 4px 12px; border-radius: 20px;
+    border: 1.5px solid var(--slate-200);
+    background: #fff; cursor: pointer;
+    transition: all .15s; white-space: nowrap;
+  }
+  .type-pill:hover, .type-pill.active {
+    background: var(--brand); color: #fff; border-color: var(--brand);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header d-flex align-items-center justify-content-between flex-wrap gap-3">
+  <div>
+    <div class="page-title">Activity Log</div>
+    <div class="page-sub">Your complete history of ticket activity and system events</div>
+  </div>
+  <a href="{% url 'profile' %}" class="btn btn-sm btn-outline-secondary">
+    <i class="fas fa-arrow-left me-1"></i>Back to Profile
+  </a>
+</div>
+
+{% if activities %}
+
+<div class="row g-3 mb-4">
+  <div class="col-6 col-md-3">
+    <div class="stat-card">
+      <div class="stat-icon si-indigo"><i class="fas fa-stream"></i></div>
+      <div><div class="stat-label">Total Events</div><div class="stat-value">{{ activities.paginator.count }}</div></div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="stat-card">
+      <div class="stat-icon si-green"><i class="fas fa-check-circle"></i></div>
+      <div><div class="stat-label">Resolved</div><div class="stat-value">{{ stats.resolved|default:"—" }}</div></div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="stat-card">
+      <div class="stat-icon si-blue"><i class="fas fa-comment-alt"></i></div>
+      <div><div class="stat-label">Comments</div><div class="stat-value">{{ stats.comments|default:"—" }}</div></div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<div class="hd-card">
+
+  <div class="hd-card-header" style="flex-wrap:wrap;gap:10px;">
+    <div class="hd-card-title">
+      <i class="fas fa-list" style="color:var(--brand);"></i>
+      Event History
+    </div>
+    <div class="d-flex align-items-center gap-2 flex-wrap" style="margin-left:auto;">
+      <div class="search-wrap">
+        <i class="fas fa-search"></i>
+        <input type="text" class="form-control form-control-sm" id="actSearch"
+               placeholder="Search activity…" oninput="filterAct()">
+      </div>
+    </div>
+  </div>
+
+  {% if activities %}
+  <div style="padding:10px 20px;border-bottom:1px solid var(--slate-100);
+              display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+    <button class="type-pill active" onclick="filterType('all', this)">All</button>
+    <button class="type-pill" onclick="filterType('created', this)">Created</button>
+    <button class="type-pill" onclick="filterType('commented', this)">Comments</button>
+    <button class="type-pill" onclick="filterType('assigned', this)">Assigned</button>
+    <button class="type-pill" onclick="filterType('resolved', this)">Resolved</button>
+  </div>
+  {% endif %}
+
+  {% if activities %}
+  <div id="actList">
+    {% for act in activities %}
+    <div class="act-row"
+         data-type="{{ act.action|lower|default:'event' }}"
+         data-search="{{ act.description|lower|default:'' }} {{ act.user.username|lower|default:'' }} {% if act.ticket %}{{ act.ticket.TICKET_TITLE|lower }}{% endif %}">
+
+      <div class="act-avatar"
+           style="background:
+             {% if act.action == 'CREATED'          %}var(--brand)
+             {% elif act.action == 'RESOLVED'        %}var(--success)
+             {% elif act.action == 'CLOSED'          %}var(--slate-500)
+             {% elif act.action == 'COMMENTED'       %}var(--brand)
+             {% elif act.action == 'ASSIGNED'        %}#7C3AED
+             {% elif act.action == 'REOPENED'        %}var(--warning)
+             {% else %}var(--slate-400){% endif %};">
+        <i class="fas
+          {% if act.action == 'CREATED'          %}fa-plus
+          {% elif act.action == 'RESOLVED'        %}fa-check
+          {% elif act.action == 'CLOSED'          %}fa-times
+          {% elif act.action == 'COMMENTED'       %}fa-comment
+          {% elif act.action == 'ASSIGNED'        %}fa-user-check
+          {% elif act.action == 'REOPENED'        %}fa-redo
+          {% else %}fa-circle{% endif %}"></i>
+      </div>
+
+      <div style="flex:1;min-width:0;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;flex-wrap:wrap;">
+          <div>
+            <div class="act-title">
+              {% if act.ticket %}
+                <a href="{% url 'ticketinfo' act.ticket.id %}"
+                   style="color:inherit;transition:color .12s;"
+                   onmouseover="this.style.color='var(--brand)'"
+                   onmouseout="this.style.color='inherit'">
+                  {{ act.ticket.TICKET_TITLE|truncatechars:55 }}
+                </a>
+              {% else %}
+                System Event
+              {% endif %}
+            </div>
+            <div class="act-meta">
+              {% if act.description %}{{ act.description }}{% endif %}
+              {% if act.user %} · by <strong>{{ act.user.username }}</strong>{% endif %}
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <span class="act-type-badge"
+                  style="background:
+                    {% if act.action == 'CREATED'          %}var(--brand-light);color:var(--brand);border:1px solid var(--brand-muted)
+                    {% elif act.action == 'RESOLVED'        %}var(--success-bg);color:var(--success);border:1px solid var(--success-border)
+                    {% elif act.action == 'CLOSED'          %}var(--slate-100);color:var(--slate-500);border:1px solid var(--slate-200)
+                    {% elif act.action == 'COMMENTED'       %}var(--brand-light);color:var(--brand);border:1px solid var(--brand-muted)
+                    {% elif act.action == 'REOPENED'        %}var(--warning-bg);color:var(--warning);border:1px solid var(--warning-border)
+                    {% else %}var(--slate-100);color:var(--slate-500);border:1px solid var(--slate-200){% endif %};">
+              {{ act.action|lower|replace:"_, " }}
+            </span>
+            <span style="font-size:11.5px;color:var(--slate-400);white-space:nowrap;">
+              {{ act.timestamp|date:"M d, Y" }}
+              <span style="color:var(--slate-300);">· {{ act.timestamp|date:"H:i" }}</span>
+            </span>
+          </div>
+        </div>
+
+        {% if act.old_value and act.new_value %}
+        <div style="display:flex;align-items:center;gap:7px;margin-top:7px;flex-wrap:wrap;">
+          <code style="font-size:11px;background:var(--danger-bg);color:var(--danger);
+                       padding:2px 7px;border-radius:4px;">{{ act.old_value|truncatechars:30 }}</code>
+          <i class="fas fa-arrow-right" style="font-size:10px;color:var(--slate-300);"></i>
+          <code style="font-size:11px;background:var(--success-bg);color:var(--success);
+                       padding:2px 7px;border-radius:4px;">{{ act.new_value|truncatechars:30 }}</code>
+        </div>
+        {% endif %}
+      </div>
+
+    </div>
+    {% endfor %}
+  </div>
+
+  <div id="actEmpty" style="display:none;padding:40px;text-align:center;">
+    <div style="font-size:32px;color:var(--slate-200);margin-bottom:10px;"><i class="fas fa-search"></i></div>
+    <div style="font-size:14px;font-weight:600;color:var(--slate-500);">No matching events</div>
+  </div>
+
+  {% else %}
+  <div class="empty-state">
+    <div class="empty-icon"><i class="fas fa-stream"></i></div>
+    <div class="empty-title">No activity yet</div>
+    <div class="empty-text">
+      Ticket events like status changes, comments and assignments will appear here.
+    </div>
+    <a href="{% url 'base' %}" class="btn btn-sm btn-primary">
+      <i class="fas fa-ticket-alt me-1"></i>Browse Tickets
+    </a>
+  </div>
+  {% endif %}
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  let currentType = 'all';
+
+  function filterAct() {
+    const q    = document.getElementById('actSearch').value.toLowerCase();
+    const rows = document.querySelectorAll('.act-row');
+    let visible = 0;
+
+    rows.forEach(row => {
+      const matchType   = currentType === 'all' || row.dataset.type.includes(currentType);
+      const matchSearch = !q || row.dataset.search.includes(q);
+      const show = matchType && matchSearch;
+      row.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    document.getElementById('actEmpty').style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  function filterType(type, btn) {
+    currentType = type;
+    document.querySelectorAll('.type-pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    filterAct();
+  }
+</script>
+{% endblock %}

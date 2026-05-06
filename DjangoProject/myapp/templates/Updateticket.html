@@ -1,0 +1,325 @@
+{% extends "Base.html" %}
+{% block title %}Edit Ticket #{{ ticket.id }} — HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <a href="{% url 'base' %}">Dashboard</a>
+  <span class="bc-sep">/</span>
+  <a href="{% url 'ticketinfo' ticket.id %}">Ticket #{{ ticket.id }}</a>
+  <span class="bc-sep">/</span>
+  <strong>Edit</strong>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .edit-wrap { max-width: 820px; margin: 0 auto; }
+
+  .change-warning {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 13px 16px;
+    background: var(--warning-bg);
+    border: 1px solid var(--warning-border);
+    border-radius: var(--r);
+    font-size: 13px; color: var(--slate-600); line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .char-counter {
+    font-size: 11.5px; color: var(--slate-400);
+    text-align: right; margin-top: 4px; transition: color .15s;
+  }
+  .char-counter.warn { color: var(--warning); font-weight: 600; }
+  .char-counter.over { color: var(--danger);  font-weight: 700; }
+
+  .change-log {
+    display: none;
+    background: var(--brand-light);
+    border: 1px solid var(--brand-muted);
+    border-radius: var(--r);
+    padding: 10px 14px;
+    font-size: 12.5px; color: var(--brand-dark);
+    margin-bottom: 16px;
+  }
+  .change-log.visible { display: block; }
+  .change-log ul { margin: 0; padding-left: 16px; }
+  .change-log li { margin-top: 3px; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="edit-wrap">
+
+  <div class="page-header d-flex align-items-start justify-content-between gap-3 flex-wrap">
+    <div>
+      <div class="page-title">
+        Edit Ticket <span style="color:var(--brand);">#{{ ticket.id }}</span>
+      </div>
+      <div class="page-sub">{{ ticket.TICKET_TITLE|truncatechars:70 }}</div>
+    </div>
+    <span class="status-badge mt-1
+      {% if ticket.TICKET_STATUS == 'Open'        %}sb-open
+      {% elif ticket.TICKET_STATUS == 'In Progress'%}sb-progress
+      {% elif ticket.TICKET_STATUS == 'Closed'    %}sb-closed
+      {% elif ticket.TICKET_STATUS == 'Resolved'  %}sb-resolved
+      {% elif ticket.TICKET_STATUS == 'Reopen'    %}sb-reopen
+      {% else %}sb-reopen{% endif %}">
+      {{ ticket.TICKET_STATUS }}
+    </span>
+  </div>
+
+  <div class="change-log" id="changeLog">
+    <strong><i class="fas fa-info-circle me-1"></i>Pending changes:</strong>
+    <ul id="changeList"></ul>
+  </div>
+
+  <form method="POST" enctype="multipart/form-data" id="editForm" novalidate>
+    {% csrf_token %}
+
+    <div class="hd-card mb-4">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-ticket-alt" style="color:var(--brand);"></i>
+          Ticket Information
+        </div>
+      </div>
+      <div class="hd-card-body">
+        <div class="row g-3">
+
+          {% if form.TICKET_TITLE %}
+          <div class="col-12">
+            <label class="form-label">Title <span class="text-danger">*</span></label>
+            {{ form.TICKET_TITLE }}
+            {% if form.TICKET_TITLE.errors %}
+              <div class="field-error">{{ form.TICKET_TITLE.errors.0 }}</div>
+            {% endif %}
+            <div class="field-error" id="err_title" style="display:none;">Title is required.</div>
+          </div>
+          {% endif %}
+
+          {% if form.TICKET_DESCRIPTION %}
+          <div class="col-12">
+            <label class="form-label">Description <span class="text-danger">*</span></label>
+            {{ form.TICKET_DESCRIPTION }}
+            <div style="display:flex;justify-content:space-between;margin-top:4px;">
+              <div class="form-text" style="margin:0;">Be specific about the issue and steps to reproduce</div>
+              <div class="char-counter" id="descCounter">0</div>
+            </div>
+            {% if form.TICKET_DESCRIPTION.errors %}
+              <div class="field-error">{{ form.TICKET_DESCRIPTION.errors.0 }}</div>
+            {% endif %}
+            <div class="field-error" id="err_desc" style="display:none;">Description must be at least 20 characters.</div>
+          </div>
+          {% endif %}
+
+          {% if form.category %}
+          <div class="col-sm-6">
+            <label class="form-label">Category</label>
+            {{ form.category }}
+          </div>
+          {% endif %}
+
+          {% if form.priority %}
+          <div class="col-sm-6">
+            <label class="form-label">Priority</label>
+            {{ form.priority }}
+            <div class="form-text">Changing priority updates ticket urgency for the team</div>
+          </div>
+          {% endif %}
+
+          {% if form.TICKET_STATUS %}
+          <div class="col-sm-6">
+            <label class="form-label">Status</label>
+            {{ form.TICKET_STATUS }}
+          </div>
+          {% endif %}
+
+          {% if form.assigned_department %}
+          <div class="col-sm-6">
+            <label class="form-label">Department</label>
+            {{ form.assigned_department }}
+            <div class="form-text">Changing department notifies all members</div>
+          </div>
+          {% endif %}
+
+          {% if form.assigned_to %}
+          <div class="col-sm-6">
+            <label class="form-label">Assign To</label>
+            {{ form.assigned_to }}
+          </div>
+          {% endif %}
+
+          {% if form.TICKET_DUE_DATE %}
+          <div class="col-sm-6">
+            <label class="form-label">Due Date <span class="text-danger">*</span></label>
+            {{ form.TICKET_DUE_DATE }}
+            {% if form.TICKET_DUE_DATE.errors %}
+              <div class="field-error">{{ form.TICKET_DUE_DATE.errors.0 }}</div>
+            {% endif %}
+            <div class="field-error" id="err_due" style="display:none;">Due date must be today or later.</div>
+          </div>
+          {% endif %}
+
+          {% if form.extend_due_date %}
+          <div class="col-sm-6">
+            <label class="form-label">Extend Due Date</label>
+            {{ form.extend_due_date }}
+            <div class="form-text">
+              Current due date: {{ ticket.TICKET_DUE_DATE|date:"M d, Y" }}. Select a later date.
+            </div>
+            {% if form.extend_due_date.help_text %}
+              <div class="form-text">{{ form.extend_due_date.help_text }}</div>
+            {% endif %}
+            {% if form.extend_due_date.errors %}
+              <div class="field-error">{{ form.extend_due_date.errors.0 }}</div>
+            {% endif %}
+            <div class="field-error" id="err_extend_due" style="display:none;">Extended due date must be later than current due date.</div>
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+
+    <div class="hd-card">
+      <div class="hd-card-body">
+
+        <div class="change-warning">
+          <i class="fas fa-exclamation-triangle mt-1" style="color:var(--warning);flex-shrink:0;"></i>
+          <div>
+            <strong style="color:var(--slate-800);">Heads up:</strong>
+            {% if form.TICKET_TITLE %}
+            Changing <strong>priority</strong> or <strong>department</strong> will automatically
+            update ticket urgency metadata.
+            {% else %}
+            As admin, you can update <strong>priority</strong>, <strong>department</strong>, and <strong>extend due date</strong>.
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2">
+          <a href="{% url 'ticketinfo' ticket.id %}" class="btn btn-outline-secondary">
+            <i class="fas fa-times me-1"></i>Cancel
+          </a>
+          <button type="submit" class="btn btn-primary" id="saveBtn">
+            <i class="fas fa-save me-2"></i>Save Changes
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  
+  const originals = {};
+  document.querySelectorAll('#editForm input, #editForm select, #editForm textarea').forEach(el => {
+    if (el.name) originals[el.name] = el.value;
+  });
+
+  const changeLog  = document.getElementById('changeLog');
+  const changeList = document.getElementById('changeList');
+  const fieldLabels = {
+    TICKET_TITLE:        'Title',
+    TICKET_DESCRIPTION:  'Description',
+    category:          'Category',
+    priority:          'Priority',
+    TICKET_STATUS:       'Status',
+    assigned_department: 'Department',
+    assigned_to:       'Assigned To',
+    TICKET_DUE_DATE:     'Due Date',
+    extend_due_date:   'Extend Due Date',
+  };
+
+  function updateChangeLog() {
+    const changes = [];
+    document.querySelectorAll('#editForm input, #editForm select, #editForm textarea').forEach(el => {
+      if (!el.name || el.type === 'hidden' || el.name === 'csrfmiddlewaretoken') return;
+      if (originals[el.name] !== undefined && el.value !== originals[el.name]) {
+        const label = fieldLabels[el.name] || el.name;
+        changes.push(label);
+      }
+    });
+    const unique = [...new Set(changes)];
+    if (unique.length) {
+      changeList.innerHTML = unique.map(c => `<li>${c}</li>`).join('');
+      changeLog.classList.add('visible');
+    } else {
+      changeLog.classList.remove('visible');
+    }
+  }
+
+  document.querySelectorAll('#editForm input, #editForm select, #editForm textarea')
+          .forEach(el => el.addEventListener('change', updateChangeLog));
+
+  const descTA  = document.getElementById('id_TICKET_DESCRIPTION');
+  const counter = document.getElementById('descCounter');
+  const MAX     = 2000;
+
+  function updateCounter() {
+    if (!descTA || !counter) return;
+    const len = descTA.value.length;
+    counter.textContent = `${len} / ${MAX}`;
+    counter.classList.remove('warn','over');
+    if (len > MAX)          counter.classList.add('over');
+    else if (len > MAX*.8)  counter.classList.add('warn');
+  }
+  if (descTA) { descTA.addEventListener('input', updateCounter); updateCounter(); }
+
+  document.getElementById('editForm').addEventListener('submit', function(e) {
+    let valid = true;
+
+    const title    = document.getElementById('id_TICKET_TITLE');
+    const errTitle = document.getElementById('err_title');
+    if (title && !title.value.trim()) {
+      title.classList.add('is-invalid'); errTitle.style.display = 'block'; valid = false;
+    } else if (title) {
+      title.classList.remove('is-invalid'); errTitle.style.display = 'none';
+    }
+
+    const desc    = document.getElementById('id_TICKET_DESCRIPTION');
+    const errDesc = document.getElementById('err_desc');
+    if (desc && desc.value.trim().length < 20) {
+      desc.classList.add('is-invalid'); errDesc.style.display = 'block'; valid = false;
+    } else if (desc) {
+      desc.classList.remove('is-invalid'); errDesc.style.display = 'none';
+    }
+
+    const due    = document.getElementById('id_TICKET_DUE_DATE');
+    const errDue = document.getElementById('err_due');
+    if (due && due.value) {
+      const today  = new Date(); today.setHours(0,0,0,0);
+      const picked = new Date(due.value);
+      if (picked < today) {
+        due.classList.add('is-invalid'); errDue.style.display = 'block'; valid = false;
+      } else {
+        due.classList.remove('is-invalid'); errDue.style.display = 'none';
+      }
+    }
+
+    const extendDue = document.getElementById('id_extend_due_date');
+    const errExtendDue = document.getElementById('err_extend_due');
+    if (extendDue && extendDue.value) {
+      const minDateRaw = extendDue.getAttribute('min');
+      if (minDateRaw) {
+        const minDate = new Date(minDateRaw);
+        const pickedDate = new Date(extendDue.value);
+        if (pickedDate < minDate) {
+          extendDue.classList.add('is-invalid'); errExtendDue.style.display = 'block'; valid = false;
+        } else {
+          extendDue.classList.remove('is-invalid'); errExtendDue.style.display = 'none';
+        }
+      }
+    }
+
+    if (!valid) { e.preventDefault(); return; }
+
+    const btn = document.getElementById('saveBtn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Saving…';
+    btn.disabled  = true;
+  });
+</script>
+{% endblock %}
+

@@ -1,0 +1,218 @@
+{% extends "Base.html" %}
+{% block title %}{{ department.name }} Tickets - HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <a href="{% url 'admin_department_list' %}">Department Management</a> / <strong>{{ department.name }}</strong>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .adt-wrap { display: grid; gap: 18px; }
+  .adt-hero, .adt-filters, .adt-table-card {
+    background: #fff;
+    border: 1px solid rgba(148, 163, 184, .22);
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, .06);
+  }
+  .adt-hero {
+    padding: 22px;
+    background:
+      linear-gradient(135deg, rgba(15,23,42,.84), rgba(30,41,59,.52)),
+      linear-gradient(135deg, rgba(15, 118, 110, .22), rgba(15,23,42,.05));
+    color: #fff;
+    background-size: cover;
+    background-position: center;
+  }
+  .adt-head { display: flex; justify-content: space-between; gap: 14px; align-items: center; }
+  .adt-title { display: flex; align-items: center; gap: 12px; }
+  .adt-icon {
+    width: 48px; height: 48px; border-radius: 16px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.16);
+    font-size: 18px;
+  }
+  .adt-title h2 { margin: 0; font-size: 24px; font-weight: 800; color: #fff; }
+  .adt-title p { margin: 4px 0 0; font-size: 13px; color: rgba(255,255,255,.76); }
+  .adt-counts { display: flex; gap: 10px; flex-wrap: wrap; }
+  .adt-pill {
+    padding: 8px 12px; border-radius: 999px;
+    background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.16);
+    font-size: 12px; font-weight: 700; color: #fff;
+  }
+  .adt-tabs { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .adt-tab {
+    padding: 10px 14px; border-radius: 12px; text-decoration: none;
+    border: 1px solid rgba(255,255,255,.16); color: rgba(255,255,255,.84);
+    background: rgba(255,255,255,.08); font-weight: 700;
+  }
+  .adt-tab.active { background: #fff; color: var(--slate-900); border-color: #fff; }
+  .adt-filters { padding: 16px; }
+  .adt-filter-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) 220px 140px; gap: 12px; }
+  .adt-table-head {
+    padding: 16px 18px; border-bottom: 1px solid var(--slate-100);
+    display: flex; justify-content: space-between; gap: 10px; align-items: center;
+  }
+  .adt-table-head h3 { margin: 0; font-size: 16px; font-weight: 800; color: var(--slate-900); }
+  .adt-table-head span { font-size: 12px; color: var(--slate-500); }
+  .adt-table { width: 100%; border-collapse: collapse; }
+  .adt-table th, .adt-table td { padding: 13px 16px; border-bottom: 1px solid var(--slate-100); vertical-align: middle; }
+  .adt-table th { background: #f8fafc; font-size: 11px; font-weight: 800; color: var(--slate-500); letter-spacing: .08em; text-transform: uppercase; }
+  .adt-status {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 5px 10px; border-radius: 999px; font-size: 11px; font-weight: 800;
+  }
+  .adt-status.open { background: #EFF6FF; color: #1D4ED8; }
+  .adt-status.progress { background: #FFFBEB; color: #B45309; }
+  .adt-status.resolved { background: var(--success-bg); color: var(--success); }
+  .adt-status.closed { background: var(--slate-100); color: var(--slate-600); }
+  .adt-pagination {
+    padding: 16px 18px; display: flex; justify-content: space-between; gap: 10px; align-items: center; flex-wrap: wrap;
+  }
+  .adt-pages { display: flex; gap: 8px; flex-wrap: wrap; }
+  .adt-pages a, .adt-pages span {
+    padding: 8px 12px; border-radius: 10px; border: 1px solid var(--slate-200); text-decoration: none;
+    color: var(--slate-700); background: #fff;
+  }
+  .adt-pages span { background: var(--brand-light); color: var(--brand); border-color: var(--brand-muted); }
+  .adt-empty { padding: 42px 18px; text-align: center; color: var(--slate-500); }
+  @media (max-width: 767px) {
+    .adt-head, .adt-filter-grid { grid-template-columns: 1fr; display: grid; }
+    .adt-counts { justify-content: flex-start; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="adt-wrap">
+  <section class="adt-hero" data-dept-name="{{ department.name|lower }}" data-dept-code="{{ department.code|lower }}">
+    <div class="adt-head">
+      <div class="adt-title">
+        <div class="adt-icon" style="color:{{ department.color }};">
+          <i class="{{ department.icon }}"></i>
+        </div>
+        <div>
+          <h2>{{ department.name }}</h2>
+          <p>{{ department.code }}{% if department.email %} | {{ department.email }}{% endif %}</p>
+        </div>
+      </div>
+      <div class="adt-counts">
+        <span class="adt-pill">Created {{ created_count }}</span>
+        <span class="adt-pill">Assigned {{ assigned_count }}</span>
+        <span class="adt-pill">{% if department.is_active %}Active{% else %}Inactive{% endif %}</span>
+      </div>
+    </div>
+    <div class="adt-tabs">
+      <a class="adt-tab {% if ticket_view == 'created' %}active{% endif %}" href="{% url 'admin_department_tickets' department.id %}?view=created">Created Tickets</a>
+      <a class="adt-tab {% if ticket_view == 'assigned' %}active{% endif %}" href="{% url 'admin_department_tickets' department.id %}?view=assigned">Assigned Tickets</a>
+    </div>
+  </section>
+
+  <section class="adt-filters">
+    <form method="get">
+      <input type="hidden" name="view" value="{{ ticket_view }}">
+      <div class="adt-filter-grid">
+        <input type="search" name="q" class="form-control" placeholder="Search by id, title, description or creator" value="{{ search_query }}">
+        <select name="status" class="form-select">
+          <option value="">All statuses</option>
+          {% for value, label in status_choices %}
+            <option value="{{ value }}" {% if status_filter == value %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+        <button class="btn btn-primary" type="submit">Filter</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="adt-table-card">
+    <div class="adt-table-head">
+      <h3>{% if ticket_view == 'assigned' %}Assigned Tickets{% else %}Created Tickets{% endif %}</h3>
+      <span>{{ tickets.paginator.count }} matching tickets</span>
+    </div>
+    {% if tickets %}
+      <div class="table-responsive">
+        <table class="adt-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Status</th>
+              <th>Creator</th>
+              <th>Assigned Dept</th>
+              <th>Assigned To</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for ticket in tickets %}
+              <tr>
+                <td><a href="{% url 'ticketinfo' ticket.id %}" style="text-decoration:none;font-weight:700;color:var(--brand);">#{{ ticket.id }}</a></td>
+                <td>{{ ticket.TICKET_TITLE }}</td>
+                <td>
+                  <span class="adt-status {% if ticket.TICKET_STATUS == 'Open' %}open{% elif ticket.TICKET_STATUS == 'In Progress' or ticket.TICKET_STATUS == 'Reopen' %}progress{% elif ticket.TICKET_STATUS == 'Resolved' %}resolved{% else %}closed{% endif %}">
+                    {{ ticket.TICKET_STATUS }}
+                  </span>
+                </td>
+                <td>{{ ticket.TICKET_CREATED.username|default:"-" }}</td>
+                <td>{% if ticket.assigned_department %}{{ ticket.assigned_department.name }}{% else %}-{% endif %}</td>
+                <td>{% if ticket.assigned_to %}{{ ticket.assigned_to.username }}{% else %}-{% endif %}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="adt-pagination">
+        <div>Page {{ tickets.number }} of {{ tickets.paginator.num_pages }}</div>
+        <div class="adt-pages">
+          {% if tickets.has_previous %}
+            <a href="?{{ pagination_query }}&page={{ tickets.previous_page_number }}">Previous</a>
+          {% endif %}
+          <span>{{ tickets.number }}</span>
+          {% if tickets.has_next %}
+            <a href="?{{ pagination_query }}&page={{ tickets.next_page_number }}">Next</a>
+          {% endif %}
+        </div>
+      </div>
+    {% else %}
+      <div class="adt-empty">No tickets found for this department view.</div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  (function () {
+    const hero = document.querySelector('.adt-hero');
+    if (!hero) return;
+
+    const deptBackgrounds = {
+      hr: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=80',
+      'human resources': 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=80',
+      it: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1400&q=80',
+      'information technology': 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1400&q=80',
+      finance: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1400&q=80',
+      accounting: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1400&q=80',
+      operations: 'https://images.unsplash.com/photo-1553413077-190dd305871c?w=1400&q=80',
+      support: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1400&q=80',
+      'customer support': 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1400&q=80',
+      management: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1400&q=80',
+      manager: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1400&q=80',
+    };
+    const fallbackBg = 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1400&q=80';
+    const deptName = (hero.getAttribute('data-dept-name') || '').trim();
+    const deptCode = (hero.getAttribute('data-dept-code') || '').trim();
+
+    let bg = deptBackgrounds[deptName] || deptBackgrounds[deptCode] || '';
+    if (!bg) {
+      for (const key of Object.keys(deptBackgrounds)) {
+        if (deptName.includes(key) || key.includes(deptName)) {
+          bg = deptBackgrounds[key];
+          break;
+        }
+      }
+    }
+
+    hero.style.backgroundImage =
+      `linear-gradient(135deg, rgba(15,23,42,.84), rgba(30,41,59,.52)), url('${bg || fallbackBg}')`;
+  })();
+</script>
+{% endblock %}

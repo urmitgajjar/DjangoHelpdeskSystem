@@ -1,0 +1,46 @@
+{% extends "Base.html" %}
+{% block title %}{{ department.name }} Dashboard - HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <strong>{{ department.name }} Dashboard</strong>
+{% endblock %}
+
+{% block content %}
+<div class="row g-3 mb-3">
+  <div class="col-6 col-md-2"><div class="stat-card"><div><div class="stat-label">Total</div><div class="stat-value">{{ stats.total }}</div></div></div></div>
+  <div class="col-6 col-md-2"><div class="stat-card"><div><div class="stat-label">Open</div><div class="stat-value">{{ stats.open }}</div></div></div></div>
+  <div class="col-6 col-md-2"><div class="stat-card"><div><div class="stat-label">In Progress</div><div class="stat-value">{{ stats.in_progress }}</div></div></div></div>
+  <div class="col-6 col-md-2"><div class="stat-card"><div><div class="stat-label">Closed</div><div class="stat-value">{{ stats.closed }}</div></div></div></div>
+  <div class="col-6 col-md-2"><div class="stat-card"><div><div class="stat-label">Resolved</div><div class="stat-value">{{ stats.resolved }}</div></div></div></div>
+  <div class="col-6 col-md-2"><div class="stat-card"><div><div class="stat-label">Members</div><div class="stat-value">{{ stats.members }}</div></div></div></div>
+</div>
+
+<div class="hd-card">
+  <div class="hd-card-header">
+    <div class="hd-card-title"><i class="fas fa-ticket-alt" style="color:var(--brand);"></i> Department Tickets</div>
+  </div>
+  <div class="table-responsive">
+    <table class="hd-table">
+      <thead>
+        <tr>
+          <th>#</th><th>Title</th><th>Status</th><th>Priority</th><th>Assigned</th><th>Due</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in tickets %}
+        <tr>
+          <td>#{{ t.id }}</td>
+          <td><a href="{% url 'ticketinfo' t.id %}">{{ t.TICKET_TITLE|truncatechars:60 }}</a></td>
+          <td>{{ t.TICKET_STATUS }}</td>
+          <td>{{ t.effective_priority_display }}</td>
+          <td>{{ t.assigned_to.username|default:"Unassigned" }}</td>
+          <td>{{ t.TICKET_DUE_DATE|date:"M d, Y" }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6" class="text-center text-muted py-4">No tickets in this department.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

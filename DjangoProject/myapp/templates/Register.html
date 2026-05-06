@@ -1,0 +1,439 @@
+{% extends "Base.html" %}
+{% block title %}Create Account — HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <strong>Create Account</strong>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .reg-wrap { max-width: 760px; margin: 0 auto; }
+
+  .step-bar {
+    display: flex; align-items: center; gap: 0;
+    margin-bottom: 28px;
+  }
+  .step {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 600; color: var(--slate-400);
+  }
+  .step.active { color: var(--brand); }
+  .step.done   { color: var(--success); }
+  .step-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--slate-200); color: var(--slate-500);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+  }
+  .step.active .step-num { background: var(--brand); color: #fff; }
+  .step.done   .step-num { background: var(--success); color: #fff; }
+  .step-line   { flex: 1; height: 2px; background: var(--slate-200); margin: 0 10px; }
+  .step-line.done { background: var(--success); }
+
+  .f-group { margin-bottom: 20px; }
+  .f-icon-wrap { position: relative; }
+  .fi {
+    position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+    font-size: 13px; color: var(--slate-400); pointer-events: none;
+  }
+  .fi + .form-control { padding-left: 36px; }
+  .field-error { font-size: 12px; color: var(--danger); margin-top: 4px; }
+  .field-ok    { font-size: 12px; color: var(--success); margin-top: 4px; }
+  .strength-bar { height: 4px; border-radius: 2px; margin-top: 8px; background: var(--slate-200); overflow: hidden; }
+  .strength-fill { height: 100%; border-radius: 2px; transition: all .3s; width: 0%; }
+  .strength-text { font-size: 12px; margin-top: 4px; }
+  .eye-btn {
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; color: var(--slate-400); cursor: pointer; font-size: 13px;
+    transition: all .15s;
+  }
+  .eye-btn:hover { color: var(--slate-700); }
+  .checkbox-card {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 16px; border: 1.5px solid var(--slate-200); border-radius: var(--r);
+    cursor: pointer; transition: all .15s; margin-bottom: 10px;
+  }
+  .checkbox-card:hover { border-color: var(--brand-muted); background: var(--brand-light); }
+  .checkbox-card input { accent-color: var(--brand); width: 16px; height: 16px; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="reg-wrap">
+
+  <div class="page-header">
+    <div class="page-title">Create Your Account</div>
+    <div class="page-sub">Join HelpDesk to submit and track support tickets</div>
+  </div>
+
+  <div class="step-bar">
+    <div class="step active" id="step1">
+      <div class="step-num">1</div> Account Info
+    </div>
+    <div class="step-line" id="line1"></div>
+    <div class="step" id="step2">
+      <div class="step-num">2</div> Personal Details
+    </div>
+    <div class="step-line" id="line2"></div>
+    <div class="step" id="step3">
+      <div class="step-num">3</div> Confirmation
+    </div>
+  </div>
+
+  <form method="POST" id="registerForm" novalidate>
+    {% csrf_token %}
+
+    <div class="hd-card mb-4">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-user-circle" style="color:var(--brand);"></i>
+          Account Information
+        </div>
+        <span style="font-size:12px;color:var(--slate-400);">
+          <i class="fas fa-asterisk text-danger" style="font-size:8px;"></i> Required
+        </span>
+      </div>
+      <div class="hd-card-body">
+        <div class="row g-3">
+
+          <div class="col-sm-6">
+            <div class="f-group">
+              <label class="form-label">First Name <span class="text-danger">*</span></label>
+              <div class="f-icon-wrap">
+                <i class="fi fas fa-user"></i>
+                {{ Register_form.first_name }}
+              </div>
+              {% if Register_form.first_name.errors %}
+                <div class="field-error">{{ Register_form.first_name.errors.0 }}</div>
+              {% endif %}
+              <div class="field-error" id="err_first_name" style="display:none;"></div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="f-group">
+              <label class="form-label">Last Name <span class="text-danger">*</span></label>
+              <div class="f-icon-wrap">
+                <i class="fi fas fa-user"></i>
+                {{ Register_form.last_name }}
+              </div>
+              {% if Register_form.last_name.errors %}
+                <div class="field-error">{{ Register_form.last_name.errors.0 }}</div>
+              {% endif %}
+              <div class="field-error" id="err_last_name" style="display:none;"></div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="f-group">
+              <label class="form-label">Username <span class="text-danger">*</span></label>
+              <div class="f-icon-wrap">
+                <i class="fi fas fa-at"></i>
+                {{ Register_form.username }}
+              </div>
+              <div class="form-text">Letters, digits and @/./+/-/_ only</div>
+              {% if Register_form.username.errors %}
+                <div class="field-error">{{ Register_form.username.errors.0 }}</div>
+              {% endif %}
+              <div class="field-error" id="err_username" style="display:none;"></div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="f-group">
+              <label class="form-label">Email Address <span class="text-danger">*</span></label>
+              <div class="f-icon-wrap">
+                <i class="fi fas fa-envelope"></i>
+                {{ Register_form.email }}
+              </div>
+              {% if Register_form.email.errors %}
+                <div class="field-error">{{ Register_form.email.errors.0 }}</div>
+              {% endif %}
+              <div class="field-error" id="err_email" style="display:none;"></div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="f-group">
+              <label class="form-label">Password <span class="text-danger">*</span></label>
+              <div class="f-icon-wrap" style="position:relative;">
+                <i class="fi fas fa-lock"></i>
+                {{ Register_form.password1 }}
+                <button type="button" class="eye-btn" onclick="togglePwd('id_password1','eye1')">
+                  <i class="fas fa-eye" id="eye1"></i>
+                </button>
+              </div>
+              <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+              <div class="strength-text" id="strengthText" style="color:var(--slate-400);">Enter a password</div>
+              {% if Register_form.password1.errors %}
+                <div class="field-error">{{ Register_form.password1.errors.0 }}</div>
+              {% endif %}
+              <div class="field-error" id="err_password1" style="display:none;"></div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="f-group">
+              <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
+              <div class="f-icon-wrap" style="position:relative;">
+                <i class="fi fas fa-lock"></i>
+                {{ Register_form.password2 }}
+                <button type="button" class="eye-btn" onclick="togglePwd('id_password2','eye2')">
+                  <i class="fas fa-eye" id="eye2"></i>
+                </button>
+              </div>
+              {% if Register_form.password2.errors %}
+                <div class="field-error">{{ Register_form.password2.errors.0 }}</div>
+              {% endif %}
+              <div class="field-error" id="err_password2" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hd-card mb-4">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-id-card" style="color:var(--brand);"></i>
+          Personal Details
+        </div>
+        <span style="font-size:12px;color:var(--slate-400);">Phone is required</span>
+      </div>
+      <div class="hd-card-body">
+        <div class="row g-3">
+
+          <div class="col-sm-6">
+            <div class="f-group">
+              <label class="form-label">Phone Number <span class="text-danger">*</span></label>
+              <div class="row g-2">
+                <div class="col-5">
+                  {{ UserProfile_form.country_code }}
+                  {% if UserProfile_form.country_code.errors %}
+                    <div class="field-error">{{ UserProfile_form.country_code.errors.0 }}</div>
+                  {% endif %}
+                </div>
+                <div class="col-7 f-icon-wrap">
+                <i class="fi fas fa-phone"></i>
+                {{ UserProfile_form.phone }}
+                </div>
+              </div>
+              {% if UserProfile_form.phone.errors %}
+                <div class="field-error">{{ UserProfile_form.phone.errors.0 }}</div>
+              {% endif %}
+              <div class="field-error" id="err_phone" style="display:none;"></div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="f-group">
+              <label class="form-label">City</label>
+              <div class="f-icon-wrap">
+                <i class="fi fas fa-city"></i>
+                {{ UserProfile_form.City }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="f-group">
+              <label class="form-label">State / Region</label>
+              <div class="f-icon-wrap">
+                <i class="fi fas fa-map-marker-alt"></i>
+                {{ UserProfile_form.State }}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="hd-card mb-4">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-bell" style="color:var(--brand);"></i>
+          Preferences
+        </div>
+      </div>
+      <div class="hd-card-body">
+
+        <label class="checkbox-card">
+          {{ UserProfile_form.email_notifications }}
+          <div>
+            <div style="font-size:13.5px;font-weight:600;color:var(--slate-800);">Email Notifications</div>
+            <div style="font-size:12.5px;color:var(--slate-500);">Receive email updates about your tickets and overdue alerts</div>
+          </div>
+        </label>
+
+        <label class="checkbox-card" id="termsCard">
+          <input type="checkbox" id="terms" required>
+          <div>
+            <div style="font-size:13.5px;font-weight:600;color:var(--slate-800);">I agree to the terms of use <span class="text-danger">*</span></div>
+            <div style="font-size:12.5px;color:var(--slate-500);">By registering you accept the helpdesk usage policy</div>
+          </div>
+        </label>
+        <div class="field-error" id="err_terms" style="display:none;">You must agree to the terms to continue.</div>
+
+      </div>
+    </div>
+
+    <div class="d-flex gap-3 align-items-center">
+      <button type="submit" class="btn btn-primary px-5 py-2" id="submitBtn" style="font-weight:700;font-size:14px;">
+        <i class="fas fa-user-plus me-2"></i>Create Account
+      </button>
+      <a href="{% url 'login' %}" class="btn btn-outline-secondary">
+        Already have an account
+      </a>
+    </div>
+
+  </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  
+  function togglePwd(inputId, eyeId) {
+    const inp = document.getElementById(inputId);
+    const eye = document.getElementById(eyeId);
+    if (inp.type === 'password') {
+      inp.type = 'text';
+      eye.classList.replace('fa-eye','fa-eye-slash');
+    } else {
+      inp.type = 'password';
+      eye.classList.replace('fa-eye-slash','fa-eye');
+    }
+  }
+
+  const pwd1 = document.getElementById('id_password1');
+  if (pwd1) {
+    pwd1.addEventListener('input', function() {
+      const v = this.value;
+      let score = 0;
+      if (v.length >= 8)            score++;
+      if (/[A-Z]/.test(v))          score++;
+      if (/[0-9]/.test(v))          score++;
+      if (/[^A-Za-z0-9]/.test(v))   score++;
+
+      const fill = document.getElementById('strengthFill');
+      const text = document.getElementById('strengthText');
+      const levels = [
+        { pct:'0%',   color:'',                   label:'Enter a password',    textColor:'var(--slate-400)' },
+        { pct:'25%',  color:'var(--danger)',        label:'Weak',               textColor:'var(--danger)' },
+        { pct:'50%',  color:'var(--warning)',       label:'Fair',               textColor:'var(--warning)' },
+        { pct:'75%',  color:'var(--info)',          label:'Good',               textColor:'var(--info)' },
+        { pct:'100%', color:'var(--success)',       label:'Strong',             textColor:'var(--success)' },
+      ];
+      const l = levels[score];
+      fill.style.width     = l.pct;
+      fill.style.background = l.color;
+      text.textContent     = l.label;
+      text.style.color     = l.textColor;
+    });
+  }
+
+  const pwd2 = document.getElementById('id_password2');
+  if (pwd2) {
+    pwd2.addEventListener('input', function() {
+      const err = document.getElementById('err_password2');
+      if (this.value && this.value !== pwd1.value) {
+        this.classList.add('is-invalid');
+        err.textContent = 'Passwords do not match.';
+        err.style.display = 'block';
+      } else {
+        this.classList.remove('is-invalid');
+        err.style.display = 'none';
+      }
+    });
+  }
+
+  const phoneEl = document.getElementById('id_phone');
+  const countryCodeEl = document.getElementById('id_country_code');
+  if (phoneEl) {
+    phoneEl.addEventListener('blur', function() {
+      const err = document.getElementById('err_phone');
+      const digits = (this.value || '').replace(/\D/g,'');
+      if (!digits) {
+        err.textContent = 'Phone number is required.';
+        err.style.display = 'block';
+      } else if (digits.length < 6 || digits.length > 12) {
+        err.textContent = 'Enter a valid phone number.';
+        err.style.display = 'block';
+      } else {
+        err.style.display = 'none';
+      }
+    });
+  }
+
+  const emailEl = document.getElementById('id_email');
+  if (emailEl) {
+    emailEl.addEventListener('blur', function() {
+      const err = document.getElementById('err_email');
+      if (this.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value)) {
+        err.textContent = 'Enter a valid email address.';
+        err.style.display = 'block';
+      } else {
+        err.style.display = 'none';
+      }
+    });
+  }
+
+  document.getElementById('registerForm').addEventListener('submit', function(e) {
+    let valid = true;
+
+    const required = [
+      { id: 'id_first_name',  errId: 'err_first_name',  msg: 'First name is required.' },
+      { id: 'id_last_name',   errId: 'err_last_name',   msg: 'Last name is required.' },
+      { id: 'id_username',    errId: 'err_username',    msg: 'Username is required.' },
+      { id: 'id_email',       errId: 'err_email',       msg: 'Email is required.' },
+      { id: 'id_phone',       errId: 'err_phone',       msg: 'Phone number is required.' },
+      { id: 'id_password1',   errId: 'err_password1',   msg: 'Password is required.' },
+      { id: 'id_password2',   errId: 'err_password2',   msg: 'Please confirm your password.' },
+    ];
+
+    required.forEach(f => {
+      const el  = document.getElementById(f.id);
+      const err = document.getElementById(f.errId);
+      if (!el || !err) return;
+      if (!el.value.trim()) {
+        el.classList.add('is-invalid');
+        err.textContent = f.msg;
+        err.style.display = 'block';
+        valid = false;
+      } else {
+        el.classList.remove('is-invalid');
+        err.style.display = 'none';
+      }
+    });
+
+    if (pwd1 && pwd2 && pwd1.value && pwd2.value && pwd1.value !== pwd2.value) {
+      const err = document.getElementById('err_password2');
+      err.textContent = 'Passwords do not match.';
+      err.style.display = 'block';
+      valid = false;
+    }
+
+    if (countryCodeEl && !countryCodeEl.value) {
+      const err = document.getElementById('err_phone');
+      err.textContent = 'Please select a country code.';
+      err.style.display = 'block';
+      valid = false;
+    }
+
+    const terms    = document.getElementById('terms');
+    const termsErr = document.getElementById('err_terms');
+    if (!terms.checked) {
+      termsErr.style.display = 'block';
+      document.getElementById('termsCard').style.borderColor = 'var(--danger)';
+      valid = false;
+    } else {
+      termsErr.style.display = 'none';
+    }
+
+    if (!valid) { e.preventDefault(); return; }
+
+    const btn = document.getElementById('submitBtn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Creating account...';
+    btn.disabled  = true;
+  });
+</script>
+{% endblock %}

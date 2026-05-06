@@ -1,0 +1,323 @@
+{% extends "Base.html" %}
+{% block title %}Rate Ticket #{{ ticket.id }} - HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <a href="{% url 'base' %}">Dashboard</a>
+  <span class="bc-sep">/</span>
+  <a href="{% url 'ticketinfo' ticket.id %}">Ticket #{{ ticket.id }}</a>
+  <span class="bc-sep">/</span>
+  <strong>Rate</strong>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .rate-wrap { max-width: 680px; margin: 0 auto; }
+
+  .rt-summary {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    gap: 1px; background: var(--slate-200);
+    border: 1px solid var(--slate-200);
+    border-radius: var(--r-lg); overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .rt-cell { background: #fff; padding: 14px; text-align: center; }
+  .rt-cell-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .5px; color: var(--slate-400); margin-bottom: 6px;
+  }
+  .rt-cell-val { font-size: 13.5px; font-weight: 700; color: var(--slate-800); }
+
+  .star-section { text-align: center; padding: 28px 0 20px; }
+  .main-stars { display: inline-flex; gap: 8px; }
+  .main-star-label {
+    font-size: 42px; cursor: pointer;
+    color: var(--slate-200);
+    transition: color .12s, transform .12s;
+    line-height: 1;
+  }
+  .main-stars .main-star-label:hover { color: var(--warning); transform: scale(1.15); }
+  .main-stars .main-star-label.is-active { color: var(--warning); }
+  .main-star-input { display: none; }
+
+  .rating-label {
+    font-size: 18px; font-weight: 800; color: var(--warning);
+    min-height: 28px; margin-top: 10px;
+    transition: all .2s;
+    letter-spacing: -.3px;
+  }
+  .rating-label.empty { color: var(--slate-300); font-weight: 500; font-size: 14px; }
+
+  .sub-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  .sub-card {
+    background: var(--slate-50); border: 1px solid var(--slate-200);
+    border-radius: var(--r-lg); padding: 16px 14px; text-align: center;
+    transition: all .15s;
+  }
+  .sub-card:hover { border-color: var(--warning-border); background: var(--warning-bg); }
+  .sub-card-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .5px; color: var(--slate-500); margin-bottom: 12px;
+  }
+  .sub-stars { display: inline-flex; gap: 3px; justify-content: center; }
+  .sub-star-label {
+    font-size: 20px; cursor: pointer;
+    color: var(--slate-200); transition: color .1s;
+  }
+  .sub-stars .sub-star-label:hover { color: var(--warning); }
+  .sub-stars .sub-star-label.is-active { color: var(--warning); }
+  .sub-star-input { display: none; }
+  .sub-selected-label {
+    font-size: 11.5px; font-weight: 600; color: var(--warning);
+    min-height: 18px; margin-top: 6px;
+  }
+
+  .feedback-section textarea { resize: vertical; min-height: 100px; }
+
+  @media (max-width: 560px) {
+    .rt-summary { grid-template-columns: 1fr 1fr; }
+    .sub-cards { grid-template-columns: 1fr; }
+    .main-star-label { font-size: 34px; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="rate-wrap">
+
+  <div class="page-header">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <div style="width:50px;height:50px;border-radius:14px;
+                  background:var(--warning-bg);color:var(--warning);
+                  display:flex;align-items:center;justify-content:center;
+                  font-size:22px;flex-shrink:0;border:2px solid var(--warning-border);">
+        <i class="fas fa-star"></i>
+      </div>
+      <div>
+        <div class="page-title">Rate Your Experience</div>
+        <div class="page-sub">Ticket #{{ ticket.id }} · {{ ticket.TICKET_TITLE|truncatechars:60 }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rt-summary">
+    <div class="rt-cell">
+      <div class="rt-cell-label">Status</div>
+      <span class="status-badge
+        {% if ticket.TICKET_STATUS == 'Closed' %}sb-closed
+        {% elif ticket.TICKET_STATUS == 'Resolved' %}sb-resolved
+        {% else %}sb-open{% endif %}">
+        {{ ticket.TICKET_STATUS }}
+      </span>
+    </div>
+    <div class="rt-cell">
+      <div class="rt-cell-label">Resolved By</div>
+      <div class="rt-cell-val">{{ ticket.assigned_to.get_full_name|default:ticket.assigned_to.username|default:"-" }}</div>
+    </div>
+    <div class="rt-cell">
+      <div class="rt-cell-label">Department</div>
+      <div class="rt-cell-val" style="color:{{ ticket.assigned_department.color|default:'var(--brand)' }};">
+        {{ ticket.assigned_department.name|default:"-" }}
+      </div>
+    </div>
+    <div class="rt-cell">
+      <div class="rt-cell-label">Closed On</div>
+      <div class="rt-cell-val">{{ ticket.TICKET_CLOSED_ON|date:"M d, Y"|default:"-" }}</div>
+    </div>
+  </div>
+
+  <form method="POST" id="rateForm" novalidate>
+    {% csrf_token %}
+
+    <div class="hd-card mb-4">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-comment-dots" style="color:var(--warning);"></i>
+          Overall Satisfaction <span class="text-danger">*</span>
+        </div>
+      </div>
+      <div class="hd-card-body">
+
+        <div class="star-section">
+          <div class="main-stars" id="mainStars">
+            {% for val in '12345' %}
+            <label class="main-star-label" data-value="{{ val }}" for="rating_{{ val }}" title="{{ val }} stars">
+              <input class="main-star-input" type="radio" name="rating"
+                     id="rating_{{ val }}" value="{{ val }}"
+                     {% if form.data.rating|stringformat:"s" == val %}checked{% endif %}>
+              <i class="fas fa-star"></i>
+            </label>
+            {% endfor %}
+          </div>
+          <div class="rating-label empty" id="ratingLabel">Click to rate</div>
+        </div>
+
+        <div class="field-error text-center" id="err_rating" style="display:none;">
+          Please select an overall rating.
+        </div>
+
+        <hr style="border-color:var(--slate-100);margin:4px 0 20px;">
+
+        <div class="sub-cards">
+
+          <div class="sub-card">
+            <div class="sub-card-label">Resolution Quality</div>
+            <div class="sub-stars" id="subStars_rq">
+              {% for val in '12345' %}
+              <label class="sub-star-label" data-value="{{ val }}" for="rq_{{ val }}" title="{{ val }} stars">
+                <input class="sub-star-input" type="radio" name="resolution_quality"
+                       id="rq_{{ val }}" value="{{ val }}"
+                       {% if form.data.resolution_quality|stringformat:"s" == val %}checked{% endif %}>
+                <i class="fas fa-star"></i>
+              </label>
+              {% endfor %}
+            </div>
+            <div class="sub-selected-label" id="lbl_rq"></div>
+          </div>
+
+          <div class="sub-card">
+            <div class="sub-card-label">Response Time</div>
+            <div class="sub-stars" id="subStars_rt">
+              {% for val in '12345' %}
+              <label class="sub-star-label" data-value="{{ val }}" for="rt_{{ val }}" title="{{ val }} stars">
+                <input class="sub-star-input" type="radio" name="response_time_rating"
+                       id="rt_{{ val }}" value="{{ val }}"
+                       {% if form.data.response_time_rating|stringformat:"s" == val %}checked{% endif %}>
+                <i class="fas fa-star"></i>
+              </label>
+              {% endfor %}
+            </div>
+            <div class="sub-selected-label" id="lbl_rt"></div>
+          </div>
+
+          <div class="sub-card">
+            <div class="sub-card-label">Resolver Helpfulness</div>
+            <div class="sub-stars" id="subStars_ah">
+              {% for val in '12345' %}
+              <label class="sub-star-label" data-value="{{ val }}" for="ah_{{ val }}" title="{{ val }} stars">
+                <input class="sub-star-input" type="radio" name="agent_helpfulness"
+                       id="ah_{{ val }}" value="{{ val }}"
+                       {% if form.data.agent_helpfulness|stringformat:"s" == val %}checked{% endif %}>
+                <i class="fas fa-star"></i>
+              </label>
+              {% endfor %}
+            </div>
+            <div class="sub-selected-label" id="lbl_ah"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="hd-card mb-4 feedback-section">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-pencil-alt" style="color:var(--brand);"></i>
+          Written Feedback
+          <span style="font-weight:400;color:var(--slate-400);font-size:12px;margin-left:4px;">(optional)</span>
+        </div>
+      </div>
+      <div class="hd-card-body">
+        {{ form.feedback }}
+        <div class="form-text mt-2">
+          Your feedback is shared with the support team to improve the service quality.
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+      <a href="{% url 'ticketinfo' ticket.id %}" class="btn btn-outline-secondary">
+        <i class="fas fa-times me-1"></i>Skip for Now
+      </a>
+      <button type="submit" class="btn px-5" id="submitBtn"
+              style="background:var(--warning);color:#fff;font-weight:700;border:none;">
+        <i class="fas fa-star me-2"></i>Submit Rating
+      </button>
+    </div>
+
+  </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const ratingLabels = { 1:'Poor', 2:'Fair', 3:'Good', 4:'Very Good', 5:'Excellent' };
+  const subLabels = { 1:'Poor', 2:'Fair', 3:'Good', 4:'Great', 5:'Excellent' };
+  const lbl = document.getElementById('ratingLabel');
+
+  function paintStars(containerId, inputName) {
+    const box = document.getElementById(containerId);
+    if (!box) return;
+    const selected = box.querySelector(`input[name="${inputName}"]:checked`);
+    const selectedValue = selected ? parseInt(selected.value, 10) : 0;
+    box.querySelectorAll('label[data-value]').forEach(label => {
+      const starValue = parseInt(label.getAttribute('data-value'), 10);
+      label.classList.toggle('is-active', starValue <= selectedValue);
+    });
+  }
+
+  document.querySelectorAll('.main-star-input').forEach(inp => {
+    inp.addEventListener('change', () => {
+      lbl.textContent = ratingLabels[inp.value] || '';
+      lbl.classList.remove('empty');
+      document.getElementById('err_rating').style.display = 'none';
+      paintStars('mainStars', 'rating');
+    });
+  });
+
+  const preChecked = document.querySelector('.main-star-input:checked');
+  if (preChecked) {
+    lbl.textContent = ratingLabels[preChecked.value] || '';
+    lbl.classList.remove('empty');
+  }
+  paintStars('mainStars', 'rating');
+
+  function bindSubStars(name, lblId, containerId) {
+    document.querySelectorAll(`input[name="${name}"]`).forEach(inp => {
+      inp.addEventListener('change', () => {
+        const el = document.getElementById(lblId);
+        if (el) el.textContent = subLabels[inp.value] || '';
+        paintStars(containerId, name);
+      });
+    });
+    const pre = document.querySelector(`input[name="${name}"]:checked`);
+    if (pre) {
+      const el = document.getElementById(lblId);
+      if (el) el.textContent = subLabels[pre.value] || '';
+    }
+    paintStars(containerId, name);
+  }
+
+  bindSubStars('resolution_quality', 'lbl_rq', 'subStars_rq');
+  bindSubStars('response_time_rating', 'lbl_rt', 'subStars_rt');
+  bindSubStars('agent_helpfulness', 'lbl_ah', 'subStars_ah');
+
+  document.getElementById('rateForm').addEventListener('submit', function(e) {
+    const mainRating = document.querySelector('.main-star-input:checked');
+    const errRating = document.getElementById('err_rating');
+    if (!mainRating) {
+      errRating.style.display = 'block';
+      const stars = document.getElementById('mainStars');
+      stars.style.animation = 'shake .3s ease';
+      setTimeout(() => {
+        stars.style.animation = '';
+      }, 400);
+      e.preventDefault();
+      return;
+    }
+    errRating.style.display = 'none';
+
+    const btn = document.getElementById('submitBtn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Submitting...';
+    btn.disabled = true;
+  });
+</script>
+
+<style>
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+  }
+</style>
+{% endblock %}

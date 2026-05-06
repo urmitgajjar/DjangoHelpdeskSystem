@@ -1,0 +1,337 @@
+{% extends "Base.html" %}
+{% load avatar_tags %}
+{% block title %}Edit Profile — HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <a href="{% url 'profile' %}">My Profile</a>
+  <span class="bc-sep">/</span>
+  <strong>Edit</strong>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .edit-profile-wrap { max-width: 760px; margin: 0 auto; }
+
+  .avatar-preview-wrap {
+    display: flex; align-items: center; gap: 20px;
+    padding: 20px;
+    background: var(--slate-50);
+    border: 1px solid var(--slate-200);
+    border-radius: var(--r-lg);
+    margin-bottom: 20px;
+  }
+  .avatar-circle {
+    width: 80px; height: 80px; border-radius: 50%;
+    object-fit: cover; border: 3px solid var(--slate-200);
+    flex-shrink: 0; background: var(--brand-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; font-weight: 800; color: var(--brand);
+    overflow: hidden;
+  }
+  .avatar-circle img {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+  }
+  .avatar-info { flex: 1; min-width: 0; }
+  .avatar-info-name { font-size: 15px; font-weight: 700; color: var(--slate-800); }
+  .avatar-info-sub  { font-size: 12.5px; color: var(--slate-400); margin-top: 2px; }
+
+  .upload-zone {
+    border: 2px dashed var(--slate-300);
+    border-radius: var(--r-lg); padding: 24px;
+    text-align: center; cursor: pointer;
+    transition: all .2s; position: relative;
+    background: var(--slate-50);
+  }
+  .upload-zone:hover, .upload-zone.drag-over {
+    border-color: var(--brand); background: var(--brand-light);
+  }
+  .upload-zone input[type=file] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+  .upload-icon { font-size: 28px; color: var(--slate-300); margin-bottom: 8px; }
+  .upload-zone:hover .upload-icon, .upload-zone.drag-over .upload-icon { color: var(--brand); }
+  .upload-label { font-size: 13.5px; font-weight: 600; color: var(--slate-600); }
+  .upload-sub   { font-size: 12px; color: var(--slate-400); margin-top: 4px; }
+
+  .notif-toggle {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 16px;
+    background: var(--slate-50); border: 1px solid var(--slate-200);
+    border-radius: var(--r-lg); cursor: pointer;
+    transition: all .15s;
+  }
+  .notif-toggle:hover { border-color: var(--brand-muted); background: var(--brand-light); }
+  .notif-toggle input[type=checkbox] {
+    width: 18px; height: 18px; accent-color: var(--brand);
+    margin-top: 2px; flex-shrink: 0; cursor: pointer;
+  }
+  .notif-toggle-title { font-size: 13.5px; font-weight: 700; color: var(--slate-800); }
+  .notif-toggle-sub   { font-size: 12px; color: var(--slate-500); margin-top: 3px; line-height: 1.5; }
+
+  .phone-wrap { position: relative; }
+  .phone-status {
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    font-size: 14px; transition: all .2s;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="edit-profile-wrap">
+
+  <div class="page-header">
+    <div class="page-title">Edit Profile</div>
+    <div class="page-sub">Keep your information accurate so the team can reach you faster</div>
+  </div>
+
+  <form method="POST" enctype="multipart/form-data" id="editProfileForm" novalidate>
+    {% csrf_token %}
+
+    <div class="avatar-preview-wrap">
+      <div class="avatar-circle" id="avatarPreview">
+        {% with avatar=request.user|avatar_url %}
+        {% if avatar %}
+          <img src="{{ avatar }}" alt="Current photo" id="avatarImg">
+        {% else %}
+          <span id="avatarInitial">{{ request.user|avatar_initial }}</span>
+        {% endif %}
+        {% endwith %}
+      </div>
+      <div class="avatar-info">
+        <div class="avatar-info-name">{{ request.user.get_full_name|default:request.user.username }}</div>
+        <div class="avatar-info-sub">@{{ request.user.username }} · {{ user_role|default:'USER' }}</div>
+        <div style="margin-top:10px;">
+          <label for="{{ form.Profile_Image.id_for_label }}"
+                 style="cursor:pointer;font-size:12.5px;font-weight:600;
+                        color:var(--brand);display:inline-flex;align-items:center;gap:6px;
+                        background:var(--brand-light);border:1px solid var(--brand-muted);
+                        padding:5px 12px;border-radius:6px;transition:all .15s;"
+                 onmouseover="this.style.background='var(--brand)';this.style.color='#fff';"
+                 onmouseout="this.style.background='var(--brand-light)';this.style.color='var(--brand)';">
+            <i class="fas fa-camera"></i> Change Photo
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="hd-card mb-4">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-address-card" style="color:var(--brand);"></i>
+          Contact Details
+        </div>
+      </div>
+      <div class="hd-card-body">
+        <div class="row g-3">
+
+          <div class="col-sm-6">
+            <label class="form-label">City</label>
+            {{ form.City }}
+            {% if form.City.errors %}
+              <div class="field-error">{{ form.City.errors.0 }}</div>
+            {% endif %}
+          </div>
+
+          <div class="col-sm-6">
+            <label class="form-label">State / Region</label>
+            {{ form.State }}
+            {% if form.State.errors %}
+              <div class="field-error">{{ form.State.errors.0 }}</div>
+            {% endif %}
+          </div>
+
+          {% if form.phone %}
+          <div class="col-sm-6">
+            <label class="form-label">Phone Number</label>
+            <div class="phone-wrap">
+              {{ form.phone }}
+              <span class="phone-status" id="phoneStatus"></span>
+            </div>
+            <div class="form-text">International format accepted · e.g. +91 98765 43210</div>
+            {% if form.phone.errors %}
+              <div class="field-error">{{ form.phone.errors.0 }}</div>
+            {% endif %}
+            <div class="field-error" id="err_phone" style="display:none;">
+              Please enter a valid phone number.
+            </div>
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+
+    <div class="hd-card mb-4">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-cog" style="color:var(--brand);"></i>
+          Photo &amp; Preferences
+        </div>
+      </div>
+      <div class="hd-card-body">
+        <div class="row g-4">
+
+          <div class="col-12">
+            <label class="form-label">Profile Picture</label>
+            <div class="upload-zone" id="uploadZone">
+              {{ form.Profile_Image }}
+              <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+              <div class="upload-label" id="uploadLabel">
+                Drop a photo here, or click to browse
+              </div>
+              <div class="upload-sub">JPG or PNG · Max 10MB</div>
+            </div>
+            <div class="field-error" id="err_photo" style="display:none;margin-top:6px;"></div>
+            {% if form.Profile_Image.errors %}
+              <div class="field-error">{{ form.Profile_Image.errors.0 }}</div>
+            {% endif %}
+          </div>
+
+          {% if form.email_notifications %}
+          <div class="col-12">
+            <label class="form-label">Notification Preferences</label>
+            <label class="notif-toggle" for="{{ form.email_notifications.id_for_label }}">
+              {{ form.email_notifications }}
+              <div>
+                <div class="notif-toggle-title">
+                  <i class="fas fa-bell me-1" style="color:var(--brand);"></i>
+                  Email Notifications
+                </div>
+                <div class="notif-toggle-sub">
+                  Receive email alerts when your tickets are commented on, assigned, updated or resolved
+                </div>
+              </div>
+            </label>
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+
+    <div class="hd-card">
+      <div class="hd-card-body">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="{% url 'ChangePassword' %}" class="btn btn-xs btn-outline-secondary">
+              <i class="fas fa-key me-1"></i>Change Password
+            </a>
+          </div>
+
+          <div class="d-flex gap-2">
+            <a href="{% url 'profile' %}" class="btn btn-outline-secondary">
+              <i class="fas fa-times me-1"></i>Cancel
+            </a>
+            <button type="submit" class="btn btn-primary px-4" id="saveBtn">
+              <i class="fas fa-save me-2"></i>Save Changes
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  
+  const fileInput  = document.getElementById('{{ form.Profile_Image.id_for_label }}');
+  const uploadZone = document.getElementById('uploadZone');
+  const uploadLbl  = document.getElementById('uploadLabel');
+  const errPhoto   = document.getElementById('err_photo');
+  const MAX_MB     = 10;
+
+  if (fileInput) {
+    fileInput.addEventListener('change', function() {
+      const file = this.files[0];
+      if (!file) return;
+
+      if (file.size > MAX_MB * 1024 * 1024) {
+        errPhoto.textContent = `File is too large (${(file.size/1024/1024).toFixed(1)}MB). Max ${MAX_MB}MB.`;
+        errPhoto.style.display = 'block';
+        this.value = '';
+        return;
+      }
+
+      if (!file.type.match(/image\/(jpeg|png|gif|webp)/)) {
+        errPhoto.textContent = 'Only JPG, PNG, GIF or WEBP images are accepted.';
+        errPhoto.style.display = 'block';
+        this.value = '';
+        return;
+      }
+      errPhoto.style.display = 'none';
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const preview = document.getElementById('avatarPreview');
+        if (preview) {
+          preview.innerHTML = `<img src="${e.target.result}" alt="Preview" id="avatarImg" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+        }
+      };
+      reader.readAsDataURL(file);
+
+      uploadLbl.textContent = file.name;
+      uploadZone.style.borderColor  = 'var(--success)';
+      uploadZone.style.background   = 'var(--success-bg)';
+      setTimeout(() => {
+        uploadZone.style.borderColor = '';
+        uploadZone.style.background  = '';
+      }, 1500);
+    });
+  }
+
+  if (uploadZone) {
+    uploadZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadZone.classList.add('drag-over');
+    });
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+    uploadZone.addEventListener('drop', ()     => uploadZone.classList.remove('drag-over'));
+  }
+
+  const phoneInput  = document.getElementById('id_phone');
+  const phoneStatus = document.getElementById('phoneStatus');
+  const phoneErr    = document.getElementById('err_phone');
+  const phoneRe     = /^[+][\d\s\-\(\)]{7,20}$/;
+
+  if (phoneInput) {
+    phoneInput.addEventListener('blur', validatePhone);
+    phoneInput.addEventListener('input', function() {
+      if (phoneStatus) phoneStatus.textContent = '';
+    });
+  }
+
+  function validatePhone() {
+    if (!phoneInput || !phoneInput.value.trim()) {
+      if (phoneStatus) phoneStatus.textContent = '';
+      if (phoneErr) phoneErr.style.display = 'none';
+      return true;  
+    }
+    const ok = phoneRe.test(phoneInput.value.trim());
+    if (phoneStatus) {
+      phoneStatus.innerHTML = ok
+        ? '<i class="fas fa-check-circle" style="color:var(--success);"></i>'
+        : '<i class="fas fa-times-circle" style="color:var(--danger);"></i>';
+    }
+    if (phoneErr) phoneErr.style.display = ok ? 'none' : 'block';
+    phoneInput.classList.toggle('is-invalid', !ok);
+    return ok;
+  }
+
+  document.getElementById('editProfileForm').addEventListener('submit', function(e) {
+    let valid = true;
+
+    if (!validatePhone()) valid = false;
+
+    if (!valid) { e.preventDefault(); return; }
+
+    const btn = document.getElementById('saveBtn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Saving…';
+    btn.disabled  = true;
+  });
+</script>
+{% endblock %}

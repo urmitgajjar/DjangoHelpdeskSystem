@@ -1,0 +1,162 @@
+{% extends "Base.html" %}
+{% block title %}{% if edit_mode %}Edit Ticket #{{ ticket.id }}{% else %}New Ticket{% endif %} - HelpDesk{% endblock %}
+
+{% block breadcrumb %}
+  <a href="{% url 'base' %}">Dashboard</a>
+  <span class="bc-sep">/</span>
+  <strong>{% if edit_mode %}Edit Ticket #{{ ticket.id }}{% else %}New Ticket{% endif %}</strong>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+<div class="col-12 col-lg-9 col-xl-8">
+
+  <div class="page-header">
+    <div class="page-title">{% if edit_mode %}Edit Ticket #{{ ticket.id }}{% else %}Submit a New Ticket{% endif %}</div>
+    <div class="page-sub">{% if edit_mode %}Update your existing ticket and submit the changes{% else %}Be specific - the clearer your description, the faster it gets resolved{% endif %}</div>
+  </div>
+
+  <form method="POST" enctype="multipart/form-data" id="newTicketForm" novalidate>
+    {% csrf_token %}
+
+    <div class="hd-card mb-4">
+      <div class="hd-card-header">
+        <div class="hd-card-title">
+          <i class="fas fa-ticket-alt me-2" style="color:var(--brand);"></i>
+          Ticket Details
+        </div>
+      </div>
+      <div class="hd-card-body">
+        <div class="row g-4">
+
+          <div class="col-12">
+            <label class="form-label">Title <span class="text-danger">*</span></label>
+            {{ form.TICKET_TITLE }}
+            <div class="form-text">Short, specific summary - e.g. "Printer not working on 3rd floor"</div>
+            {% if form.TICKET_TITLE.errors %}
+              <div class="field-error">{{ form.TICKET_TITLE.errors.0 }}</div>
+            {% endif %}
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Description <span class="text-danger">*</span></label>
+            {{ form.TICKET_DESCRIPTION }}
+            <div class="form-text">What's happening What did you expect vs what you saw Any error messages</div>
+            {% if form.TICKET_DESCRIPTION.errors %}
+              <div class="field-error">{{ form.TICKET_DESCRIPTION.errors.0 }}</div>
+            {% endif %}
+          </div>
+
+          <div class="col-sm-6">
+            <label class="form-label">Category</label>
+            {{ form.category }}
+            {% if form.category.errors %}
+              <div class="field-error">{{ form.category.errors.0 }}</div>
+            {% endif %}
+          </div>
+
+          {% if form.priority %}
+          <div class="col-sm-6">
+            <label class="form-label">Priority</label>
+            {{ form.priority }}
+            <div class="form-text">Higher priority helps your team triage faster</div>
+            {% if form.priority.errors %}
+              <div class="field-error">{{ form.priority.errors.0 }}</div>
+            {% endif %}
+          </div>
+          {% endif %}
+
+          {% if form.assigned_department %}
+          <div class="col-sm-6">
+            <label class="form-label">Department</label>
+            {{ form.assigned_department }}
+            <div class="form-text">Which team should handle this</div>
+          </div>
+          {% endif %}
+
+          <div class="col-sm-6">
+            <label class="form-label">Due Date <span class="text-danger">*</span></label>
+            {{ form.TICKET_DUE_DATE }}
+            {% if form.TICKET_DUE_DATE.errors %}
+              <div class="field-error">{{ form.TICKET_DUE_DATE.errors.0 }}</div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hd-card">
+      <div class="hd-card-body">
+
+        <div style="background:var(--brand-light);border-left:3px solid var(--brand);border-radius:6px;padding:12px 16px;margin-bottom:18px;">
+          <div style="font-size:12.5px;font-weight:700;color:var(--brand);margin-bottom:6px;">
+            <i class="fas fa-lightbulb me-1"></i> {% if edit_mode %}Tips while updating{% else %}Tips for a faster resolution{% endif %}
+          </div>
+          <ul style="font-size:12.5px;color:var(--gray-600);margin:0;padding-left:18px;line-height:1.9;">
+            <li>Attach screenshots or error logs when possible</li>
+            {% if edit_mode %}
+            <li>Select the correct department - wrong routing causes delays</li>
+            <li>Urgent tickets are usually handled first by department teams</li>
+            {% else %}
+            <li>Priority is decided automatically by AI</li>
+            <li>Department is routed automatically by ML</li>
+            {% endif %}
+          </ul>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2">
+          <a href="{% if edit_mode %}{% url 'ticketinfo' ticket.id %}{% if mine_only_mode %}?mine_only=1{% endif %}{% else %}{% url 'base' %}{% endif %}" class="btn btn-sm btn-outline-secondary">
+            <i class="fas fa-times"></i> Cancel
+          </a>
+          <button type="submit" class="btn btn-sm btn-primary">
+            <i class="fas fa-paper-plane"></i> {% if edit_mode %}Update Ticket{% else %}Submit Ticket{% endif %}
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+</div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  (function () {
+    const form = document.getElementById('newTicketForm');
+    if (!form) return;
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    const title = document.getElementById('id_TICKET_TITLE');
+    const description = document.getElementById('id_TICKET_DESCRIPTION');
+    const dueDate = document.getElementById('id_TICKET_DUE_DATE');
+
+    function setMinDueDate() {
+      if (!dueDate) return;
+      const d = new Date();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      dueDate.min = d.getFullYear() + '-' + month + '-' + day;
+      dueDate.dataset.minDate = 'today';
+    }
+
+    function normalizeInput(el) {
+      if (!el) return;
+      el.addEventListener('blur', () => {
+        el.value = el.value.trim();
+      });
+    }
+
+    setMinDueDate();
+    normalizeInput(title);
+    normalizeInput(description);
+
+    form.addEventListener('submit', () => {
+      if (!submitBtn) return;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+    });
+  })();
+</script>
+{% endblock %}

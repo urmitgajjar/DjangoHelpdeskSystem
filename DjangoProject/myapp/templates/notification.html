@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ notification.title|default:"Helpdesk Notification" }}</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f3f6fb;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#f3f6fb;">
+    <tr>
+      <td align="center" style="padding:28px 12px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:620px;background-color:#ffffff;border:1px solid #e5eaf2;border-radius:14px;overflow:hidden;">
+          <tr>
+            <td align="center" style="background-color:#0f766e;padding:30px 24px;">
+              <div style="font-family:Arial,sans-serif;font-size:13px;line-height:13px;color:#dff4ff;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">HelpDesk Notification</div>
+              <div style="font-family:Arial,sans-serif;font-size:26px;line-height:32px;color:#ffffff;font-weight:700;margin:0;">{{ notification.title|default:"New Notification" }}</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:28px 26px 24px 26px;">
+              <p style="margin:0 0 14px 0;font-family:Arial,sans-serif;font-size:17px;line-height:24px;color:#0f172a;font-weight:600;">
+                Hello {{ user.get_username|default:user.username }},
+              </p>
+
+              <p style="margin:0 0 18px 0;font-family:Arial,sans-serif;font-size:15px;line-height:24px;color:#475569;">
+                {{ notification.message }}
+              </p>
+
+              {% if ticket %}
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:20px 0;border:1px solid #d9e4f3;background-color:#f8fbff;border-radius:8px;">
+                <tr>
+                  <td style="padding:14px 16px;">
+                    <p style="margin:0 0 8px 0;font-family:Arial,sans-serif;font-size:14px;line-height:20px;color:#0f172a;font-weight:700;">Ticket Details</p>
+                    <p style="margin:0 0 6px 0;font-family:Arial,sans-serif;font-size:13px;line-height:20px;color:#334155;">
+                      <strong>Title:</strong> {{ ticket.TICKET_TITLE }}
+                    </p>
+                    {% if ticket.priority %}
+                    <p style="margin:0 0 6px 0;font-family:Arial,sans-serif;font-size:13px;line-height:20px;color:#334155;">
+                      <strong>Priority:</strong> {{ ticket.priority }}
+                    </p>
+                    {% endif %}
+                    {% if ticket.assigned_department %}
+                    <p style="margin:0;font-family:Arial,sans-serif;font-size:13px;line-height:20px;color:#334155;">
+                      <strong>Department:</strong> {{ ticket.assigned_department.name }}
+                    </p>
+                    {% endif %}
+                  </td>
+                </tr>
+              </table>
+              {% endif %}
+
+              <p style="margin:0;font-family:Arial,sans-serif;font-size:14px;line-height:22px;color:#0f172a;">
+                Regards,<br><strong>HelpDesk Team</strong>
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding:14px 20px;background-color:#f8fafc;border-top:1px solid #e9eef6;text-align:center;">
+              <p style="margin:0;font-family:Arial,sans-serif;font-size:12px;line-height:19px;color:#64748b;">
+                Automated email, please do not reply.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
