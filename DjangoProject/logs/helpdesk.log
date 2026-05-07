@@ -2425,3 +2425,35 @@ INFO 2026-05-07 19:05:46,671 basehttp "GET /dashboard/ HTTP/1.1" 200 46386
 INFO 2026-05-07 19:05:46,717 basehttp "GET /favicon.ico HTTP/1.1" 204 0
 INFO 2026-05-07 19:05:48,846 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 48465
 INFO 2026-05-07 19:05:48,898 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-07 20:03:54,456 autoreload Watching for file changes with StatReloader
+INFO 2026-05-07 20:04:04,589 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-07 20:04:04,667 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-07 20:04:06,391 basehttp "GET /login/?role=admin HTTP/1.1" 200 13515
+INFO 2026-05-07 20:04:06,427 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-07 20:04:12,097 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-07 20:04:12,162 basehttp "GET /dashboard/ HTTP/1.1" 200 46713
+INFO 2026-05-07 20:04:12,239 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-07 20:04:16,675 basehttp "POST /tickets/bulk-delete/ HTTP/1.1" 302 0
+INFO 2026-05-07 20:04:16,720 basehttp "GET /dashboard/ HTTP/1.1" 200 43481
+INFO 2026-05-07 20:04:16,759 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-07 20:04:17,921 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-07 20:04:17,926 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-07 20:04:17,961 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-07 20:04:18,392 basehttp "GET /login/?role=user HTTP/1.1" 200 13664
+INFO 2026-05-07 20:04:18,426 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-07 20:04:20,876 basehttp "GET /api/username-exists/?username=D HTTP/1.1" 200 17
+INFO 2026-05-07 20:04:21,820 basehttp "GET /api/username-exists/?username=Daksh HTTP/1.1" 200 16
+INFO 2026-05-07 20:04:22,189 basehttp "GET /api/username-exists/?username=Daksh HTTP/1.1" 200 16
+INFO 2026-05-07 20:04:25,451 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-07 20:04:25,504 basehttp "GET /dashboard/ HTTP/1.1" 200 44178
+INFO 2026-05-07 20:04:25,555 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-07 20:04:27,153 basehttp "GET /ticket/new/ HTTP/1.1" 200 37014
+INFO 2026-05-07 20:04:27,204 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-07 20:04:54,552 views AI priority prediction started for new ticket submit.
+INFO 2026-05-07 20:04:55,204 views AI priority prediction applied: LOW
+INFO 2026-05-07 20:04:55,207 views ML department prediction applied: HR
+INFO 2026-05-07 20:05:02,803 basehttp "POST /ticket/new/ HTTP/1.1" 302 0
+INFO 2026-05-07 20:05:02,852 basehttp "GET /dashboard/ HTTP/1.1" 200 44176
+INFO 2026-05-07 20:05:02,906 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-07 20:05:04,292 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 44951
+INFO 2026-05-07 20:05:04,342 basehttp "GET /favicon.ico HTTP/1.1" 204 0
