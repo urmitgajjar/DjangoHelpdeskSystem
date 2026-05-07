@@ -2379,3 +2379,4 @@ INFO 2026-05-05 22:53:27,163 basehttp "GET /favicon.ico HTTP/1.1" 204 0
 INFO 2026-05-05 22:53:30,139 basehttp "POST /admin/logout/ HTTP/1.1" 302 0
 INFO 2026-05-05 22:53:30,145 basehttp "GET / HTTP/1.1" 200 9002
 INFO 2026-05-05 22:53:30,178 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-07 10:19:10,659 autoreload Watching for file changes with StatReloader
