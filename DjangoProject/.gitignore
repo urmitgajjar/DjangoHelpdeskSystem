@@ -23,3 +23,6 @@ celerybeat-schedule*
 # OS Files
 .DS_Store
 Thumbs.db
+
+# Log Files
+helpdesk.log

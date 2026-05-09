@@ -2457,3 +2457,22 @@ INFO 2026-05-07 20:05:02,852 basehttp "GET /dashboard/ HTTP/1.1" 200 44176
 INFO 2026-05-07 20:05:02,906 basehttp "GET /favicon.ico HTTP/1.1" 204 0
 INFO 2026-05-07 20:05:04,292 basehttp "GET /dashboard/?mine_only=1 HTTP/1.1" 200 44951
 INFO 2026-05-07 20:05:04,342 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-08 13:18:02,084 autoreload Watching for file changes with StatReloader
+INFO 2026-05-08 13:18:15,118 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-08 13:18:15,231 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-08 13:21:31,901 basehttp "GET /login/?role=user HTTP/1.1" 200 13452
+INFO 2026-05-08 13:21:31,948 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-08 13:21:33,098 basehttp "GET /api/username-exists/?username=D HTTP/1.1" 200 17
+INFO 2026-05-08 13:21:33,900 basehttp "GET /api/username-exists/?username=Daksh HTTP/1.1" 200 16
+INFO 2026-05-08 13:21:34,271 basehttp "GET /api/username-exists/?username=Daksh HTTP/1.1" 200 16
+INFO 2026-05-08 13:21:37,296 basehttp "POST /login/?role=user HTTP/1.1" 302 0
+INFO 2026-05-08 13:21:37,368 basehttp "GET /dashboard/ HTTP/1.1" 200 44178
+INFO 2026-05-08 13:21:37,441 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-08 13:25:38,532 basehttp "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-05-08 13:25:38,536 basehttp "GET / HTTP/1.1" 200 9002
+INFO 2026-05-08 13:25:38,571 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-08 13:25:39,273 basehttp "GET /login/?role=admin HTTP/1.1" 200 13727
+INFO 2026-05-08 13:25:39,315 basehttp "GET /favicon.ico HTTP/1.1" 204 0
+INFO 2026-05-08 13:25:47,966 basehttp "POST /login/?role=admin HTTP/1.1" 302 0
+INFO 2026-05-08 13:25:48,021 basehttp "GET /dashboard/ HTTP/1.1" 200 44774
+INFO 2026-05-08 13:25:48,073 basehttp "GET /favicon.ico HTTP/1.1" 204 0
